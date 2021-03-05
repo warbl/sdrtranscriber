@@ -25,10 +25,12 @@ app.get("/api/getStations", (req, res) => {
     const  getStations = `SELECT * from station`;
     db.query(getStations, (err, result) => {
         console.log(result);
+        console.log(err);
         res.send(result);
     })
 });
 
+//probably dont need this
 app.get("/api/getSongs", (req, res) => {
     const  getSongs = `SELECT * from song_played`;
     db.query(getSongs, (err, result) => {
@@ -37,51 +39,26 @@ app.get("/api/getSongs", (req, res) => {
     })
 });
 
-app.get("/api/getSongsByStation/:stationName", (req, res) => {
-    const stationName = req.params.stationName;
-    const  getSongsByStation = `SELECT * from song_played WHERE station_name = '${stationName}'`;
+app.get("/api/getSongsByStation/:stationFreq", (req, res) => {
+    const stationFreq = req.params.stationFreq;
+    const  getSongsByStation = `SELECT * from song_played WHERE station_freq = '${stationFreq}'`;
     db.query(getSongsByStation, (err, result) => {
         console.log(result);
+        console.log(err);
         res.send(result);
     })
 });
 
-const getDate = () => {
-    var date = new Date();
-    var aaaa = date.getFullYear();
-    var gg = date.getDate();
-    var mm = (date.getMonth() + 1);
-
-    if (gg < 10)
-        gg = "0" + gg;
-    if (mm < 10)
-        mm = "0" + mm;
-
-    var cur_day = aaaa + "-" + mm + "-" + gg;
-    var hours = date.getHours()
-    var minutes = date.getMinutes()
-    var seconds = date.getSeconds();
-
-    if (hours < 10)
-        hours = "0" + hours;
-    if (minutes < 10)
-        minutes = "0" + minutes;
-    if (seconds < 10)
-        seconds = "0" + seconds;
-
-    return cur_day + " " + hours + ":" + minutes + ":" + seconds;
-}
-
 app.post("/api/insertSong",  (req, res) => {
-    const stationName = req.body.stationName;
+    const stationFreq = req.body.stationFreq;
     const songName = req.body.songName;
     const songArtist = req.body.songArtist;
+    const albumCover = req.body.albumCover;
     const yt_link= req.body.yt_link;
-    //const timePlayed = req.body.timePlayed;
+    const timePlayed = req.body.timePlayed; // format (yyyy-mm-dd hh:mm:ss)
 
-    const timePlayed = getDate();
-    const  insertSong = `INSERT INTO song_played (song_name, song_artist, yt_link, station_name, recent_time_played) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE recent_time_played = '${timePlayed}'`;
-    db.query(insertSong, [songName, songArtist, yt_link, stationName, timePlayed ], (err, result) => {
+    const  insertSong = `INSERT INTO song_played (song_name, song_artist, yt_link, album_cover, station_freq, recent_time_played) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE recent_time_played = '${timePlayed}'`;
+    db.query(insertSong, [songName, songArtist, yt_link, albumCover, stationFreq, timePlayed ], (err, result) => {
         console.log(err);
         console.log(result);
         res.send(result);
