@@ -40,9 +40,9 @@ export default function SidePanel(){
     return (
         <div className="music">
             <div className="sidePanel">
-            <Form className="filter-form">
-                <Form.Group className="filter-form-box">
-                    <Form.Control onChange={search} className='filter_form_input' type="text" placeholder=" Search stations..." />
+            <Form className="filter-form-stations">
+                <Form.Group className="filter-form-station-box">
+                    <Form.Control onChange={search} className='filter-form-station-input' type="text" placeholder=" Search stations..." />
                 </Form.Group>
             </Form>
                 <div className="list_container" id='scrollbar'>

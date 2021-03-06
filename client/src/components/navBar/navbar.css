@@ -4,29 +4,32 @@
     left: 0px;
     padding-top: 10px;
     z-index: 1;             
-    background-color: white;
-    color: black;
+    background-color: #C25C5C;
+    color: white;
     font-weight: bold;
     width: 100%;
     min-width: 750px;
-    height: 120px;
+    height: 80px;
+    border-bottom: thin solid black;
 }
 
 .navTitle { 
     float: left;
-    font-size: 60px;
+    padding-left: 10px;
+    font-size: 30px;
     letter-spacing: 1.5px;
     text-align: left;   
+    color:#542124;
 }
 
 .navTabs{
-    padding-top: 20px;
+    padding-top: 15px;
     float: right;
     width:100%;
 }
 
 .navLink { 
-    font-size: 20px;
+    font-size: 18px;
     width: 33%;
     text-align:center;
     display: inline;
@@ -35,10 +38,10 @@
 
 
 .link{
-    color: black;
+    color: white;
     text-decoration: none;
 }
 
 .link:hover {
-    color:red;
+    color:#542124;
 }
