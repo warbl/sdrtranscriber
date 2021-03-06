@@ -13,6 +13,8 @@ export default function SidePanel(){
         fetchRadioStations();
     },[]);
 
+    //figure out loop to sleep then fetch data again
+
     const fetchRadioStations = async () => {
         Axios.get("http://localhost:3001/api/getStations").then((response) => {
             console.log(response.data);
