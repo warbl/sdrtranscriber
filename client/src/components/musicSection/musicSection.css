@@ -1,0 +1,63 @@
+.music{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 130px;
+    height: 85vh;
+}
+
+
+.sidePanel{
+    flex: 1;
+    flex-grow: 0;   
+    flex-basis: 25em;
+    text-align:center;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+    justify-content: flex-start;
+    border-right: solid thick black;
+    width: 100%;
+}
+
+.filter-form {
+    padding-top: 30px;
+    align-items: center;
+    width: 100%;
+}
+
+.list_container{
+    margin-top: 30px;
+    overflow-y: auto;
+    height: 87%;
+}
+
+.station{
+    border:black thin solid;
+    padding-bottom: 10px;
+}
+
+.station:hover{
+    color: red;
+    cursor: pointer;
+}
+
+.container{
+    flex: 4;
+    flex-grow: 0;   
+    flex-basis: 100em;
+    text-align:center;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+}
+
+.empty_song_container{
+    padding-top: 250px;
+    font-size: 30px;
+}
+
+.stationHeading{
+    text-decoration: underline;
+    font-weight: bold;
+}

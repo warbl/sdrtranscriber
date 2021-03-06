@@ -32,7 +32,7 @@ app.get("/api/getStations", (req, res) => {
 
 app.get("/api/getSongsByStation/:stationFreq", (req, res) => {
     const stationFreq = req.params.stationFreq;
-    const  getSongsByStation = `SELECT * from song_played WHERE station_freq = '${stationFreq}'`;
+    const  getSongsByStation = `SELECT * from song_played WHERE station_freq = ${stationFreq}`;
     db.query(getSongsByStation, (err, result) => {
         console.log(result);
         console.log(err);

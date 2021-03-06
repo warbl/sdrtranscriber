@@ -1,10 +1,23 @@
-import Home from './components/home';
+import Home from './components/homePage/home';
+import Music from './components/musicSection/musicSection'
+import NavBar from './components/navBar/navbar'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import News from './components/newsSection/newsSection';
+import Radio from './components/radioSection/radio';
 
 function App() {
   return (
+    <Router>
     <div className="App">
-        <Home />
+       <NavBar />
+      <Switch>
+      <Route exact path='/' component = {Home} />
+      <Route path='/music' component = {Music} />
+      <Route path='/news' component = {News} />
+      <Route path='/radio' component = {Radio} />
+      </Switch>
     </div>
+    </Router>
   );
 }
 

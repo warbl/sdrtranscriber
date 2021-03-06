@@ -1,0 +1,24 @@
+
+.home{
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 150px;
+}
+
+.header{
+    padding-bottom: 50px;
+}
+
+.paragraph{
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
