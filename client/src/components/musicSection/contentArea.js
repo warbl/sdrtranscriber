@@ -9,21 +9,62 @@ export default function ContentArea({station}){
     const [filterResults, setFilterResults] = useState([]);
 
     useEffect(() => {
-        getSongsByStation(station);
+        fetchSongsByStation(station);
     }, [station]);
 
-    const getSongsByStation = (station) => {
+    const fetchSongsByStation = (station) => {
+        console.log(station);
         const stationFreq = station.station_freq
-        console.log(stationFreq);
         Axios.get("http://localhost:3001/api/getSongsByStation/" + stationFreq).then((response) => {
             console.log("getting songs from station: " + stationFreq);
-            console.log(response.data);
-            setSongs(response.data);
-            setFilterResults(response.data);
+            const data = response.data;
+            if(data.length > 0){
+            data.forEach(element => {
+                const newDate = formatDate(element.time_played);
+                element.time_played = newDate;
+                console.log(element);
+            });
+        }
+        setSongs(data);
+        setFilterResults(data);
+        //sleep();
         }).catch((error) => {
             console.log(error);
         });
     }; 
+
+    const formatDate = (oldDate) => {
+        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const data = oldDate.split("T");
+        //date
+        let date = data[0].split("-");
+        const year = date[0];
+        const month = months[parseInt(date[1])-1];
+        const day = date[2];
+        date = month + " " + day + " " + year;
+        //time
+        let time = data[1].split(":");
+        let hour = parseInt(time[0]);
+        let pm = false;
+        if(hour > 12){
+            pm = true;
+            hour = hour - 12;
+        }
+        const minutes = time[1];
+        time = hour + ":" + minutes;
+        (pm === false) ? time = time + " am" : time = time + "pm";
+        //putting back together
+        return date + " at " + time;
+    }
+
+    /*
+    const sleep = async() => {
+        const tempStation = station;
+        await new Promise(r => setTimeout(r, 60000));
+        console.log("slept!");
+        fetchSongsByStation(tempStation);
+    }
+    */
 
     const search = (e) => {
         const search = e.target.value;
@@ -53,13 +94,13 @@ export default function ContentArea({station}){
                     {filterResults && filterResults.map((val) => {
                         return(
                         <div className="song" key={val.song_id}>
-                            <div className="album-image" key={val.song_id}>
+                            <div className="album-image">
                                 <img src={val.album_cover} alt="album_image"/>
                             </div>
                             <div className="song-info">
-                            <h1 key={val.song_id} id={val.song_id}>{val.song_name}</h1>
-                            <h3 key={val.song_id} id={val.song_id}>Artist: {val.song_artist}</h3>
-                            <h3 key={val.song_id} id={val.song_id}>Played on: {val.time_played}</h3>
+                            <h1>{val.song_name}</h1>
+                            <h3>Artist: {val.song_artist}</h3>
+                            <h3>Played on: {val.time_played}</h3>
                             <a href={val.yt_link} target="_blank">Listen to Song HERE</a>
                             </div>
                         </div>

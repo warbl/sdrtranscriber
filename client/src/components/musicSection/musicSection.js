@@ -13,14 +13,12 @@ export default function SidePanel(){
         fetchRadioStations();
     },[]);
 
-    //figure out loop to sleep then fetch data again
-
     const fetchRadioStations = async () => {
         Axios.get("http://localhost:3001/api/getStations").then((response) => {
             console.log(response.data);
             setStationList(response.data);
-            setStation(response.data[0]);
             setFilterResults(response.data);
+            setStation(response.data[0]);
         }).catch((error) => {
             console.log(error);
         });
@@ -36,7 +34,6 @@ export default function SidePanel(){
     const clickStation = (val) => {
         setStation(val);
     };
-
     return (
         <div className="music">
             <div className="sidePanel">
@@ -49,8 +46,8 @@ export default function SidePanel(){
                     {filterResults && filterResults.map((val) => {
                         return(
                         <div className="station" key={val.station_id} onClick={() => clickStation(val)}>
-                            <h3 key={val.station_id} id={val.station_id}>{val.station_name}</h3>
-                            <span key={val.station_id} id={val.station_id}>({val.station_freq})</span>
+                            <h3>{val.station_name}</h3>
+                            <span>({val.station_freq})</span>
                         </div>
                     )
                 })} 
