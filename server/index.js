@@ -30,40 +30,14 @@ app.get("/api/getStations", (req, res) => {
     })
 });
 
-//probably dont need this
-app.get("/api/getSongs", (req, res) => {
-    const  getSongs = `SELECT * from song_played`;
-    db.query(getSongs, (err, result) => {
-        console.log(result);
-        res.send(result);
-    })
-});
-
 app.get("/api/getSongsByStation/:stationFreq", (req, res) => {
     const stationFreq = req.params.stationFreq;
-    const  getSongsByStation = `SELECT * from song_played WHERE station_freq = '${stationFreq}'`;
+    const  getSongsByStation = `SELECT * from song_played WHERE station_freq = ${stationFreq} ORDER BY time_played DESC`;
     db.query(getSongsByStation, (err, result) => {
         console.log(result);
         console.log(err);
         res.send(result);
     })
-});
-
-app.post("/api/insertSong",  (req, res) => {
-    const stationFreq = req.body.stationFreq;
-    const songName = req.body.songName;
-    const songArtist = req.body.songArtist;
-    const albumCover = req.body.albumCover;
-    const yt_link= req.body.yt_link;
-    const timePlayed = req.body.timePlayed; // format (yyyy-mm-dd hh:mm:ss)
-
-    const  insertSong = `INSERT INTO song_played (song_name, song_artist, yt_link, album_cover, station_freq, recent_time_played) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE recent_time_played = '${timePlayed}'`;
-    db.query(insertSong, [songName, songArtist, yt_link, albumCover, stationFreq, timePlayed ], (err, result) => {
-        console.log(err);
-        console.log(result);
-        res.send(result);
-    })
-    
 });
 
 app.listen(3001, () => {

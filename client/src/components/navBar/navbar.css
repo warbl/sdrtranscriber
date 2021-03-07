@@ -1,0 +1,47 @@
+.nav{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    padding-top: 10px;
+    z-index: 1;             
+    background-color: #C25C5C;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    min-width: 750px;
+    height: 80px;
+    border-bottom: thin solid black;
+}
+
+.navTitle { 
+    float: left;
+    padding-left: 10px;
+    font-size: 30px;
+    letter-spacing: 1.5px;
+    text-align: left;   
+    color:#542124;
+}
+
+.navTabs{
+    padding-top: 15px;
+    float: right;
+    width:100%;
+}
+
+.navLink { 
+    font-size: 18px;
+    width: 33%;
+    text-align:center;
+    display: inline;
+    float: left;
+}
+
+
+.link{
+    color: white;
+    text-decoration: none;
+}
+
+.link:hover {
+    color:#542124;
+}
