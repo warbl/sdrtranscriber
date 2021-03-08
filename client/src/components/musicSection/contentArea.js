@@ -13,7 +13,6 @@ export default function ContentArea({station}){
     }, [station]);
 
     const fetchSongsByStation = (station) => {
-        console.log(station);
         const stationFreq = station.station_freq
         Axios.get("http://localhost:3001/api/getSongsByStation/" + stationFreq).then((response) => {
             console.log("getting songs from station: " + stationFreq);
@@ -22,9 +21,9 @@ export default function ContentArea({station}){
             data.forEach(element => {
                 const newDate = formatDate(element.time_played);
                 element.time_played = newDate;
-                console.log(element);
             });
         }
+        console.log(data);
         setSongs(data);
         setFilterResults(data);
         //sleep();
@@ -45,14 +44,29 @@ export default function ContentArea({station}){
         //time
         let time = data[1].split(":");
         let hour = parseInt(time[0]);
+        // UTC to EST
+        if(hour > 5){
+            hour = hour - 5;
+        } else {
+            let tempHour = 24;
+            let timeLeft = 5 - hour;
+            hour = tempHour - timeLeft;
+        }
         let pm = false;
-        if(hour > 12){
+        if(hour === 12){
             pm = true;
+        }
+        if(hour > 12){
             hour = hour - 12;
+            if(hour === 12){
+                pm = false;
+            }else{
+                pm = true;
+            }
         }
         const minutes = time[1];
         time = hour + ":" + minutes;
-        (pm === false) ? time = time + " am" : time = time + "pm";
+        (pm === false) ? time = time + "am" : time = time + "pm";
         //putting back together
         return date + " at " + time;
     }
@@ -68,7 +82,6 @@ export default function ContentArea({station}){
 
     const search = (e) => {
         const search = e.target.value;
-        console.log(search);
         const result = songs.filter(value =>  value.song_name.toLowerCase().includes(search.toLowerCase()) || value.song_artist.toLowerCase().includes(search));
         setFilterResults(result);
     };
@@ -101,7 +114,7 @@ export default function ContentArea({station}){
                             <h1>{val.song_name}</h1>
                             <h3>Artist: {val.song_artist}</h3>
                             <h3>Played on: {val.time_played}</h3>
-                            <a href={val.yt_link} target="_blank">Listen to Song HERE</a>
+                            <a href={val.yt_link} target="_blank" rel="noreferrer" className="yt-link">Listen to Song HERE</a>
                             </div>
                         </div>
                     )
