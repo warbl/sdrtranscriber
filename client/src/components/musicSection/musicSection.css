@@ -69,6 +69,7 @@
 }
 
 .empty_song_container{
+    border-top:black thin solid;
     padding-top: 100px;
     font-size: 30px;
 }
