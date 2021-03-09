@@ -33,6 +33,7 @@ export default function ContentArea({station}){
     }; 
 
     const formatDate = (oldDate) => {
+        console.log(oldDate);
         var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         const data = oldDate.split("T");
         //date
@@ -104,14 +105,14 @@ export default function ContentArea({station}){
                 </div>
         ) : (
             <div className="song_container" id='scrollbar'>
-                    {filterResults && filterResults.map((val) => {
+                    {filterResults && filterResults.map((val, index) => {
                         return(
                         <div className="song" key={val.song_id}>
                             <div className="album-image">
                                 <img src={val.album_cover} alt="album_image"/>
                             </div>
                             <div className="song-info">
-                            <h1>{val.song_name}</h1>
+                            <h1>{index+1}. {val.song_name}</h1>
                             <h3>Artist: {val.song_artist}</h3>
                             <h3>Played on: {val.time_played}</h3>
                             <a href={val.yt_link} target="_blank" rel="noreferrer" className="yt-link">Listen to Song HERE</a>

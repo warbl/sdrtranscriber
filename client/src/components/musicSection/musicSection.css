@@ -93,7 +93,6 @@
 
 .song{
     display: flex;
-    flex-wrap: nowrap;
     flex-direction: row;
     align-items: center;
     padding: 10px;
@@ -112,6 +111,7 @@
 }
 
 .song-info {
+    word-wrap: break-word;
     width: 300px;
 }
 
