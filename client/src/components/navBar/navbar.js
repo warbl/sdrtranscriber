@@ -12,13 +12,13 @@ export default function NavBar(){
             </div>
             <div className="navTabs">
             <div className="navLink">
-                <Link to="/music" className="link">Search Music</Link>
+                <a href="/music" className="link">Search Music</a>
             </div>  
             <div className="navLink">
-                <Link to="/news" className="link">View News</Link>
+                <a href="/news" className="link">View News</a>
             </div> 
             <div className="navLink">
-                <Link to="/radio" className="link">Listen to Radio</Link>
+                <a href="/radio" className="link">Listen to Radio</a>
             </div> 
             </div>
         </div>

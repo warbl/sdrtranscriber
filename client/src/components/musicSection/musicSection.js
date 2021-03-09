@@ -26,7 +26,6 @@ export default function SidePanel(){
 
     const search = (e) => {
         const search = e.target.value.toString();
-        console.log(search);
         const result = stationList.filter(value =>  value.station_name.toLowerCase().includes(search.toLowerCase()) || value.station_freq.toString().includes(search));
         setFilterResults(result);
     };
