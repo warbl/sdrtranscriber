@@ -20,6 +20,12 @@ export default function NavBar(){
             <div className="navLink">
                 <a href="/radio" className="link">Listen to Radio</a>
             </div> 
+			
+			<div className = "hamburgerIcon">
+				<a href="javascript:void(0);" className ="icon" onclick ="displayBurger()">
+					<i className = "hamburger-icon"></i>
+				</a>
+			</div>
             </div>
         </div>
     )
