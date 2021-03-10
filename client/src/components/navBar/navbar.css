@@ -3,17 +3,12 @@
 }
 
 .nav{
-    position: relative;
 	overflow: hidden;
-    top: 0px;
-    left: 0px;
-    padding-top: 10px;
-    z-index: 1;             
+    padding-top: 10px;        
     background-color: #C25C5C;
     color: white;
     font-weight: bold;
     width: 100%;
-    min-width: 750px;
     height: 80px;
     border-bottom: thin solid black;
 }
@@ -42,7 +37,7 @@
 }
 
 .hamburgerIcon{
-	display:block;
+	display:none;
 	width:50%;
 	height: auto;
 }
@@ -63,7 +58,7 @@
 }
 
 @media screen and (max-width: 600px){
-	.navLink{
+	.navTabs{
 		display:none;
 	}
 	.hamburgerIcon{
@@ -77,12 +72,12 @@
 	
 	.nav.responsive .hamburgerIcon{
 		position:absolute;
-		right: 10px;
-		top: 10px;
+		right: 0;
+		top: 0;
 	}
-	.topnav.responsive .link{
+	.nav.responsive .navTabs{
 		float: none;
-		display:block;
+		display: block;
 		text-align: left;
 	}
 }
