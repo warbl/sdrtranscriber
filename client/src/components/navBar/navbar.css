@@ -1,7 +1,8 @@
 
 
 .nav{
-    position: fixed;
+    position: relative;
+	overflow: hidden;
     top: 0px;
     left: 0px;
     padding-top: 10px;
@@ -38,7 +39,7 @@
     float: left;
 }
 
-.nav .icon{
+.nav .hamburger{
 	display:none;
 }
 
@@ -61,18 +62,19 @@
 	.link{
 		display:none;
 	}
-	.icon{
-		display:block;
+	.hamburger{
+		float: right;
+		display: block;
 	}
 }
 
 @media screen and (max-width: 600px){
 	.nav.responsive{position: relative;}
 	
-	.nav.responsive .icon{
+	.nav.responsive .hamburger{
 		position:absolute;
-		right: 0;
-		top: 0;
+		right: 10px;
+		top: 10px;
 	}
 	.topnav.responsive .link{
 		float: none;

@@ -7,14 +7,16 @@ import hamburger from '../../images/hamburger.png'
 
 export default function NavBar(){
 	
-	function displayTabs(){
-		var x = document.getElementById("topNav");
-		if(x.className === "nav"){
-			x.className += " responsive";
-		} else{
-			x.className = "nav";
+			
+		function displayTabs(){
+			var x = document.getElementById("topNav");
+			if(x.className === "nav"){
+				x.className += " responsive";
+			}
+			else{
+				x.className = "topnav";
+			}
 		}
-	}
 	
     return(
         <div className="nav" id = "topNav">
@@ -33,7 +35,7 @@ export default function NavBar(){
             </div> 
 			
 			<div className = "hamburgerIcon">
-				<a href="#0;" className ="icon" onclick = "displayTabs()">
+				<a href="#0;" className ="hamburger" onclick = {displayTabs}>
 					<img src ={hamburger} alt ="hamburger icon"/>
 				</a>
 			</div>
