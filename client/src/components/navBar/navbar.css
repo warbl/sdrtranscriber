@@ -1,4 +1,6 @@
-
+@viewport {
+	width: device-width;
+}
 
 .nav{
     position: relative;
@@ -27,7 +29,7 @@
 
 .navTabs{
     padding-top: 15px;
-    float: right;
+    float: left;
     width:100%;
 }
 
@@ -39,8 +41,8 @@
     float: left;
 }
 
-.nav .hamburger{
-	display:none;
+.nav .hamburgerIcon{
+	display:block;
 }
 
 
@@ -53,16 +55,16 @@
     color:#542124;
 }
 
-.link:active{
+.navLink:active{
 	background-color:#5eaddb;
 	color:black;
 }
 
 @media screen and (max-width: 600px){
-	.link{
+	.navLink{
 		display:none;
 	}
-	.hamburger{
+	.hamburgerIcon{
 		float: right;
 		display: block;
 	}
@@ -71,7 +73,7 @@
 @media screen and (max-width: 600px){
 	.nav.responsive{position: relative;}
 	
-	.nav.responsive .hamburger{
+	.nav.responsive .hamburgerIcon{
 		position:absolute;
 		right: 10px;
 		top: 10px;

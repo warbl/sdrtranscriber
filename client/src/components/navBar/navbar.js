@@ -24,22 +24,23 @@ export default function NavBar(){
                 SDR Transcriber
             </div>
             <div className="navTabs">
-            <div className="navLink">
-                <a href="/music" className="link">Search Music</a>
-            </div>  
-            <div className="navLink">
-                <a href="/news" className="link">View News</a>
-            </div> 
-            <div className="navLink">
-                <a href="/radio" className="link">Listen to Radio</a>
-            </div> 
+				<div className="navLink">
+					<a href="/music" className="link">Search Music</a>
+				</div>  
+				<div className="navLink">
+					<a href="/news" className="link">View News</a>
+				</div> 
+				<div className="navLink">
+					<a href="/radio" className="link">Listen to Radio</a>
+				</div> 
+			
+            </div>
 			
 			<div className = "hamburgerIcon">
-				<a href="#0;" className ="hamburger" onclick = {displayTabs}>
-					<img src ={hamburger} alt ="hamburger icon"/>
+				<a href="#0;" className ="hamburgerLink" onClick = {displayTabs}>
+					<img classname="hamburgerImage" src ={hamburger} alt ="hamburger icon"/>
 				</a>
 			</div>
-            </div>
         </div>
     )
 }
