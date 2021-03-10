@@ -41,8 +41,10 @@
     float: left;
 }
 
-.nav .hamburgerIcon{
+.hamburgerIcon{
 	display:block;
+	width:50%;
+	height: auto;
 }
 
 
@@ -55,7 +57,7 @@
     color:#542124;
 }
 
-.navLink:active{
+.link:active{
 	background-color:#5eaddb;
 	color:black;
 }

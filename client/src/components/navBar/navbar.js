@@ -14,7 +14,7 @@ export default function NavBar(){
 				x.className += " responsive";
 			}
 			else{
-				x.className = "topnav";
+				x.className = "nav";
 			}
 		}
 	
@@ -38,7 +38,7 @@ export default function NavBar(){
 			
 			<div className = "hamburgerIcon">
 				<a href="#0;" className ="hamburgerLink" onClick = {displayTabs}>
-					<img classname="hamburgerImage" src ={hamburger} alt ="hamburger icon"/>
+					<img className="hamburgerImage" src ={hamburger} alt ="hamburger icon"/>
 				</a>
 			</div>
         </div>
