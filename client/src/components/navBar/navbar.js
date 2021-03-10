@@ -1,12 +1,23 @@
 import React from "react";
 import "./navbar.css";
 import {Link} from 'react-router-dom';
+import hamburger from '../../images/hamburger.png'
 
 
 
 export default function NavBar(){
+	
+	function displayTabs(){
+		var x = document.getElementById("topNav");
+		if(x.className === "nav"){
+			x.className += " responsive";
+		} else{
+			x.className = "nav";
+		}
+	}
+	
     return(
-        <div className="nav">
+        <div className="nav" id = "topNav">
             <div className="navTitle">
                 SDR Transcriber
             </div>
@@ -22,8 +33,8 @@ export default function NavBar(){
             </div> 
 			
 			<div className = "hamburgerIcon">
-				<a href="javascript:void(0);" className ="icon" onclick ="displayBurger()">
-					<i className = "hamburger-icon"></i>
+				<a href="#0;" className ="icon" onclick = "displayTabs()">
+					<img src ={hamburger} alt ="hamburger icon"/>
 				</a>
 			</div>
             </div>
