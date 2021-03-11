@@ -122,3 +122,18 @@
 .yt-link:visited{
     color:#542124;
 }
+
+.refresh{
+    margin-bottom: 10px;
+    background-color: #542124;
+    color: white;
+    border: black thin solid;
+}
+
+.refresh:focus {
+    outline: none;
+  }
+
+  .refresh:hover{
+      cursor: pointer;
+  }

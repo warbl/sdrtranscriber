@@ -22,6 +22,10 @@
     color:#542124;
 }
 
+.navTitle:hover{
+	cursor: pointer;
+}
+
 .navTabs{
     padding-top: 15px;
     float: left;
