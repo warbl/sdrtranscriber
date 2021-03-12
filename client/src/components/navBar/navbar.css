@@ -3,8 +3,11 @@
 }
 
 .nav{
-	overflow: hidden;
-    padding-top: 10px;        
+	position: fixed;
+    top: 0px;
+    left: 0px;
+    padding-top: 10px;
+    z-index: 1;             
     background-color: #C25C5C;
     color: white;
     font-weight: bold;
@@ -62,32 +65,9 @@
 }
 
 @media screen and (max-width: 600px){
-	.navTabs{
-		display:none;
-	}
-	.hamburgerIcon{
-		position:fixed;
-		float: right;
-		display: block;
-		right: 0;
-		top: 0;
-	}
-}
-
-@media screen and (max-width: 600px){
-	.nav.responsive{position: relative;}
-	
-	.nav .responsive .navTitle{
-		margin:auto;
-	}
-	
-	.nav.responsive .hamburgerIcon{
-		position:fixed;
-
-	}
-	.nav.responsive .navTabs{
+	.nav .navTabs{
 		float: none;
-		display: flex;
+		display:flex;
 		text-align: left;
 	}
 }
