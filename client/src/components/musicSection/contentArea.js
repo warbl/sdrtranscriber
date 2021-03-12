@@ -8,15 +8,17 @@ export default function ContentArea({ station }) {
     const [songs, setSongs] = useState([]);
     const [filterResults, setFilterResults] = useState([]);
 
+    
     useEffect(() => {
-        fetchSongsByStation(station);
+        fetchSongsByStation();
+        const id = setInterval(fetchSongsByStation, 30000);
+        return () => clearInterval(id);
     }, [station]);
 
-    const fetchSongsByStation = (station) => {
-        document.body.style.cursor = 'wait';
+    const fetchSongsByStation = () => {
         const stationFreq = station.station_freq;
         Axios.get("http://localhost:3001/api/getSongsByStation/" + stationFreq).then((response) => {
-            console.log("getting songs from station: " + stationFreq);
+            console.log("getting songs from station: " + station.station_freq);
             const data = response.data;
             if (data.length > 0) {
                 data.forEach(element => {
@@ -27,11 +29,9 @@ export default function ContentArea({ station }) {
             console.log(data);
             setSongs(data);
             setFilterResults(data);
-            document.body.style.cursor = 'default';
         }).catch((error) => {
             console.log(error);
-            document.body.style.cursor = 'wait';
-        });
+        })
     };
 
     const formatDate = (oldDate) => {
@@ -74,22 +74,11 @@ export default function ContentArea({ station }) {
         return date + " at " + time;
     }
 
-
-    const sleep = async () => {
-        const tempStation = station;
-        await new Promise(r => setTimeout(r, 60000));
-        console.log("slept!");
-    }
-
     const search = (e) => {
         const search = e.target.value;
         const result = songs.filter(value => value.song_name.toLowerCase().includes(search.toLowerCase()) || value.song_artist.toLowerCase().includes(search));
         setFilterResults(result);
     };
-
-    const refresh = () => {
-        fetchSongsByStation(station);
-    }
 
     return (
         <>
@@ -97,7 +86,6 @@ export default function ContentArea({ station }) {
                 <h1 className="stationHeading"> {station.station_name} - {station.station_freq} SET LIST </h1>
                 {songs.length > 0 &&
                     <div>
-                        <button className="refresh" onClick={refresh}>REFRESH</button>
                         <Form className="filter-form-songs">
                             <Form.Group className="filter-form-song-box">
                                 <Form.Control onChange={search} className='filter-form-song-input' type="text" placeholder=" Search songs..." />
