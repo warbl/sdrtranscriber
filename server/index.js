@@ -40,6 +40,6 @@ app.get("/api/getSongsByStation/:stationFreq", (req, res) => {
     })
 });
 
-app.listen(3001, () => {
+app.listen((3001, '0.0.0.0'), () => {
     console.log("SERVER IS RUNNING ON PORT 3001!");
 })
