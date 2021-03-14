@@ -8,7 +8,7 @@ export default function ContentArea({ station }) {
     const [songs, setSongs] = useState([]);
     const [filterResults, setFilterResults] = useState([]);
 
-    
+
     useEffect(() => {
         fetchSongsByStation();
         const id = setInterval(fetchSongsByStation, 30000);
@@ -35,43 +35,24 @@ export default function ContentArea({ station }) {
     };
 
     const formatDate = (oldDate) => {
-        console.log(oldDate);
-        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        const data = oldDate.split("T");
-        //date
-        let date = data[0].split("-");
-        const year = date[0];
-        const month = months[parseInt(date[1]) - 1];
-        const day = date[2];
-        date = month + " " + day + " " + year;
-        //time
-        let time = data[1].split(":");
-        let hour = parseInt(time[0]);
-        // UTC to EST
-        if (hour > 5) {
-            hour = hour - 5;
-        } else {
-            let tempHour = 24;
-            let timeLeft = 5 - hour;
-            hour = tempHour - timeLeft;
+        var tmpDate = new Date(oldDate).toDateString();
+        var tmpTime = new Date(oldDate).toTimeString().split(' ')[0];
+        var hours = tmpTime.split(':')[0];
+        var minutes = tmpTime.split(':')[1];
+        // calculate
+        var timeValue;
+        if (hours > 0 && hours <= 12) {
+            timeValue = "" + hours;
+        } else if (hours > 12) {
+            timeValue = "" + (hours - 12);
+        } else if (hours == 0) {
+            timeValue = "12";
         }
-        let pm = false;
-        if (hour === 12) {
-            pm = true;
-        }
-        if (hour > 12) {
-            hour = hour - 12;
-            if (hour === 12) {
-                pm = false;
-            } else {
-                pm = true;
-            }
-        }
-        const minutes = time[1];
-        time = hour + ":" + minutes;
-        (pm === false) ? time = time + "am" : time = time + "pm";
-        //putting back together
-        return date + " at " + time;
+        timeValue += ":" + minutes;  // get minutes
+        timeValue += (hours >= 12) ? "pm" : "am";  // get AM/PM
+
+        return tmpDate + ' at ' + timeValue;
+
     }
 
     const search = (e) => {
