@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/getStations", (req, res) => {
-    const  getStations = `SELECT * from station`;
+    const  getStations = `SELECT * from station ORDER BY station_freq`;
     db.query(getStations, (err, result) => {
         console.log(result);
         console.log(err);
