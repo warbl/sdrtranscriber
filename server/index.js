@@ -58,6 +58,6 @@ app.get("/api/getSongsByPopularity", (req, res) => {
     })
 });
 
-app.listen((3001, '0.0.0.0'), () => {
+app.listen((3001), () => {
     console.log("SERVER IS RUNNING ON PORT 3001!");
 })
