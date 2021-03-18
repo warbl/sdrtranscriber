@@ -14,7 +14,7 @@ export default function ContentArea({ station }) {
 
     useEffect(() => {
         fetchSongsByStation();
-        const id = setInterval(fetchSongsByStation, 6000);
+        const id = setInterval(fetchSongsByStation, 5000);
         return () => clearInterval(id);
     }, [station]);
 
