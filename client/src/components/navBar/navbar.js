@@ -40,7 +40,9 @@ export default function NavBar(){
 				<div className="navLink">
 					<a href="/radio" className="link">Listen to Radio</a>
 				</div> 
-			
+				<div className="navLink">
+					<a href="/topSongs" className="link">See Top Songs</a>
+				</div> 
             </div>
 			
 			<div className = "hamburgerIcon">
