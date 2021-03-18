@@ -2,16 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Form } from 'react-bootstrap';
 import Axios from 'axios';
 import "./musicSection.css";
+import { formatDate } from '../helpers/formatDate';
 
 
 export default function ContentArea({ station }) {
     const [songs, setSongs] = useState([]);
     const [filterResults, setFilterResults] = useState([]);
+    let songSize = 0;
+    const [showBanner, setShowBanner] = useState(false);
 
 
     useEffect(() => {
         fetchSongsByStation();
-        const id = setInterval(fetchSongsByStation, 30000);
+        const id = setInterval(fetchSongsByStation, 6000);
         return () => clearInterval(id);
     }, [station]);
 
@@ -26,34 +29,20 @@ export default function ContentArea({ station }) {
                     element.time_played = newDate;
                 });
             }
-            console.log(data);
             setSongs(data);
             setFilterResults(data);
+            if(songSize === 0){
+                songSize = data.length;
+                return;
+            }else if(songSize > 0 && songSize < data.length){
+                console.log("new song added");
+                setShowBanner(true);
+                songSize = data.length;
+            }
         }).catch((error) => {
             console.log(error);
         })
     };
-
-    const formatDate = (oldDate) => {
-        var tmpDate = new Date(oldDate).toDateString();
-        var tmpTime = new Date(oldDate).toTimeString().split(' ')[0];
-        var hours = tmpTime.split(':')[0];
-        var minutes = tmpTime.split(':')[1];
-        // calculate
-        var timeValue;
-        if (hours > 0 && hours <= 12) {
-            timeValue = "" + hours;
-        } else if (hours > 12) {
-            timeValue = "" + (hours - 12);
-        } else if (hours == 0) {
-            timeValue = "12";
-        }
-        timeValue += ":" + minutes;  // get minutes
-        timeValue += (hours >= 12) ? "pm" : "am";  // get AM/PM
-
-        return tmpDate + ' at ' + timeValue;
-
-    }
 
     const search = (e) => {
         const search = e.target.value;
@@ -65,6 +54,10 @@ export default function ContentArea({ station }) {
         <>
             <div className="container">
                 <h1 className="stationHeading"> {station.station_name} - {station.station_freq} SET LIST </h1>
+                {showBanner === true && <div className="banner">
+                    <span className="banner-content">New song just added! Check it out below.</span>
+                    <span className="close-button" onClick={() => { setShowBanner(false)}}>X</span>
+                </div>}
                 {songs.length > 0 &&
                     <div>
                         <Form className="filter-form-songs">
