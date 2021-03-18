@@ -86,6 +86,9 @@ export default function ContentArea({ station }) {
                                             <h3>Played on: {val.time_played}</h3>
                                             <a href={val.yt_link} target="_blank" rel="noreferrer" className="yt-link">Listen to Song HERE</a>
                                         </div>
+										<div className ="playback">
+											<iframe src={val.yt_link} width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+										</div>
                                     </div>
                                 )
                             })}
