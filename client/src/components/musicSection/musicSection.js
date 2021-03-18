@@ -14,7 +14,7 @@ export default function SidePanel(){
     },[]);
 
     const fetchRadioStations = async () => {
-        Axios.get("http://localhost:3001/api/getStations").then((response) => {
+        Axios.get("http://54.166.59.136:3001/api/getStations").then((response) => {
             console.log(response.data);
             setStationList(response.data);
             setFilterResults(response.data);
