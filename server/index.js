@@ -49,6 +49,15 @@ app.get("/api/getLatestSong", (req, res) => {
     })
 });
 
+app.get("/api/getStationGenres", (req, res) => {
+    const  getStationGenres = `SELECT DISTINCT (music_genre) FROM station`;
+    db.query(getStationGenres, (err, result) => {
+        console.log(result);
+        console.log(err);
+        res.send(result);
+    })
+});
+
 app.get("/api/getSongsByPopularity", (req, res) => {
     const  getSongsByPopularity = `SELECT * FROM song_played WHERE song_id IN (SELECT MAX(song_id) FROM song_played GROUP BY song_name, song_artist) AND popularity_rating IS NOT NULL ORDER BY popularity_rating`;
     db.query(getSongsByPopularity, (err, result) => {
