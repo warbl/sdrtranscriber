@@ -11,14 +11,14 @@ export default function SidePanel() {
 	const [stationGenres, setStationGenres] = useState([]);
 	
 	function openSidebar(){
-		document.getElementById("sidePanel").style.width ="250px";
-		document.getElementById("setlist").style.marginLeft = "250px";
+		document.getElementById("sidebar").style.width ="250px";
+		document.getElementById("scrollbar").style.marginLeft = "250px";
 		console.log("showing sidepanel");
 	}
 	
 	function closeSidebar(){
-		document.getElementById("sidePanel").style.width = "0";
-		document.getElementById("sidePanel").style.marginLeft="0";
+		document.getElementById("sidebar").style.width = "0";
+		document.getElementById("scrollbar").style.marginLeft="0";
 		console.log("hiding sidepanel");
 		
 	}
