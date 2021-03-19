@@ -94,7 +94,8 @@ export default function ContentArea({ station }) {
                                             <a href={val.yt_link} target="_blank" rel="noreferrer" className="yt-link">Listen to Song HERE</a>
                                         </div>
 										<div className ="playback">
-											<iframe src={val.yt_link} width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+											<iframe src={[val.yt_link.slice(0, 24), 'embed/', val.yt_link.slice(24)].join('')} width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+					
 										</div>
                                     </div>
                                 )
