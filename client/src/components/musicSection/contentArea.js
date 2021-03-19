@@ -52,7 +52,7 @@ export default function ContentArea({ station }) {
 
     return (
         <>
-            <div className="container">
+            <div className="container" id = "setlist">
                 <h1 className="stationHeading"> {station.station_name} - {station.station_freq} SET LIST </h1>
                 {showBanner === true && <div className="banner">
                     <span className="banner-content">New song just added! Check it out below.</span>
