@@ -8,6 +8,7 @@ export default function SidePanel() {
     const [stationList, setStationList] = useState([]);
     const [station, setStation] = useState({});
     const [filterResults, setFilterResults] = useState([]);
+	const [stationGenres, setStationGenres] = useState([]);
 
     useEffect(() => {
         fetchRadioStations();
