@@ -1,8 +1,11 @@
 .news{
-    color: white;
+    color: #485060;
+    font-family: 'Arvo', sans-serif;
     text-align: center;
     font-weight: bold;
     padding-top: 150px;
+    background-color: white;
+    height: 100vh;
 }
 
 .title{

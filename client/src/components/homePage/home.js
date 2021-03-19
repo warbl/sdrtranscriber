@@ -32,13 +32,17 @@ export default function Home() {
     };
 
     return (
-        <div className="home">
+        <div className="group">
             {lastSong && <div className="banner">
                 {lastSong[0].song_name} by {lastSong[0].song_artist} started playing on station {lastSong[0].station_freq} at {lastSong[0].time_played}
             </div>}
-            <h1 className="heading">No radio No problem</h1>
-            <h3 className="paragraph">Enjoy and explore all the content from the radio stations of Philadelphia right here!</h3>
-            <img className="icon" src={radio} alt="home page icon" />
+            <div className="home">
+                <div className="content">
+                    <h1 className="heading">NO RADIO,<br/> NO PROBLEM.</h1>
+                    <h3 className="paragraph">Enjoy and explore all the content from the radio stations of Philadelphia right here!</h3>
+                </div>
+                <img className="icon" src={radio} alt="home page icon" />
+            </div>
         </div>
     )
 }
