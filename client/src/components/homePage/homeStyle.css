@@ -3,7 +3,8 @@
 }
 
 .group{
-    height: 100vh;
+    height: 87.5vh;
+    padding-top: 100px;
     background-color: #515D71;
 }
 
@@ -51,8 +52,6 @@ img{
     font-family: 'Garamond Premier Pro', serif;
     font-size: 20px;
     color: #485060;
-    padding-top: 120px;
-    padding-left: 20px;
     padding-bottom: 5px;
     background-color: #F0CF91;
 }

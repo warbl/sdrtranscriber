@@ -73,7 +73,7 @@ export default function SidePanel() {
                         </select>
                     </Form.Group>}
                 </Form>
-                <div className="list_container" id='scrollbar'>
+                <div className="list_container">
                     {filterResults && filterResults.map((val) => {
                         return (
                             <div className="station" key={val.station_id} onClick={() => clickStation(val)}>

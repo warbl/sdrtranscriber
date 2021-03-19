@@ -52,12 +52,12 @@ export default function ContentArea({ station }) {
 
     return (
         <>
-            <div className="container">
-                <h1 className="stationHeading"> {station.station_name} - {station.station_freq} SET LIST </h1>
-                {showBanner === true && <div className="banner">
-                    <span className="banner-content">New song just added! Check it out below.</span>
-                    <span className="close-button" onClick={() => { setShowBanner(false)}}>X</span>
+            <div className="container" style={{ height: showBanner ? '90%' : '95%' }}>
+            {showBanner === true && <div className="banner">
+                    <span className="banner-content">New song just added. Check it out below!</span>
+                    <span className="close-button" onClick={() => { setShowBanner(false)}}>&#x2715;</span>
                 </div>}
+                <h1 className="stationHeading"> {station.station_name} - {station.station_freq} SET LIST </h1>
                 {songs.length > 0 &&
                     <div>
                         <Form className="filter-form-songs">
@@ -73,7 +73,7 @@ export default function ContentArea({ station }) {
                         <p>Sorry no songs could be found</p>
                     </div>
                 ) : (
-                        <div className="song_container" id='scrollbar'>
+                        <div className="song_container" style={{ height: showBanner ? '90%' : '90%'}}>
                             {filterResults && filterResults.map((val, index) => {
                                 return (
                                     <div className="song" key={val.song_id}>
@@ -86,9 +86,6 @@ export default function ContentArea({ station }) {
                                             <h3>Played on: {val.time_played}</h3>
                                             <a href={val.yt_link} target="_blank" rel="noreferrer" className="yt-link">Listen to Song HERE</a>
                                         </div>
-										<div className ="playback">
-											<iframe src={val.yt_link} width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-										</div>
                                     </div>
                                 )
                             })}
