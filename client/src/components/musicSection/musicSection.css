@@ -31,6 +31,7 @@
 .filter-form-songs {
     width: 100%;
     padding-bottom: 10px;
+    text-align: center;
 }
 
 .filter-form-song-input{
@@ -97,7 +98,8 @@
     padding: 10px;
     border: black thin solid;
     margin: .75em;
-    background-color: #C86463;
+    background-color: white;
+    width: 60%;
 }
 
 .album-image{
@@ -144,4 +146,12 @@ h1{
 
 .close-button:hover{
     cursor: pointer;
+}
+
+.heading{
+    padding-top:120px;
+    font-size: 24px;
+    text-align: center;
+    color: #485060;
+    font-family: 'Archivo Black', sans-serif;
 }
