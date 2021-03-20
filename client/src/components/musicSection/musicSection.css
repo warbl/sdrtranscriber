@@ -94,9 +94,8 @@
 .song{
     display: flex;
     flex-direction: row;
-    align-items: center;
     padding: 10px;
-    border: black thin solid;
+    box-shadow: 5px 5px 5px 5px #485060;
     margin: .75em;
     background-color: white;
     width: 60%;
@@ -104,6 +103,7 @@
 
 .album-image{
     width:300px;
+    float: right;
 }
 
 .album-image img {
@@ -116,6 +116,7 @@
     width: 600px;
     font-family: 'Garamond Premier Pro', serif;
     font-size: 18px;
+    float: left;
 }
 
 h1{

@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b238a8ea-9fe9-494f-bb26-2f0f487e5b4e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/homePage/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/homePage/home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/homePage/homeStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/homePage/homeStyle.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/musicSection/musicSection.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/musicSection/musicSection.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/navBar/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/navBar/navbar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/newsSection/newsSection.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/newsSection/newsSection.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/radioSection/radio.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/radioSection/radio.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/radioSection/radio.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/radioSection/radio.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +42,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1616101726336</updated>
-      <workItem from="1616101731039" duration="14868000" />
+      <workItem from="1616101731039" duration="15261000" />
+      <workItem from="1616210847732" duration="2496000" />
     </task>
     <servers />
   </component>
