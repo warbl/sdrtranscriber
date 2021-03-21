@@ -29,7 +29,16 @@ export default function SidePanel() {
     const fetchStationGenres = async () => {
         Axios.get("http://localhost:3001/api/getStationGenres").then((response) => {
             console.log(response.data);
-            setStationGenres(response.data);
+            if (response.data.length > 0) {
+                let allGenres = [];
+                response.data.forEach(element => {
+                    const genres = element.music_genre.split(',');
+                    genres.forEach(genre => {
+                        allGenres.push(genre);
+                    })
+                });
+                setStationGenres(allGenres);
+            }
         }).catch((error) => {
             console.log(error);
         });
@@ -64,10 +73,10 @@ export default function SidePanel() {
                     </Form.Group>
                     {stationGenres && <Form.Group>
                         <select type="text" className="form_dropdown" onChange={filterbyGenre}>
-                            <option value={"all stations"}>All Stations</option>
-                            {stationGenres && stationGenres.map((val) => {
+                            <option value={"all stations"}>All Genres</option>
+                            {stationGenres && stationGenres.map((val, index) => {
                                 return (
-                                    <option key={val.music_genre} value={val.music_genre}>{val.music_genre}</option>
+                                    <option key={index} value={val}>{val}</option>
                                 )
                             })}
                         </select>
