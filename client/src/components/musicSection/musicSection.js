@@ -8,6 +8,7 @@ export default function SidePanel() {
     const [stationList, setStationList] = useState([]);
     const [station, setStation] = useState({});
     const [filterResults, setFilterResults] = useState([]);
+    const [stationGenres, setStationGenres] = useState([]);
 
     useEffect(() => {
         fetchRadioStations();
@@ -28,7 +29,16 @@ export default function SidePanel() {
     const fetchStationGenres = async () => {
         Axios.get("http://localhost:3001/api/getStationGenres").then((response) => {
             console.log(response.data);
-            setStationGenres(response.data);
+            if (response.data.length > 0) {
+                let allGenres = [];
+                response.data.forEach(element => {
+                    const genres = element.music_genre.split(',');
+                    genres.forEach(genre => {
+                        allGenres.push(genre);
+                    })
+                });
+                setStationGenres(allGenres);
+            }
         }).catch((error) => {
             console.log(error);
         });
@@ -62,22 +72,22 @@ export default function SidePanel() {
                         <Form.Control onChange={search} className='filter-form-station-input' type="text" placeholder=" Search stations..." />
                     </Form.Group>
                     {stationGenres && <Form.Group>
-                        <select type="text" className="form_dropdown" onChange={filterbyGenre}>
-                            <option value={"all stations"}>All Stations</option>
-                            {stationGenres && stationGenres.map((val) => {
+                        <select type="text" className="filter-form_dropdown" onChange={filterbyGenre}>
+                            <option value={"all stations"}>All Genres</option>
+                            {stationGenres && stationGenres.map((val, index) => {
                                 return (
-                                    <option key={val.music_genre} value={val.music_genre}>{val.music_genre}</option>
+                                    <option key={index} value={val}>{val}</option>
                                 )
                             })}
                         </select>
                     </Form.Group>}
                 </Form>
-                <div className="list_container" id='scrollbar'>
+                <div className="list_container">
                     {filterResults && filterResults.map((val) => {
                         return (
                             <div className="station" key={val.station_id} onClick={() => clickStation(val)}>
-                                <h3>{val.station_name}</h3>
-                                <span>({val.station_freq})</span>
+                                <h3 className="station_name">{val.station_name}</h3>
+                                <span className="station_freq">({val.station_freq})</span>
                             </div>
                         )
                     })}

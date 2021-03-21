@@ -2,6 +2,7 @@ import React from "react";
 import "./navbar.css";
 import {useHistory} from 'react-router-dom';
 import hamburger from '../../images/hamburger.png'
+import logo from '../../images/capstone logo.png'
 
 
 
@@ -27,8 +28,8 @@ export default function NavBar(){
 	
     return(
         <div className="nav" id = "topNav">
-            <div className="navTitle" onClick={goToHomePage}>
-                SDR Transcriber
+            <div onClick={goToHomePage}>
+				<img className="logo" src ={logo} alt ="sdr logo" onClick={goToHomePage}/>
             </div>
             <div className="navTabs">
 				<div className="navLink">
