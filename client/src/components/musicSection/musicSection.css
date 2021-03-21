@@ -47,7 +47,7 @@
     margin: 0px 5px;
 }
 
-.form_dropdown{
+.filter-form_dropdown{
     color: gray;
     width: 200px;
     background-color: #F0CF91;
@@ -60,15 +60,6 @@
     margin-top: 15px;
     overflow-y: auto;
     height: 89%;
-}
-
-.station{
-    padding-bottom: 10px;
-}
-
-.station:hover{
-    cursor: pointer;
-    color:#542124;
 }
 
 .container{
@@ -144,6 +135,7 @@ h1{
 .banner{
     margin: 0;
     padding: 0;
+    padding-left: 10px;
     padding-top: 10px;
     padding-bottom: 5px;
     position: relative;
@@ -164,4 +156,37 @@ h1{
     text-align: center;
     color: #485060;
     font-family: 'Archivo Black', sans-serif;
+}
+
+.station{
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.station:hover{
+    cursor: pointer;
+    color:#542124;
+}
+
+.station_name{
+    display: inline-block;
+    padding-right: 8px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.station_freq{
+    text-align: center;
+    font-size: 20px;
+}
+
+
+.top-songs-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    height: 575px;
 }

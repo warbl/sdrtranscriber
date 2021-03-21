@@ -72,7 +72,7 @@ export default function SidePanel() {
                         <Form.Control onChange={search} className='filter-form-station-input' type="text" placeholder=" Search stations..." />
                     </Form.Group>
                     {stationGenres && <Form.Group>
-                        <select type="text" className="form_dropdown" onChange={filterbyGenre}>
+                        <select type="text" className="filter-form_dropdown" onChange={filterbyGenre}>
                             <option value={"all stations"}>All Genres</option>
                             {stationGenres && stationGenres.map((val, index) => {
                                 return (
@@ -86,8 +86,8 @@ export default function SidePanel() {
                     {filterResults && filterResults.map((val) => {
                         return (
                             <div className="station" key={val.station_id} onClick={() => clickStation(val)}>
-                                <h3>{val.station_name}</h3>
-                                <span>({val.station_freq})</span>
+                                <h3 className="station_name">{val.station_name}</h3>
+                                <span className="station_freq">({val.station_freq})</span>
                             </div>
                         )
                     })}

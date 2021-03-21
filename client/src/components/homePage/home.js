@@ -10,7 +10,7 @@ export default function Home() {
 
     useEffect(() => {
         fetchLatestSong();
-        const id = setInterval(fetchLatestSong, 4000);
+        const id = setInterval(fetchLatestSong, 5000);
         return () => clearInterval(id);
     }, []);
 

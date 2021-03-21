@@ -11,7 +11,7 @@ export default function TopSongs() {
 
     useEffect(() => {
         fetchTopSongs();
-        const id = setInterval(fetchTopSongs, 30000);
+        const id = setInterval(fetchTopSongs, 5000);
         return () => clearInterval(id);
     }, []);
 
@@ -49,7 +49,7 @@ export default function TopSongs() {
                     </Form.Group>
                 </Form>
             </div>
-                <div className="song-container">
+                <div className="top-songs-container">
                     {filterResults && filterResults.map((val, index) => {
                         return (
                             <div className="song" key={val.song_id}>
