@@ -77,16 +77,16 @@ export default function ContentArea({ station }) {
                             {filterResults && filterResults.map((val, index) => {
                                 return (
                                     <div className="song" key={val.song_id}>
-                                        <div className="album-image">
-                                            <img src={val.album_cover} alt="album_image" />
-                                        </div>
                                         <div className="song-info">
                                             <h1>{index + 1}. {val.song_name}</h1>
                                             <h3>Artist: {val.song_artist}</h3>
                                             <h3>Played on: {val.time_played}</h3>
                                             <div className="playback">
-                                                <iframe src={[val.yt_link.slice(0, 24), '/embed', val.yt_link.slice(24)].join('')} width="300" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                <iframe src={[val.yt_link.slice(0, 24), '/embed', val.yt_link.slice(24)].join('')} height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                             </div>
+                                        </div>
+                                        <div className="album-image">
+                                            <img src={val.album_cover} alt="album_image" />
                                         </div>
                                     </div>
                                 )

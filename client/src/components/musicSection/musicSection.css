@@ -32,6 +32,9 @@
 .filter-form-song-input{
     height: 15px;
     width: 500px;
+    background-color: #F0CF91;
+    border: 1px solid #C7AC7A;
+    border-radius: 50px;
 }
 
 .filter-form-stations {
@@ -98,23 +101,23 @@
     box-shadow: 5px 5px 5px 5px #485060;
     margin: .75em;
     background-color: white;
-    width: 60%;
+    width: 50%;
 }
 
 .album-image{
-    width:300px;
-    float: right;
+    width: 170px;
+    height: 170px;
 }
-
 .album-image img {
-    width: 180px;
-    height: 180px;
+    width: 170px;
+    height: 170px;
 }
 
 .song-info {
     word-wrap: break-word;
-    width: 600px;
+    width: 70%;
     font-family: 'Garamond Premier Pro', serif;
+    text-align: left;
     font-size: 18px;
     float: left;
 }
@@ -132,12 +135,13 @@ h1{
     color:#542124;
 }
 
+iframe{
+    width: 142%;
+}
+
 .banner{
     margin: 0;
-    padding: 0;
-    padding-left: 10px;
-    padding-top: 10px;
-    padding-bottom: 5px;
+    padding: 10px 0 5px 10px;
     position: relative;
 }
 
