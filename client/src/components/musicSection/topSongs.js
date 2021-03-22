@@ -8,10 +8,11 @@ import "./musicSection.css";
 export default function TopSongs() {
     const [topSongs, setTopSongs] = useState();
     const [filterResults, setFilterResults] = useState();
+    const [input, setInput] = useState();
 
     useEffect(() => {
         fetchTopSongs();
-        const id = setInterval(fetchTopSongs, 5000);
+        const id = setInterval(fetchTopSongs, 300000);
         return () => clearInterval(id);
     }, []);
 
@@ -26,6 +27,7 @@ export default function TopSongs() {
                 });
             }
             console.log(data);
+            setInput('');
             setTopSongs(data);
             setFilterResults(data);
         }).catch((error) => {
@@ -45,7 +47,7 @@ export default function TopSongs() {
             <div>
                 <Form className="filter-form-songs">
                     <Form.Group className="filter-form-song-box">
-                        <Form.Control onChange={search} className='filter-form-song-input' type="text" placeholder=" Search songs..." />
+                        <Form.Control className='filter-form-song-input' type="text" placeholder=" Search songs..." value={input} onChange={(e) => {setInput(e.target.value); search(e)}}/>
                     </Form.Group>
                 </Form>
             </div>

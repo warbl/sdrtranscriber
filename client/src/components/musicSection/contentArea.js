@@ -10,6 +10,7 @@ export default function ContentArea({ station }) {
     const [filterResults, setFilterResults] = useState([]);
     let songSize = 0;
     const [showBanner, setShowBanner] = useState(false);
+    const [input, setInput] = useState();
 
 
     useEffect(() => {
@@ -29,15 +30,18 @@ export default function ContentArea({ station }) {
                     element.time_played = newDate;
                 });
             }
-            setSongs(data);
-            setFilterResults(data);
             if (songSize === 0) {
                 songSize = data.length;
+                setSongs(data);
+                setFilterResults(data);
                 return;
             } else if (songSize > 0 && songSize < data.length) {
                 console.log("new song added");
+                setInput('');
                 setShowBanner(true);
                 songSize = data.length;
+                setSongs(data);
+                setFilterResults(data);
             }
         }).catch((error) => {
             console.log(error);
@@ -62,7 +66,7 @@ export default function ContentArea({ station }) {
                     <div>
                         <Form className="filter-form-songs">
                             <Form.Group className="filter-form-song-box">
-                                <Form.Control onChange={search} className='filter-form-song-input' type="text" placeholder=" Search songs..." />
+                                <Form.Control className='filter-form-song-input' type="text" placeholder=" Search songs..." value={input} onChange={(e) => {setInput(e.target.value); search(e)}}/>
                             </Form.Group>
                         </Form>
                     </div>
