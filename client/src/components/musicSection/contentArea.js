@@ -10,6 +10,7 @@ export default function ContentArea({ station }) {
     const [filterResults, setFilterResults] = useState([]);
     let songSize = 0;
     const [showBanner, setShowBanner] = useState(false);
+    const [input, setInput] = useState();
 
 
     useEffect(() => {
@@ -29,15 +30,18 @@ export default function ContentArea({ station }) {
                     element.time_played = newDate;
                 });
             }
-            setSongs(data);
-            setFilterResults(data);
             if (songSize === 0) {
                 songSize = data.length;
+                setSongs(data);
+                setFilterResults(data);
                 return;
             } else if (songSize > 0 && songSize < data.length) {
                 console.log("new song added");
+                setInput('');
                 setShowBanner(true);
                 songSize = data.length;
+                setSongs(data);
+                setFilterResults(data);
             }
         }).catch((error) => {
             console.log(error);
@@ -62,7 +66,7 @@ export default function ContentArea({ station }) {
                     <div>
                         <Form className="filter-form-songs">
                             <Form.Group className="filter-form-song-box">
-                                <Form.Control onChange={search} className='filter-form-song-input' type="text" placeholder=" Search songs..." />
+                                <Form.Control className='filter-form-song-input' type="text" placeholder=" Search songs..." value={input} onChange={(e) => { setInput(e.target.value); search(e) }} />
                             </Form.Group>
                         </Form>
                     </div>
@@ -77,16 +81,18 @@ export default function ContentArea({ station }) {
                             {filterResults && filterResults.map((val, index) => {
                                 return (
                                     <div className="song" key={val.song_id}>
-                                        <div className="album-image">
-                                            <img src={val.album_cover} alt="album_image" />
-                                        </div>
                                         <div className="song-info">
-                                            <h1>{index + 1}. {val.song_name}</h1>
-                                            <h3>Artist: {val.song_artist}</h3>
-                                            <h3>Played on: {val.time_played}</h3>
-                                            <div className="playback">
-                                                <iframe src={[val.yt_link.slice(0, 24), '/embed', val.yt_link.slice(24)].join('')} width="300" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                            <div className="song-content">
+                                                <h1>{index + 1}. {val.song_name}</h1>
+                                                <h3>Artist: {val.song_artist}</h3>
+                                                <h3>Played on: {val.time_played}</h3>
                                             </div>
+                                            <div className="album-image">
+                                                <img src={val.album_cover} alt="album_image" />
+                                            </div>
+                                        </div>
+                                        <div className="playback">
+                                            <iframe src={[val.yt_link.slice(0, 24), '/embed', val.yt_link.slice(24)].join('')} width="300" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                         </div>
                                     </div>
                                 )

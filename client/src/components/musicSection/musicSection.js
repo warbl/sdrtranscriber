@@ -9,6 +9,8 @@ export default function SidePanel() {
     const [station, setStation] = useState({});
     const [filterResults, setFilterResults] = useState([]);
     const [stationGenres, setStationGenres] = useState([]);
+    const [input, setInput] = useState('');
+    const [genre, setGenre] = useState("All Genres");
 
     useEffect(() => {
         fetchRadioStations();
@@ -46,19 +48,26 @@ export default function SidePanel() {
 
     const search = (e) => {
         const search = e.target.value.toString();
-        const result = stationList.filter(value => value.station_name.toLowerCase().includes(search.toLowerCase()) || value.station_freq.toString().includes(search));
-        setFilterResults(result);
+        if (genre.toLowerCase() === "all genres") {
+            console.log("here");
+            const result = stationList.filter(value => value.station_name.toLowerCase().includes(search.toLowerCase()) || value.station_freq.toString().includes(search));
+            setFilterResults(result);
+        }else{
+            const result = stationList.filter(value => (value.station_name.toLowerCase().includes(search.toLowerCase()) || value.station_freq.toString().includes(search)) && value.music_genre.toLowerCase().includes(genre.toLowerCase()));
+            setFilterResults(result);
+        }
     };
 
     const filterbyGenre = (e) => {
-        const genre = e.target.value;
-        console.log(genre);
-        if (genre.toLowerCase() === "all stations") {
-            setFilterResults(stationList);
-            return;
-        }
-        const result = stationList.filter(value => value.music_genre.toLowerCase().includes(genre.toLowerCase()));
+        const search = e.target.value;
+        console.log(search);
+        if (search.toLowerCase() === "all genres") {
+            const result = stationList.filter(value => value.station_name.toLowerCase().includes(input.toLowerCase()) || value.station_freq.toString().includes(input));
+            setFilterResults(result);
+        }else{
+        const result = stationList.filter(value => value.music_genre.toLowerCase().includes(search.toLowerCase()) && (value.station_name.toLowerCase().includes(input.toLowerCase()) || value.station_freq.toString().includes(input)));
         setFilterResults(result);
+        }
     };
 
     const clickStation = (val) => {
@@ -69,11 +78,11 @@ export default function SidePanel() {
             <div className="sidePanel">
                 <Form className="filter-form-stations">
                     <Form.Group className="filter-form-station-box">
-                        <Form.Control onChange={search} className='filter-form-station-input' type="text" placeholder=" Search stations..." />
+                        <Form.Control className='filter-form-station-input' type="text" placeholder=" Search stations..." value={input} onChange={(e) => {setInput(e.target.value); search(e)}}/>
                     </Form.Group>
                     {stationGenres && <Form.Group>
-                        <select type="text" className="filter-form_dropdown" onChange={filterbyGenre}>
-                            <option value={"all stations"}>All Genres</option>
+                        <select type="text" className="filter-form_dropdown" value={genre} onChange={(e) => {setGenre(e.target.value); filterbyGenre(e)}}>
+                            <option value={"all genres"}>All Genres</option>
                             {stationGenres && stationGenres.map((val, index) => {
                                 return (
                                     <option key={index} value={val}>{val}</option>

@@ -8,10 +8,11 @@ import "./musicSection.css";
 export default function TopSongs() {
     const [topSongs, setTopSongs] = useState();
     const [filterResults, setFilterResults] = useState();
+    const [input, setInput] = useState();
 
     useEffect(() => {
         fetchTopSongs();
-        const id = setInterval(fetchTopSongs, 5000);
+        const id = setInterval(fetchTopSongs, 300000);
         return () => clearInterval(id);
     }, []);
 
@@ -26,6 +27,7 @@ export default function TopSongs() {
                 });
             }
             console.log(data);
+            setInput('');
             setTopSongs(data);
             setFilterResults(data);
         }).catch((error) => {
@@ -45,7 +47,7 @@ export default function TopSongs() {
             <div>
                 <Form className="filter-form-songs">
                     <Form.Group className="filter-form-song-box">
-                        <Form.Control onChange={search} className='filter-form-song-input' type="text" placeholder=" Search songs..." />
+                        <Form.Control className='filter-form-song-input' type="text" placeholder=" Search songs..." value={input} onChange={(e) => {setInput(e.target.value); search(e)}}/>
                     </Form.Group>
                 </Form>
             </div>
@@ -53,18 +55,21 @@ export default function TopSongs() {
                     {filterResults && filterResults.map((val, index) => {
                         return (
                             <div className="song" key={val.song_id}>
+                            <div className="song-info">
+                                <div className="song-content">
+                                    <h1>{index + 1}. {val.song_name}</h1>
+                                    <h3>Artist: {val.song_artist}</h3>
+                                    <h3>Played on: {val.station_freq}</h3>
+                                </div>
                                 <div className="album-image">
                                     <img src={val.album_cover} alt="album_image" />
                                 </div>
-                                <div className="song-info">
-                                    <h1>{index + 1}. {val.song_name}</h1>
-                                    <h3>Artist: {val.song_artist}</h3>
-                                    <div className="playback">
-                                        <iframe src={[val.yt_link.slice(0, 24), '/embed', val.yt_link.slice(24)].join('')} width="300" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                    </div>
-                                </div>
                             </div>
-                        )
+                            <div className="playback">
+                                <iframe src={[val.yt_link.slice(0, 24), '/embed', val.yt_link.slice(24)].join('')} width="300" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                            </div>
+                        </div>
+                    )
                     })}
                 </div>
         </div>
