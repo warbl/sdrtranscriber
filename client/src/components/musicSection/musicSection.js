@@ -8,9 +8,23 @@ export default function SidePanel() {
     const [stationList, setStationList] = useState([]);
     const [station, setStation] = useState({});
     const [filterResults, setFilterResults] = useState([]);
+	
     const [stationGenres, setStationGenres] = useState([]);
     const [input, setInput] = useState('');
     const [genre, setGenre] = useState("All Genres");
+	
+	function openSidebar(){
+		document.getElementById("sidebar").style.width ="250px";
+		document.getElementById("scrollbar").style.marginLeft = "250px";
+		console.log("showing sidepanel");
+	}
+	
+	function closeSidebar(){
+		document.getElementById("sidebar").style.width = "0";
+		document.getElementById("scrollbar").style.marginLeft="0";
+		console.log("hiding sidepanel");
+		
+	}
 
     useEffect(() => {
         fetchRadioStations();
@@ -75,7 +89,9 @@ export default function SidePanel() {
     };
     return (
         <div className="music">
-            <div className="sidePanel">
+			<button class="open-btn" onClick = {openSidebar}>&#9776; Stations</button>
+            <div className="sidePanel" id ="sidebar">
+				<a href ="javascript:void(0)" className = "close-btn" onClick = {closeSidebar}>&times;</a>
                 <Form className="filter-form-stations">
                     <Form.Group className="filter-form-station-box">
                         <Form.Control className='filter-form-station-input' type="text" placeholder=" Search stations..." value={input} onChange={(e) => {setInput(e.target.value); search(e)}}/>
