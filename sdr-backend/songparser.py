@@ -120,7 +120,7 @@ def insert_into_db(song_name, song_artist, spotify_link, album_link, station_fre
     now = datetime.datetime.now()
 
     # execute SQL query using execute() method.
-    print 'DEBUG: ' + 'INSERT INTO song_played (song_name, song_artist, yt_link, album_cover, station_freq, time_played) VALUES("'+song_name+'", "'+song_artist+'", "'+spotify_link+'", "'+album_link+'", "'+str(station_freq)+'", "'+now.strftime('%Y-%m-%d %H:%M:%S')+'")'
+    print 'DEBUG: ' + 'INSERT INTO TranscribedSpeech (song_name, song_artist, yt_link, album_cover, station_freq, time_played) VALUES("'+song_name+'", "'+song_artist+'", "'+spotify_link+'", "'+album_link+'", "'+str(station_freq)+'", "'+now.strftime('%Y-%m-%d %H:%M:%S')+'")'
 
     cursor.execute('INSERT INTO song_played (song_name, song_artist, yt_link, album_cover, station_freq, time_played) VALUES("'+song_name+'", "'+song_artist+'", "'+spotify_link+'", "'+album_link+'", "'+str(station_freq)+'", "'+now.strftime('%Y-%m-%d %H:%M:%S')+'")')
     db.commit()
