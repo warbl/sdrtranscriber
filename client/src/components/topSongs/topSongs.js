@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Form } from 'react-bootstrap';
 import Axios from 'axios';
 import { formatDate } from '../helpers/formatDate';
-import "./musicSection.css";
+import "./topSongs.css";
 
 
 export default function TopSongs() {
     const [topSongs, setTopSongs] = useState();
     const [filterResults, setFilterResults] = useState();
-    const [input, setInput] = useState();
+    const [input, setInput] = useState('');
 
     useEffect(() => {
         fetchTopSongs();
@@ -47,14 +47,14 @@ export default function TopSongs() {
             <div>
                 <Form className="filter-form-songs">
                     <Form.Group className="filter-form-song-box">
-                        <Form.Control className='filter-form-song-input' type="text" placeholder=" Search songs..." value={input} onChange={(e) => {setInput(e.target.value); search(e)}}/>
+                        <Form.Control className='filter-form-song-input' type="text" placeholder=" Search songs..." onChange={(e) => { setInput(e.target.value); search(e) }} />
                     </Form.Group>
                 </Form>
             </div>
-                <div className="top-songs-container">
-                    {filterResults && filterResults.map((val, index) => {
-                        return (
-                            <div className="song" key={val.song_id}>
+            <div className="top-songs-container">
+                {filterResults && filterResults.map((val, index) => {
+                    return (
+                        <div className="song" key={val.song_id}>
                             <div className="song-info">
                                 <div className="song-content">
                                     <h1>{index + 1}. {val.song_name}</h1>
@@ -70,8 +70,8 @@ export default function TopSongs() {
                             </div>
                         </div>
                     )
-                    })}
-                </div>
+                })}
+            </div>
         </div>
     )
 }
