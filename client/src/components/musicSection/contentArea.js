@@ -30,6 +30,7 @@ export default function ContentArea({ station }) {
                     element.time_played = newDate;
                 });
             }
+            setShowBanner(true);
             if (songSize === 0) {
                 songSize = data.length;
                 setSongs(data);
@@ -77,7 +78,7 @@ export default function ContentArea({ station }) {
                         <p>Sorry no songs could be found</p>
                     </div>
                 ) : (
-                        <div className="song_container" style={{ height: showBanner ? '90%' : '87%' }}>
+                        <div className="song_container">
                             {filterResults && filterResults.map((val, index) => {
                                 return (
                                     <div className="song" key={val.song_id}>
