@@ -13,10 +13,6 @@
 
 .sidePanel{
     flex: 1;
-	z-index: 1;
-	top: 0;
-	left: 0;
-	overflow-x: hidden;
     flex-grow: 0;   
     flex-basis: 25em;
     text-align:center;
@@ -24,6 +20,13 @@
     font-family: 'Archivo Black', sans-serif;
     justify-content: flex-start;
     width: 100%;
+    background-color: #485060;
+    height: 100vh;
+}
+
+.side-nav-bar{
+    height: 100vh;
+    overflow-y: scroll;
 }
 
 .filter-form-songs {
@@ -34,7 +37,7 @@
 
 .filter-form-song-input{
     height: 15px;
-    width: 500px;
+    width: 70%;
     background-color: #F0CF91;
     border: 1px solid #C7AC7A;
     border-radius: 50px;
@@ -46,7 +49,7 @@
 }
 
 .filter-form-station-input{
-    width: 200px;
+    width: 85%;
     background-color: #F0CF91;
     border: 1px solid #C7AC7A;
     border-radius: 50px;
@@ -55,7 +58,7 @@
 
 .filter-form_dropdown{
     color: gray;
-    width: 200px;
+    width: 85%;
     background-color: #F0CF91;
     border: 1px solid #C7AC7A;
     border-radius: 50px;
@@ -84,13 +87,6 @@
     font-size: 30px;
 }
 
-.open-btn{
-	display:none;
-}
-.close-btn{
-	display:none;
-}
-
 .song_container{
     display: flex;
     flex-direction: column;
@@ -105,43 +101,47 @@
 }
 
 .song{
+    position: relative;
     display: flex;
     flex-direction: column;
     padding: 10px;
     box-shadow: 5px 5px 5px 5px #485060;
     margin: .75em;
     background-color: white;
-    width: 50%;
+    width: 60%;
 }
 
 .song-info {
+    width: 100%;
     display: flex;
     flex-direction: row;
     word-wrap: break-word;
     font-family: 'Garamond Premier Pro', serif;
     text-align: left;
-    font-size: 18px;
-    float: left;
+    height: min(300px, 35vh);
+}
+
+.song-info h1{
+    font-size: min(2vw, 30px);
 }
 
 .song-content{
-    width: 60%;
-    height: 230px;
     padding-right: 10px;
+    font-size: min(1.5vw, 18px);
 }
 
 .album-image{
-    width: 200px;
-    height: 200px;
+    width: 60%;
+    height: min(200px, 33.33vh);
 }
 .album-image img {
-    width: 200px;
-    height: 200px;
+    width: 60%;
+    height: min(200px, 33.33vh);
+    float: right;
 }
 
 h1{
     font-family: 'Archivo Black', sans-serif;
-    font-size: 24px;
 }
 
 iframe{
@@ -186,8 +186,8 @@ iframe{
 .station_name{
     display: inline-block;
     padding-right: 8px;
-    font-size: 30px;
     font-weight: bold;
+    font-size: 25px;
 }
 
 .station_freq{
@@ -195,82 +195,81 @@ iframe{
     font-size: 20px;
 }
 
-.top-songs-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-y: auto;
-    height: 575px;
+.sidebar-nav-hide {
+    left: -1000px;
 }
 
-.top-songs-container .song-content{
-    font-size: 30px;
+@media only screen and (max-width: 750px) {
+    .sidePanel {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 2;
+    }
+
+    .side-nav-bar{
+        height: 100%;
+        width: 100%;
+        z-index: 2;
+        overflow-y: scroll;
+    }
+
+    #menuBtn {
+        display: block;
+    }
+
+    .filter-form-station-input{
+        width: 50%;
+        font-size: 4vw;
+    }
+    
+    .filter-form_dropdown{
+        width: 50%;
+        font-size: 4vw;
+    }
+
+    .station_name{
+        font-size: 4vw;
+    }
+
+    .station_freq{
+        font-size: 4vw;
+    }
+
+    .banner{
+        font-size: 3.5vw;
+    }
+
+    .stationHeading{
+        font-size: 4vw;
+    }
+
+    .song{
+        position: relative;
+        height: 25vh;
+        width: 90%;
+    }
+
+    .album-image img{
+        height: 12vh;
+        width: 60%;
+    }
+
+    .playback{
+        margin-top: -150px;
+    }
 }
 
-.top-songs-container .album-image img{
-    width: 250px;
-}
-	
-@media screen and (max-width: 600px){
-	.song_container{
-		float: none;
-		width:100%;
-		height:auto;
-		display:flex;
-		text-align: left;
-	}
-	
-	.album-image img{
-		width: 90px;
-		height: auto;
-	}
-	
-	.sidePanel{
-		flex: 1;
-		z-index: 2;
-		top: 6rem;
-		left: 0;
-		overflow-x: hidden;
-		position: fixed;
-		flex-grow: 0;   
-		flex-basis: 25em;
-		text-align:center;
-		font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
-		border-right: solid thick black;
-		width: 0%;
-		height: 100%;
-		opacity: 100%;
-		transition: 0.5s;
-		background-color: #5e5151;
-	}
-	
-	.sidePanel .close-btn{
-		display:flex;
-		position: absolute;
-		color: white;
-		top: 0;
-		right: 25px;
-		font-size: 36px;
-		margin-left: 50px;
-	}
-	
-	.open-btn{
-		position: absolute;
-		top:50%;
-		display: flex;
-		font-size:20px;
-		cursor: pointer;
-		background-color: #111;
-		color: white;
-		padding: 10px 15px;
-		border: none;
-		font-size: 15px;
-		width: 80px;
-		height: 60px;
-	}
-	
-	.open-btn:hover{
-		background-color: #109;
-	}
-	
+#menuBtn {
+    display: none;
+    margin: 0;
+    z-index: 3;
+    position: fixed;
+    right: 14px;
+    top: 140px;
+    color:#C7AC7A;
+    font-size: 40px;
+    cursor: pointer;
+    transition: color 1s;
+    font-size: 6vw;
 }
