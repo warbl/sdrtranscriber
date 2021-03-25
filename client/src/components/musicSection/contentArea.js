@@ -56,7 +56,7 @@ export default function ContentArea({ station }) {
 
     return (
         <>
-            <div className="container" style={{ height: showBanner ? '90%' : '95%' }}>
+            <div className="container" style={{ height: showBanner ? '87%' : '95%' }}>
                 {showBanner === true && <div className="banner">
                     <span className="banner-content">New song just added. Check it out below!</span>
                     <span className="close-button" onClick={() => { setShowBanner(false) }}>&#x2715;</span>
@@ -77,7 +77,7 @@ export default function ContentArea({ station }) {
                         <p>Sorry no songs could be found</p>
                     </div>
                 ) : (
-                        <div className="song_container" style={{ height: showBanner ? '90%' : '90%' }}>
+                        <div className="song_container" style={{ height: showBanner ? '90%' : '87%' }}>
                             {filterResults && filterResults.map((val, index) => {
                                 return (
                                     <div className="song" key={val.song_id}>
@@ -92,7 +92,7 @@ export default function ContentArea({ station }) {
                                             </div>
                                         </div>
                                         <div className="playback">
-                                            <iframe src={[val.yt_link.slice(0, 24), '/embed', val.yt_link.slice(24)].join('')} width="300" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                            <iframe src={[val.yt_link.slice(0, 24), '/embed', val.yt_link.slice(24)].join('')} height="75" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                         </div>
                                     </div>
                                 )
