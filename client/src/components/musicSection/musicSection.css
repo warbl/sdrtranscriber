@@ -68,7 +68,7 @@
 .list_container{
     margin-top: 15px;
     overflow-y: auto;
-    height: 89%;
+    height: 85%;
 }
 
 .container{
@@ -253,6 +253,10 @@ iframe{
     .album-image img{
         height: 12vh;
         width: 60%;
+    }
+
+    .list_container{
+        height:80%;
     }
     
     .playback{
