@@ -67,6 +67,18 @@ app.get("/api/getSongsByPopularity", (req, res) => {
     })
 });
 
+app.get("/api/getNewsContent", (req, res) => {
+    const  getNewsContent = `SELECT * FROM TranscribedSpeech`;
+    db.query(getNewsContent, (err, result) => {
+        console.log(result);
+        console.log(err);
+        res.send(result);
+    })
+});
+
 app.listen((3001), () => {
     console.log("SERVER IS RUNNING ON PORT 3001!");
 })
+
+
+
