@@ -15,7 +15,7 @@ export default function Home() {
     }, []);
 
     const fetchLatestSong = () => {
-        Axios.get("http://localhost:3001/api/getLatestSong").then((response) => {
+        Axios.get("http://54.166.59.136:3001/api/getLatestSong").then((response) => {
             const data = response.data;
             if (data.length > 0) {
                 data.forEach(element => {

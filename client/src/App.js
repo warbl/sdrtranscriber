@@ -4,7 +4,7 @@ import NavBar from './components/navBar/navbar'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import News from './components/newsSection/newsSection';
 import Radio from './components/radioSection/radio';
-import TopSongs from './components/musicSection/topSongs';
+import TopSongs from './components/topSongs/topSongs';
 
 function App() {
   return (
