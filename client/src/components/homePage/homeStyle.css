@@ -1,9 +1,9 @@
 @viewport {
-	width: 100%;
+	width: device-width;
 }
 
 .group{
-    height: 87.5vh;
+    height: 85.5vh;
     padding-top: 100px;
     background-color: #515D71;
 }

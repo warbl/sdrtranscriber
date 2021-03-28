@@ -31,7 +31,6 @@
     margin: .75em;
     background-color: white;
     width: 60%;
-    font-size: 16px;
     font-size: 3.0vw; 
 }
 
@@ -44,20 +43,20 @@
 }
 
 .song-info h1{
-    font-size: min(2.5vw, 27px);
+    font-size: min(2.8vw, 27px);
 }
 .top-songs-container .song-content{
     width: 50%;
     height: 230px;
     padding-right: 20px;
-    font-size: min(2.5vw, 22px);
+    font-size: min(4vw, 24px);
 }
 
 .top-songs-container .album-image{
-    width: 70%;
+    width: 50%;
 }
 .top-songs-container .album-image img {
-    width: 70%;
+    width: 50%;
     float: right;
 }
 
@@ -71,7 +70,7 @@
 
 .container .heading{
     padding-top: 120px;
-    font-size: min(4vw, 30px);
+    font-size: min(2.5vw, 30px);
     text-align: center;
     color: #485060;
     font-family: 'Archivo Black', sans-serif;
@@ -79,5 +78,21 @@
 
 .container .song-content{
     width: 50%;
-    font-size: min(1.5vw, 30px);
+    font-size: min(1.8vw, 40px);
+}
+
+@media only screen and (max-width: 750px) {
+    .top-songs-container .song{
+        width: 80%;
+    }
+    .container .song-content{
+        width: 70%;
+    }
+    .top-songs-container .album-image{
+        width: 25%;
+    }
+    .top-songs-container .album-image img {
+        width: 100%;
+        float: right;
+    }
 }
