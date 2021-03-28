@@ -14,7 +14,7 @@ export default function NewsSection(){
     }, []);
 
     const fetchNewsContent= () => {
-        Axios.get("http://localhost:3001/api/getNewsContent").then((response) => {
+        Axios.get("http://54.166.59.136:3001/api/getNewsContent").then((response) => {
             setNewsContent(response.data);
             console.log(response.data);
         }).catch((error) => {
