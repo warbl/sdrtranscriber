@@ -56,7 +56,7 @@ export default function ContentArea({ station }) {
 
     return (
         <>
-            <div className="container" style={{ height: showBanner ? '87%' : '95%' }}>
+           <div className="container" style={{ height: showBanner ? '82%' : '87%' }}>
                 {showBanner === true && <div className="banner">
                     <span className="banner-content">New song just added. Check it out below!</span>
                     <span className="close-button" onClick={() => { setShowBanner(false) }}>&#x2715;</span>
