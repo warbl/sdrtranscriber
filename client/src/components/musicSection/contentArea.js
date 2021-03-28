@@ -56,7 +56,7 @@ export default function ContentArea({ station }) {
 
     return (
         <>
-           <div className="container" style={{ height: showBanner ? '82%' : '87%' }}>
+            <div className="container" style={{ height: showBanner ? '82%' : '87%' }}>
                 {showBanner === true && <div className="banner">
                     <span className="banner-content">New song just added. Check it out below!</span>
                     <span className="close-button" onClick={() => { setShowBanner(false) }}>&#x2715;</span>
@@ -91,9 +91,10 @@ export default function ContentArea({ station }) {
                                                 <img src={val.album_cover} alt="album_image" />
                                             </div>
                                         </div>
-                                        <div className="playback">
+                                        {val.yt_link !== 'N/A' && <div className="playback">
                                             <iframe src={[val.yt_link.slice(0, 24), '/embed', val.yt_link.slice(24)].join('')} height="75" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                         </div>
+                                        }
                                     </div>
                                 )
                             })}
