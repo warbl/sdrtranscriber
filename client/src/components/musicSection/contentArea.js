@@ -21,7 +21,7 @@ export default function ContentArea({ station }) {
 
     const fetchSongsByStation = () => {
         const stationFreq = station.station_freq;
-        Axios.get("http://localhost:3001/api/getSongsByStation/" + stationFreq).then((response) => {
+        Axios.get("http://54.166.59.136:3001/api/getSongsByStation/" + stationFreq).then((response) => {
             console.log("getting songs from station: " + station.station_freq);
             const data = response.data;
             if (data.length > 0) {
@@ -30,7 +30,6 @@ export default function ContentArea({ station }) {
                     element.time_played = newDate;
                 });
             }
-            setShowBanner(true);
             if (songSize === 0) {
                 songSize = data.length;
                 setSongs(data);
@@ -57,7 +56,7 @@ export default function ContentArea({ station }) {
 
     return (
         <>
-            <div className="container" style={{ height: showBanner ? '87%' : '95%' }}>
+           <div className="container" style={{ height: showBanner ? '82%' : '87%' }}>
                 {showBanner === true && <div className="banner">
                     <span className="banner-content">New song just added. Check it out below!</span>
                     <span className="close-button" onClick={() => { setShowBanner(false) }}>&#x2715;</span>

@@ -76,7 +76,7 @@ app.get("/api/getNewsContent", (req, res) => {
     })
 });
 
-app.listen((3001), () => {
+app.listen((3001, '00000'), () => {
     console.log("SERVER IS RUNNING ON PORT 3001!");
 })
 
