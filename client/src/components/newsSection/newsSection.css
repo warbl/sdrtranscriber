@@ -11,6 +11,7 @@
     background-color: white;
     height: 100vh;
     align-items: center;
+    width: 100%;
 }
 
 .heading{
@@ -43,4 +44,14 @@
 
 .news-section{
     font-size: 27px;
+}
+
+@media only screen and (max-width: 750px) {
+   .news-container{
+    font-size: 4vw;
+   }
+
+   .title{
+       margin-bottom: 10px;
+   }
 }

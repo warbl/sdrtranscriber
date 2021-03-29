@@ -119,7 +119,6 @@
     word-wrap: break-word;
     font-family: 'Garamond Premier Pro', serif;
     text-align: left;
-    height: min(300px, 35vh);
 }
 
 .song-info h1{
