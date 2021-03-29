@@ -1,6 +1,6 @@
 import os, sys
 import requests
-from acrcloud.recognizer import ACRCloudRecognizer
+#from acrcloud.recognizer import ACRCloudRecognizer
 
 
 def musicRecog(music):
@@ -9,7 +9,7 @@ def musicRecog(music):
         'return': 'spotify',
     }
     files = {
-        'file': open('output.wav','rb'),
+        'file': open(music,'rb'),
     }
     result = requests.post('https://api.audd.io/', data=data, files=files)
     return result.text
