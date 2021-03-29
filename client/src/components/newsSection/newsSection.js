@@ -11,7 +11,7 @@ export default function NewsSection() {
 
     useEffect(() => {
         fetchNewsContent();
-        const id = setInterval(fetchNewsContent, 10000);
+        const id = setInterval(fetchNewsContent, 5000);
         return () => clearInterval(id);
     }, []);
 
