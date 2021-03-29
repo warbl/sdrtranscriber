@@ -59,7 +59,7 @@ app.get("/api/getStationGenres", (req, res) => {
 });
 
 app.get("/api/getSongsByPopularity", (req, res) => {
-    const  getSongsByPopularity = `SELECT * FROM song_played WHERE song_id IN (SELECT MAX(song_id) FROM song_played GROUP BY song_name, song_artist) AND popularity_rating IS NOT NULL ORDER BY popularity_rating`;
+    const  getSongsByPopularity = `SELECT * FROM song_played WHERE song_id IN (SELECT MAX(song_id) FROM song_played GROUP BY song_name, song_artist) AND popularity_rating >= 0 ORDER BY popularity_rating`;
     db.query(getSongsByPopularity, (err, result) => {
         console.log(result);
         console.log(err);
@@ -76,7 +76,7 @@ app.get("/api/getNewsContent", (req, res) => {
     })
 });
 
-app.listen((3001, '00000'), () => {
+app.listen(3001, '0.0.0.0', () => {
     console.log("SERVER IS RUNNING ON PORT 3001!");
 })
 
