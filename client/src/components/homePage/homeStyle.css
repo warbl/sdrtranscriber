@@ -1,9 +1,9 @@
 @viewport {
-	width: device-width;
+	width: 100%;
 }
 
 .group{
-    height: 85.5vh;
+    height: 87.5vh;
     padding-top: 100px;
     background-color: #515D71;
 }
@@ -86,3 +86,4 @@ img{
         font-size: 8vw;
     }
 }
+
