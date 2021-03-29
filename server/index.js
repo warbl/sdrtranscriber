@@ -59,7 +59,7 @@ app.get("/api/getStationGenres", (req, res) => {
 });
 
 app.get("/api/getSongsByPopularity", (req, res) => {
-    const  getSongsByPopularity = `SELECT * FROM song_played WHERE song_id IN (SELECT MAX(song_id) FROM song_played GROUP BY song_name, song_artist) AND popularity_rating >= 0 ORDER BY popularity_rating DESC`;
+    const  getSongsByPopularity = `SELECT * FROM song_played WHERE song_id IN (SELECT MAX(song_id) FROM song_played GROUP BY song_name, song_artist) AND popularity_rating >= 0 ORDER BY popularity_rating DESC LIMIT 20`;
     db.query(getSongsByPopularity, (err, result) => {
         console.log(result);
         console.log(err);
