@@ -1,5 +1,5 @@
 @viewport {
-	width: auto;
+	width: device-width;
 }
 
 .nav{
@@ -46,7 +46,8 @@
 .link{
     color: white;
     text-decoration: none;
-    font-size: 1.5vw;
+    font-size: 20px;
+    font-size: 2vw;
 }
 
 .link:hover {
@@ -63,12 +64,11 @@
     position: fixed;
     top: 20px;
     right: 20px;
+    font-size: 40px;
+    font-size: 6vw;
 }
 
 @media screen and (max-width: 780px){
-    .nav{
-        height: 70px;
-    }
 	#navMenuBtn{
         display: block;
         cursor: pointer;
