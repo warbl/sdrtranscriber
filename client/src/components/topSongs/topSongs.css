@@ -53,10 +53,10 @@
 }
 
 .top-songs-container .album-image{
-    width: 70%;
+    width: 50%;
 }
 .top-songs-container .album-image img {
-    width: 70%;
+    width: 50%;
     float: right;
 }
 
