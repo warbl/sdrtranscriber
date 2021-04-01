@@ -71,6 +71,7 @@ export default function Radio() {
 
     const clickStation = (e) => {
         setStation(val);
+        setLivestreamLink(null);
     }
 
     const tuneToStation = () => {
