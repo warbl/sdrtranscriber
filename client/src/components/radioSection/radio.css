@@ -1,13 +1,291 @@
 .radio{
     color: #485060;
-    font-family: 'Arvo', sans-serif;
+    display: flex;
+    flex-direction: row;
     text-align: center;
     font-weight: bold;
-    padding-top: 150px;
+    padding-top: 100px;
+    height: 88vh;
     background-color: white;
+    width: 100%;
+}
+
+.music{
+    color: #485060;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 100px;
+    position: fixed;
+    height: 88vh;
+    background-color: white;
+    width: 100%;
+}
+
+.sidePanel{
+    flex: 1;
+    flex-grow: 0;   
+    flex-basis: 25em;
+    text-align:center;
+    color: #F0CF91;
+    font-family: 'Archivo Black', sans-serif;
+    justify-content: flex-start;
+    width: 100%;
+    background-color: #485060;
     height: 100vh;
 }
 
-.title{
-    padding-bottom: 50px;
+.side-nav-bar{
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.filter-form-songs {
+    width: 100%;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.filter-form-song-input{
+    height: 15px;
+    width: 70%;
+    background-color: #F0CF91;
+    border: 1px solid #C7AC7A;
+    border-radius: 50px;
+}
+
+.filter-form-stations {
+    width: 100%;
+    padding-top: 10px;
+}
+
+.filter-form-station-input{
+    width: 85%;
+    background-color: #F0CF91;
+    border: 1px solid #C7AC7A;
+    border-radius: 50px;
+    margin: 0px 5px;
+}
+
+.filter-form_dropdown{
+    color: gray;
+    width: 85%;
+    background-color: #F0CF91;
+    border: 1px solid #C7AC7A;
+    border-radius: 50px;
+    margin: 20px 5px;
+}
+
+.list_container{
+    margin-top: 15px;
+    overflow-y: auto;
+    height: 85%;
+}
+
+.container{
+    flex: 4;
+    flex-grow: 0;   
+    flex-basis: 100em;
+    text-align:center;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+    font-family: 'Archivo Black', sans-serif;
+}
+
+.empty_song_container{
+    padding-top: 100px;
+    font-size: 30px;
+}
+
+.song_container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+    overflow-y: auto;
+    height: 95%;
+}
+
+.stationHeading{
+    font-family: 'Archivo Black', sans-serif;
+}
+
+.song{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    box-shadow: 5px 5px 5px 5px #485060;
+    margin: .75em;
+    background-color: white;
+    width: 60%;
+}
+
+.song-info {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    word-wrap: break-word;
+    font-family: 'Garamond Premier Pro', serif;
+    text-align: left;
+}
+
+.song-info h1{
+    font-size: min(2vw, 30px);
+}
+
+.song-content{
+    padding-right: 10px;
+    font-size: min(1.5vw, 18px);
+}
+
+.album-image{
+    width: 60%;
+    height: min(200px, 33.33vh);
+}
+.album-image img {
+    width: 60%;
+    height: min(200px, 33.33vh);
+    float: right;
+}
+
+h1{
+    font-family: 'Archivo Black', sans-serif;
+}
+
+iframe{
+    width: 100%;
+}
+
+.banner{
+    margin: 0;
+    padding: 10px 0 5px 10px;
+    position: relative;
+}
+
+.close-button{
+    float: right;
+    padding-right: 40px;
+}
+
+.close-button:hover{
+    cursor: pointer;
+}
+
+.heading{
+    padding-top:120px;
+    font-size: 24px;
+    text-align: center;
+    color: #485060;
+    font-family: 'Archivo Black', sans-serif;
+}
+
+.station{
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.station:hover{
+    cursor: pointer;
+    color:#542124;
+}
+
+.station_name{
+    display: inline-block;
+    padding-right: 8px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.station_freq{
+    text-align: center;
+    font-size: 20px;
+}
+
+.sidebar-nav-hide {
+    left: -1000px;
+}
+
+@media only screen and (max-width: 750px) {
+    .sidePanel {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 2;
+    }
+
+    .side-nav-bar{
+        height: 100%;
+        width: 100%;
+        z-index: 2;
+        overflow-y: scroll;
+    }
+
+    #menuBtn {
+        display: block;
+    }
+
+    .filter-form-station-input{
+        width: 50%;
+        font-size: 4vw;
+    }
+    
+    .filter-form_dropdown{
+        width: 50%;
+        font-size: 4vw;
+    }
+
+    .station_name{
+        font-size: 4vw;
+    }
+
+    .station_freq{
+        font-size: 4vw;
+    }
+
+    .banner{
+        font-size: 3.5vw;
+    }
+
+    .stationHeading{
+        font-size: 4vw;
+    }
+
+    .song{
+        position: relative;
+        height: 25vh;
+        width: 90%;
+    }
+
+    .album-image img{
+        height: 12vh;
+        width: 60%;
+    }
+
+    .list_container{
+        height:80%;
+    }
+    
+    .playback{
+        margin-top: -150px;
+    }
+}
+
+#menuBtn {
+    display: none;
+    margin: 0;
+    z-index: 3;
+    position: fixed;
+    right: 14px;
+    top: 140px;
+    color:#C7AC7A;
+    font-size: 40px;
+    cursor: pointer;
+    transition: color 1s;
+    font-size: 6vw;
 }

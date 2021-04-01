@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { Form } from 'react-bootstrap';
 import Axios from 'axios';
 import './radio.css'
 
@@ -11,6 +14,8 @@ export default function Radio() {
     const [filterResults, setFilterResults] = useState();
     const [station, setStation] = useState();
     const [livestreamLink, setLivestreamLink] = useState();
+    const [input, setInput] = useState('');
+    const [hideSidebar, setHideSidebar] = useState(false);
 
     useEffect(() => {
         fetchStations();
@@ -69,7 +74,7 @@ export default function Radio() {
         }
     };
 
-    const clickStation = (e) => {
+    const clickStation = (val) => {
         setStation(val);
         setLivestreamLink(null);
     }
@@ -93,34 +98,55 @@ export default function Radio() {
 
     return (
         <div className="radio">
-            {!station && !livestreamLink && <h1 className="title">Choose a Station</h1>}
-            {(station && !livestreamLink) &&
-                <div className="select-station">
-                    <h3>Listen to station: {station.station_name} - {station.station_freq}?</h3>
-                    {!loadingStation && <button onClick={() => removeStation()}>X</button>}
-                    {!loadingStation && <button onClick={() => tuneToStation()}>Connect</button>}
-                    {loadingStation && <div>Connecting...</div>}
-                </div>}
-            {livestreamLink &&
-                <div className="livestream container">
-                    <h1 className="livestream-title">Listening to {station.station_name} - {station.station_freq}</h1>
-                    <button onClick={() => stopStream()}>Disconnect</button>
-                    <div className="playback">
-                        <audio controls autoPlay>
-                            <source src={livestreamLink} type="audio/mpeg" />
+            <div className="sidePanel">
+                <div className="side-nav-bar">
+                    <Form className="filter-form-stations">
+                        <Form.Group className="filter-form-station-box">
+                            <Form.Control className='filter-form-station-input' type="text" placeholder=" Search stations..." value={input} onChange={(e) => { setInput(e.target.value); search(e) }} />
+                        </Form.Group>
+                        {stationGenres && <Form.Group>
+                            <select type="text" className="filter-form_dropdown" value={genre} onChange={(e) => { setGenre(e.target.value); filterbyGenre(e) }}>
+                                <option value={"all genres"}>All Genres</option>
+                                {stationGenres && stationGenres.map((val, index) => {
+                                    return (
+                                        <option key={index} value={val}>{val}</option>
+                                    )
+                                })}
+                            </select>
+                        </Form.Group>}
+                    </Form>
+                    <div className="list_container">
+                        {filterResults && filterResults.map((val) => {
+                            return (
+                                <div className="station" key={val.station_id} onClick={() => clickStation(val)}>
+                                    <h3 className="station_name">{val.station_name}</h3>
+                                    <span className="station_freq">({val.station_freq})</span>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
+            </div>
+            <div className="radio-song-container">
+                {!station && !livestreamLink && <h1 className="title">Choose a Station</h1>}
+                {(station && !livestreamLink) &&
+                    <div className="select-station">
+                        <h3>Listen to station: {station.station_name} - {station.station_freq}?</h3>
+                        {!loadingStation && <button onClick={() => removeStation()}>X</button>}
+                        {!loadingStation && <button onClick={() => tuneToStation()}>Connect</button>}
+                        {loadingStation && <div>Connecting...</div>}
+                    </div>}
+                {livestreamLink &&
+                    <div className="livestream container">
+                        <h1 className="livestream-title">Listening to {station.station_name} - {station.station_freq}</h1>
+                        <button onClick={() => stopStream()}>Disconnect</button>
+                        <div className="playback">
+                            <audio controls autoPlay>
+                                <source src={livestreamLink} type="audio/mpeg" />
                     Your browser does not support the audio element.
                 </audio>
-                    </div>
-                </div>}
-            <div className="station_container">
-                {filterResults && filterResults.map((val) => {
-                    return (
-                        <div className="station" key={val.station_id} onClick={() => clickStation(val)}>
-                            <h3 className="station_name">{val.station_name}</h3>
-                            <span className="station_freq">({val.station_freq})</span>
                         </div>
-                    )
-                })}
+                    </div>}
             </div>
         </div>
     )
