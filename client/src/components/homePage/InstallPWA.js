@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import "./homeStyle.css";
 
-
-const InstallPWA = () => {
+export default function InstallPWA() {
   const [supportsPWA, setSupportsPWA] = useState(false);
   const [promptInstall, setPromptInstall] = useState(null);
 
@@ -14,7 +14,7 @@ const InstallPWA = () => {
     };
     window.addEventListener("beforeinstallprompt", handler);
 
-    return () => window.removeEventListener("transitionend", handler);
+    return () => window.removeEventListener("transitioned", handler);
   }, []);
 
   const onClick = evt => {
@@ -29,15 +29,13 @@ const InstallPWA = () => {
   }
   return (
     <button
-      className="link-button"
+      className="pwa-link-button"
       id="setup_button"
       aria-label="Install app"
       title="Install app"
       onClick={onClick}
     >
-      Install
+      Install Mobile App Here
     </button>
   );
 };
-
-export default InstallPWA;

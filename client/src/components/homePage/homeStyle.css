@@ -55,6 +55,16 @@ img{
     background-color: #F0CF91;
 }
 
+.pwa-button{
+    text-align: center;
+}
+
+.pwa-link-button{
+    padding: 10px;
+    background-color: #C7AC7A;
+    color: #515D71;
+}
+
 @media only screen and (max-width: 750px) {
     .home{
         flex-direction: column;
