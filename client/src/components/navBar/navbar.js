@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import logo from '../../images/capstone logo.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import InstallPWA from "./InstallPWA";
 
 
 
@@ -47,6 +48,7 @@ export default function NavBar() {
 
 	return (
 		<div className="nav" id="topNav">
+			<InstallPWA />
 			<div onClick={goToHomePage}>
 				<img className="logo" src={logo} alt="sdr logo" onClick={goToHomePage} />
 			</div>
