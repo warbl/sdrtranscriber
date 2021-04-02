@@ -17,7 +17,7 @@ export default function TopSongs() {
     }, []);
 
     const fetchTopSongs = () => {
-        Axios.get("http://54.166.59.136:3001/api/getSongsByPopularity").then((response) => {
+        Axios.get("https://sdrtranscriber.tk:3002/api/getSongsByPopularity").then((response) => {
             const data = response.data;
             if (data.length > 0) {
                 data.forEach(element => {
