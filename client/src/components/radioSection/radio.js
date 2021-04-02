@@ -1,26 +1,51 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSpinner} from "@fortawesome/free-solid-svg-icons";
+import { faSpinner, faBars} from "@fortawesome/free-solid-svg-icons";
 import { Form } from 'react-bootstrap';
 import Axios from 'axios';
 import './radio.css'
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.css';
 
 
 export default function Radio() {
     const [stationList, setStationList] = useState();
     const [stationGenres, setStationGenres] = useState();
-    const [loadingStation, setLoadingStation] = useState(false);
     const [livestream, setLivestream] = useState(false);
     const [genre, setGenre] = useState();
     const [filterResults, setFilterResults] = useState();
     const [station, setStation] = useState();
     const [input, setInput] = useState('');
+    const sidebarRef = useRef(null);
+    const sidebarNavRef = useRef(null);
     const [hideSidebar, setHideSidebar] = useState(false);
 
     useEffect(() => {
         fetchStations();
         fetchStationGenres();
+        if (window.innerWidth <= 750) {
+            let mobileBtn = document.getElementById('menuBtn');
+            mobileBtn.style.display = "block";
+        }
+        window.addEventListener('resize', handleResize);
+        return function cleanupListener() {
+            window.removeEventListener('resize', handleResize)
+        }
     }, []);
+
+    const handleResize = () => {
+        if (window.innerWidth > 750) {
+            setHideSidebar(false);
+            let mobileBtn = document.getElementById('menuBtn');
+            mobileBtn.style.display = "none";
+            sidebarRef.current.style.display = "block";
+
+        } else {
+            let mobileBtn = document.getElementById('menuBtn');
+            mobileBtn.style.display = "block";
+            mobileBtn.style.color = "#C7AC7A";
+        }
+    };
 
     const fetchStations = async () => {
         Axios.get("http://localhost:3001/api/getStations").then((response) => {
@@ -75,15 +100,33 @@ export default function Radio() {
     };
 
     const clickStation = (val) => {
-        setStation(val);
+        if (livestream) {
+            alertify.alert('Error', 'You cannot change stations until you disconnect from current station!');
+        } else {
+            setStation(val);
+            toggleSidebar();
+        }
     }
 
+    const toggleSidebar = () => {
+        let mobileBtn = document.getElementById('menuBtn');
+        if (window.innerWidth > 750) return;
+        if (!hideSidebar) {
+            mobileBtn.style.color = "#485060";
+            sidebarRef.current.style.display = "none";
+            setHideSidebar(true);
+        } else {
+            mobileBtn.style.color = "#C7AC7A";
+            sidebarRef.current.style.display = "block";
+            setHideSidebar(false);
+        }
+    };
+
+
     const tuneToStation = () => {
-        setLoadingStation(true);
         //send station name to api
         //poll other api until you receive a livestream link back
         // setLivestreamLink(response.data);
-        setLoadingStation(false);
         setLivestream(true);
     }
 
@@ -97,18 +140,21 @@ export default function Radio() {
         audio.currentTime = 0;
         setStation(null);
         setLivestream(false);
+        document.getElementById("livestream-container").style.display = "none";
+        document.getElementById("loading-container").style.display = "block";
     }
 
     const ReadyToPlay = (e) => {
-        document.getElementById("livestream-container").style.display("show");
-        document.getElementById("loading-container").style.display("none");
+        document.getElementById("livestream-container").style.display = "block";
+        document.getElementById("loading-container").style.display = "none";
 
     }
 
     return (
         <div className="radio">
-            <div className="sidePanel">
-                <div className="side-nav-bar">
+            <FontAwesomeIcon onClick={toggleSidebar} id="menuBtn" icon={faBars} />
+            <div ref={sidebarRef} className="sidePanel">
+                <div ref={sidebarNavRef} className="side-nav-bar">
                     <Form className="filter-form-stations">
                         <Form.Group className="filter-form-station-box">
                             <Form.Control className='filter-form-station-input' type="text" placeholder=" Search stations..." value={input} onChange={(e) => { setInput(e.target.value); search(e) }} />
@@ -124,7 +170,7 @@ export default function Radio() {
                             </select>
                         </Form.Group>}
                     </Form>
-                    <div className="list_container">
+                    <div className="list_container" id="station-container">
                         {filterResults && filterResults.map((val) => {
                             return (
                                 <div className="station" key={val.station_id} onClick={() => clickStation(val)}>
@@ -146,9 +192,9 @@ export default function Radio() {
                     </div>}
                 {station && livestream &&
                     <div className="play-song-container">
-                        <div className="loading-container">
-                                Connecting to Station...
-                                <FontAwesomeIcon icon={faSpinner} class="fa-pulse"/>
+                        <div className="loading-container" id="loading-container">
+                            Connecting to Station...
+                                <FontAwesomeIcon icon={faSpinner} className="fa-pulse" />
                         </div>
                         <div className="livestream container" id="livestream-container" style={{ display: 'none' }}>
                             <h1 className="livestream-title">Listening to {station.station_name} - {station.station_freq}</h1>
