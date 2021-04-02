@@ -250,6 +250,10 @@ iframe{
         width: 90%;
     }
 
+    .song-info{
+        height: max(300px, 35vh);
+    }
+
     .album-image img{
         height: 12vh;
         width: 60%;
@@ -259,8 +263,8 @@ iframe{
         height:80%;
     }
     
-    .playback{
-        margin-top: -150px;
+    iframe{
+        margin-top: -25px;
     }
 }
 

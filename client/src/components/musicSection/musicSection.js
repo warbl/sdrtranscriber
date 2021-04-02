@@ -45,7 +45,7 @@ export default function SidePanel() {
     };
 
     const fetchRadioStations = async () => {
-        Axios.get("http://54.166.59.136:3001/api/getStations").then((response) => {
+        Axios.get("http://localhost:3001/api/getStations").then((response) => {
             console.log(response.data);
             setStationList(response.data);
             setFilterResults(response.data);
@@ -56,7 +56,7 @@ export default function SidePanel() {
     };
 
     const fetchStationGenres = async () => {
-        Axios.get("http://54.166.59.136:3001/api/getStationGenres").then((response) => {
+        Axios.get("http://localhost:3001/api/getStationGenres").then((response) => {
             console.log(response.data);
             if (response.data.length > 0) {
                 let allGenres = [];
