@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner} from "@fortawesome/free-solid-svg-icons";
 import { Form } from 'react-bootstrap';
 import Axios from 'axios';
 import './radio.css'
@@ -10,10 +10,10 @@ export default function Radio() {
     const [stationList, setStationList] = useState();
     const [stationGenres, setStationGenres] = useState();
     const [loadingStation, setLoadingStation] = useState(false);
+    const [livestream, setLivestream] = useState(false);
     const [genre, setGenre] = useState();
     const [filterResults, setFilterResults] = useState();
     const [station, setStation] = useState();
-    const [livestreamLink, setLivestreamLink] = useState();
     const [input, setInput] = useState('');
     const [hideSidebar, setHideSidebar] = useState(false);
 
@@ -76,7 +76,6 @@ export default function Radio() {
 
     const clickStation = (val) => {
         setStation(val);
-        setLivestreamLink(null);
     }
 
     const tuneToStation = () => {
@@ -85,15 +84,25 @@ export default function Radio() {
         //poll other api until you receive a livestream link back
         // setLivestreamLink(response.data);
         setLoadingStation(false);
+        setLivestream(true);
     }
 
-    const removeStation = (e) => {
+    const removeStation = () => {
         setStation(null);
     }
 
-    const stopStream = () => {
-        setLivestreamLink(null);
+    const stopAudio = () => {
+        const audio = document.getElementById("audio");
+        audio.pause();
+        audio.currentTime = 0;
         setStation(null);
+        setLivestream(false);
+    }
+
+    const ReadyToPlay = (e) => {
+        document.getElementById("livestream-container").style.display("show");
+        document.getElementById("loading-container").style.display("none");
+
     }
 
     return (
@@ -127,24 +136,29 @@ export default function Radio() {
                     </div>
                 </div>
             </div>
-            <div className="radio-song-container">
-                {!station && !livestreamLink && <h1 className="title">Choose a Station</h1>}
-                {(station && !livestreamLink) &&
+            <div className="find-song-container">
+                {!station && <h1 className="title">Choose a Station</h1>}
+                {station && !livestream &&
                     <div className="select-station">
                         <h3>Listen to station: {station.station_name} - {station.station_freq}?</h3>
-                        {!loadingStation && <button onClick={() => removeStation()}>X</button>}
-                        {!loadingStation && <button onClick={() => tuneToStation()}>Connect</button>}
-                        {loadingStation && <div>Connecting...</div>}
+                        <button onClick={() => removeStation()}>Cancel</button>
+                        <button onClick={() => tuneToStation()}>Connect</button>
                     </div>}
-                {livestreamLink &&
-                    <div className="livestream container">
-                        <h1 className="livestream-title">Listening to {station.station_name} - {station.station_freq}</h1>
-                        <button onClick={() => stopStream()}>Disconnect</button>
-                        <div className="playback">
-                            <audio controls autoPlay>
-                                <source src={livestreamLink} type="audio/mpeg" />
-                    Your browser does not support the audio element.
-                </audio>
+                {station && livestream &&
+                    <div className="play-song-container">
+                        <div className="loading-container">
+                                Connecting to Station...
+                                <FontAwesomeIcon icon={faSpinner} class="fa-pulse"/>
+                        </div>
+                        <div className="livestream container" id="livestream-container" style={{ display: 'none' }}>
+                            <h1 className="livestream-title">Listening to {station.station_name} - {station.station_freq}</h1>
+                            <div className="playback">
+                                <audio controls autoPlay="autoplay" id="audio" onCanPlay={(e) => ReadyToPlay(e)}>
+                                    <source src="http://173.49.251.28:8090/live" type="audio/mpeg" />
+                                Your browser does not support the audio element.
+                            </audio>
+                            </div>
+                            <button onClick={() => stopAudio()}>Disconnect</button>
                         </div>
                     </div>}
             </div>
