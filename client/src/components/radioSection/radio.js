@@ -152,36 +152,6 @@ export default function Radio() {
 
     return (
         <div className="radio">
-            <FontAwesomeIcon onClick={toggleSidebar} id="menuBtn" icon={faBars} />
-            <div ref={sidebarRef} className="sidePanel">
-                <div ref={sidebarNavRef} className="side-nav-bar">
-                    <Form className="filter-form-stations">
-                        <Form.Group className="filter-form-station-box">
-                            <Form.Control className='filter-form-station-input' type="text" placeholder=" Search stations..." value={input} onChange={(e) => { setInput(e.target.value); search(e) }} />
-                        </Form.Group>
-                        {stationGenres && <Form.Group>
-                            <select type="text" className="filter-form_dropdown" value={genre} onChange={(e) => { setGenre(e.target.value); filterbyGenre(e) }}>
-                                <option value={"all genres"}>All Genres</option>
-                                {stationGenres && stationGenres.map((val, index) => {
-                                    return (
-                                        <option key={index} value={val}>{val}</option>
-                                    )
-                                })}
-                            </select>
-                        </Form.Group>}
-                    </Form>
-                    <div className="list_container" id="station-container">
-                        {filterResults && filterResults.map((val) => {
-                            return (
-                                <div className="station" key={val.station_id} onClick={() => clickStation(val)}>
-                                    <h3 className="station_name">{val.station_name}</h3>
-                                    <span className="station_freq">({val.station_freq})</span>
-                                </div>
-                            )
-                        })}
-                    </div>
-                </div>
-            </div>
             <div className="find-song-container">
                 {!station && <h1 className="title">Choose a Station</h1>}
                 {station && !livestream &&
@@ -193,8 +163,8 @@ export default function Radio() {
                 {station && livestream &&
                     <div className="play-song-container">
                         <div className="loading-container" id="loading-container">
-                            Connecting to Station...
-                                <FontAwesomeIcon icon={faSpinner} className="fa-pulse" />
+                            <p className="loading-text">Connecting to Station...</p>
+                                <FontAwesomeIcon icon={faSpinner} className="loading-inidicator fa-pulse fa-4x" />
                         </div>
                         <div className="livestream container" id="livestream-container" style={{ display: 'none' }}>
                             <h1 className="livestream-title">Listening to {station.station_name} - {station.station_freq}</h1>
@@ -204,9 +174,23 @@ export default function Radio() {
                                 Your browser does not support the audio element.
                             </audio>
                             </div>
-                            <button onClick={() => stopAudio()}>Disconnect</button>
+                            <button className="disconnect-button" onClick={() => stopAudio()}>Disconnect</button>
                         </div>
                     </div>}
+            </div>
+            <FontAwesomeIcon onClick={toggleSidebar} id="menuBtn" icon={faBars} />
+            <div ref={sidebarRef} className="sidePanel">
+                <div ref={sidebarNavRef} className="side-nav-bar">
+                    <div className="list_container" id="station-container">
+                        {stationList && stationList.map((val) => {
+                            return (
+                                <div className="station" key={val.station_id} onClick={() => clickStation(val)}>
+                                    <img src={val.music_img}/>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
             </div>
         </div>
     )

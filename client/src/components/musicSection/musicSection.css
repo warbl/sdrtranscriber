@@ -1,4 +1,4 @@
-.radio{
+.music{
     color: #485060;
     display: flex;
     flex-direction: row;
@@ -68,7 +68,7 @@
 .list_container{
     margin-top: 15px;
     overflow-y: auto;
-    height: 85%;
+    height: 78%;
 }
 
 .container{
