@@ -244,27 +244,17 @@
         font-size: 4vw;
     }
 
-    .music .song{
-        position: relative;
-        height: 25vh;
-        width: 90%;
-    }
-
-    .music .song-info{
-        height: max(300px, 35vh);
-    }
-
     .music .album-image img{
         height: 12vh;
         width: 60%;
     }
 
     .music .list_container{
-        height:80%;
+        height: 75%;
     }
     
    .music iframe{
-        margin-top: -25px;
+        margin-top: -40px;
     }
 }
 
