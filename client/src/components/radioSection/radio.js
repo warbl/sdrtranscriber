@@ -10,19 +10,14 @@ import 'alertifyjs/build/css/alertify.css';
 
 export default function Radio() {
     const [stationList, setStationList] = useState();
-    const [stationGenres, setStationGenres] = useState();
     const [livestream, setLivestream] = useState(false);
-    const [genre, setGenre] = useState();
-    const [filterResults, setFilterResults] = useState();
     const [station, setStation] = useState();
-    const [input, setInput] = useState('');
     const sidebarRef = useRef(null);
     const sidebarNavRef = useRef(null);
     const [hideSidebar, setHideSidebar] = useState(false);
 
     useEffect(() => {
         fetchStations();
-        fetchStationGenres();
         if (window.innerWidth <= 750) {
             let mobileBtn = document.getElementById('menuBtn');
             mobileBtn.style.display = "block";
@@ -51,52 +46,9 @@ export default function Radio() {
         Axios.get("http://localhost:3001/api/getStations").then((response) => {
             console.log(response.data);
             setStationList(response.data);
-            setFilterResults(response.data);
         }).catch((error) => {
             console.log(error);
         });
-    };
-
-    const fetchStationGenres = async () => {
-        Axios.get("http://localhost:3001/api/getStationGenres").then((response) => {
-            console.log(response.data);
-            if (response.data.length > 0) {
-                let allGenres = [];
-                response.data.forEach(element => {
-                    const genres = element.music_genre.split(',');
-                    genres.forEach(genre => {
-                        allGenres.push(genre);
-                    })
-                });
-                setStationGenres(allGenres);
-            }
-        }).catch((error) => {
-            console.log(error);
-        });
-    };
-
-    const search = (e) => {
-        const search = e.target.value.toString();
-        if (genre.toLowerCase() === "all genres") {
-            console.log("here");
-            const result = stationList.filter(value => value.station_name.toLowerCase().includes(search.toLowerCase()) || value.station_freq.toString().includes(search));
-            setFilterResults(result);
-        } else {
-            const result = stationList.filter(value => (value.station_name.toLowerCase().includes(search.toLowerCase()) || value.station_freq.toString().includes(search)) && value.music_genre.toLowerCase().includes(genre.toLowerCase()));
-            setFilterResults(result);
-        }
-    };
-
-    const filterbyGenre = (e) => {
-        const search = e.target.value;
-        console.log(search);
-        if (search.toLowerCase() === "all genres") {
-            const result = stationList.filter(value => value.station_name.toLowerCase().includes(input.toLowerCase()) || value.station_freq.toString().includes(input));
-            setFilterResults(result);
-        } else {
-            const result = stationList.filter(value => value.music_genre.toLowerCase().includes(search.toLowerCase()) && (value.station_name.toLowerCase().includes(input.toLowerCase()) || value.station_freq.toString().includes(input)));
-            setFilterResults(result);
-        }
     };
 
     const clickStation = (val) => {
