@@ -53,6 +53,8 @@ img{
     color: #485060;
     padding-bottom: 5px;
     background-color: #F0CF91;
+    padding-left: 5px;
+    padding-top: 5px;
 }
 
 @media only screen and (max-width: 750px) {
