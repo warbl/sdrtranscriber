@@ -29,16 +29,15 @@ export default function Radio() {
     }, []);
 
     const handleResize = () => {
+        let mobileBtn = document.getElementById('menuBtn');
         if (window.innerWidth > 750) {
             setHideSidebar(false);
-            let mobileBtn = document.getElementById('menuBtn');
             mobileBtn.style.display = "none";
             sidebarRef.current.style.display = "block";
 
         } else {
-            let mobileBtn = document.getElementById('menuBtn');
             mobileBtn.style.display = "block";
-            mobileBtn.style.color = "#C7AC7A";
+            mobileBtn.style.color = "#485060";
         }
     };
 
@@ -64,22 +63,23 @@ export default function Radio() {
         let mobileBtn = document.getElementById('menuBtn');
         if (window.innerWidth > 750) return;
         if (!hideSidebar) {
-            mobileBtn.style.color = "#485060";
+            mobileBtn.style.color = "#C7AC7A";
             sidebarRef.current.style.display = "none";
             setHideSidebar(true);
-        } else {
-            mobileBtn.style.color = "#C7AC7A";
+        } else { 
+            mobileBtn.style.color = "#485060";
             sidebarRef.current.style.display = "block";
             setHideSidebar(false);
         }
     };
 
 
-    const tuneToStation = () => {
+    const tuneToStation =  () => {
         //send station name to api
         //poll other api until you receive a livestream link back
         // setLivestreamLink(response.data);
         setLivestream(true);
+        setTimeout(() => { readyToPlay() }, 4000);
     }
 
     const removeStation = () => {
@@ -96,7 +96,7 @@ export default function Radio() {
         document.getElementById("loading-container").style.display = "block";
     }
 
-    const ReadyToPlay = (e) => {
+    const readyToPlay = (e) => {
         document.getElementById("livestream-container").style.display = "block";
         document.getElementById("loading-container").style.display = "none";
 
@@ -116,12 +116,12 @@ export default function Radio() {
                     <div className="play-song-container">
                         <div className="loading-container" id="loading-container">
                             <p className="loading-text">Connecting to Station...</p>
-                                <FontAwesomeIcon icon={faSpinner} className="loading-inidicator fa-pulse fa-4x" />
+                                <FontAwesomeIcon icon={faSpinner} id="loading-indicator" className="loading-inidicator fa-pulse fa-4x" />
                         </div>
                         <div className="livestream container" id="livestream-container" style={{ display: 'none' }}>
                             <h1 className="livestream-title">Listening to {station.station_name} - {station.station_freq}</h1>
                             <div className="playback">
-                                <audio controls autoPlay="autoplay" id="audio" onCanPlay={(e) => ReadyToPlay(e)}>
+                                <audio controls autoPlay="autoplay" id="audio" onCanPlay={(e) => readyToPlay(e)}>
                                     <source src="http://173.49.251.28:8090/live" type="audio/mpeg" />
                                 Your browser does not support the audio element.
                             </audio>
@@ -133,11 +133,13 @@ export default function Radio() {
             <FontAwesomeIcon onClick={toggleSidebar} id="menuBtn" icon={faBars} />
             <div ref={sidebarRef} className="sidePanel">
                 <div ref={sidebarNavRef} className="side-nav-bar">
+                <h3 className="station-list-header">Stations</h3>
                     <div className="list_container" id="station-container">
                         {stationList && stationList.map((val) => {
                             return (
                                 <div className="station" key={val.station_id} onClick={() => clickStation(val)}>
-                                    <img src={val.music_img}/>
+                                    <img className="station-logo" src={val.music_img}/>
+                                    <span className="station-name">{val.station_name}-{val.station_freq}</span>
                                 </div>
                             )
                         })}

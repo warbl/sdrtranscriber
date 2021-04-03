@@ -21,7 +21,6 @@
     color:#485060;
     font-family: 'Archivo Black', sans-serif;
     width: 100%;
-    background-color: #F0CF91;
     height: 60vh;
 }
 
@@ -35,7 +34,8 @@
     flex-wrap: wrap;
     justify-content: space-around;
     margin-top: 10px;
-    height: 100%;
+    height: 95%;
+    overflow-y: scroll;
 }
 
 .radio .find-song-container{
@@ -49,92 +49,33 @@
     font-family: 'Archivo Black', sans-serif;
 }
 
-.radio .station:hover{
-    cursor: pointer;
-    color:#542124;
+.radio .station{
+    width: 20%;
+    height: 180px;
+    padding: 8px;
+    border: black thin solid;
+    background-color: #F0CF91;
+    margin: 1rem;
+    box-shadow: 5px 5px 5px 5px #485060;
 }
 
-.radio .station_name{
+.radio .station:hover{
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.radio .station-name{
     font-weight: bold;
     font-size: 25px;
     display: block;
+    padding-top: 5px;
+    padding-left: 10px;
 }
 
-.radio .station_freq{
-    text-align: center;
-    font-size: 20px;
-    display: block;
-}
-
-.radio .station{
-    padding-bottom: 10px;
-    width: 20%;
-    box-sizing: border-box;
-}
-
-@media only screen and (max-width: 750px) {
-    .radio .sidePanel {
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        z-index: 2;
-    }
-
-    .radio .side-nav-bar{
-        height: 100%;
-        width: 100%;
-        z-index: 2;
-        overflow-y: scroll;
-    }
-
-    .radio #menuBtn {
-        display: block;
-    }
-
-    .radio .filter-form-station-input{
-        width: 50%;
-        font-size: 4vw;
-    }
-    
-    .radio .filter-form_dropdown{
-        width: 50%;
-        font-size: 4vw;
-    }
-
-    .radio .station_name{
-        font-size: 4vw;
-    }
-
-    .radio .station_freq{
-        font-size: 4vw;
-    }
-
-    .radio .banner{
-        font-size: 3.5vw;
-    }
-
-    .radio .stationHeading{
-        font-size: 4vw;
-    }
-
-    .radio .song{
-        position: relative;
-        height: 25vh;
-        width: 90%;
-    }
-
-    .radio .album-image img{
-        height: 12vh;
-        width: 60%;
-    }
-
-    .radio .list_container{
-        height:80%;
-    }
-    
-    .radio .playback{
-        margin-top: -150px;
-    }
+.radio .station-logo{
+    width: 50%;
+    height: 50%;
+    padding: 8px;
 }
 
 .radio #menuBtn {
@@ -144,7 +85,7 @@
     position: fixed;
     right: 14px;
     top: 140px;
-    color:#C7AC7A;
+    color: #485060;
     font-size: 40px;
     cursor: pointer;
     transition: color 1s;
@@ -178,6 +119,7 @@
 }
 
 .select-station button{
+    width: 10%;
     padding: 10px;
     margin-left: 5px;
     background-color: #C7AC7A;
@@ -188,6 +130,7 @@
 }
 
 .disconnect-button{
+    width: 10%;
     padding: 10px;
     margin-top: 10px;
     background-color: #C7AC7A;
@@ -195,4 +138,87 @@
 
 .disconnect-button:hover{
     cursor: pointer;
+}
+
+.radio .station-list-header{
+    display: none;
+}
+
+
+@media only screen and (max-width: 750px) {
+    .radio .sidePanel {
+        width: 100%;
+        height: 90%;
+        position: fixed;
+        z-index: 2;
+        background-color: #C7AC7A;
+    }
+
+    .radio .side-nav-bar{
+        height: 100%;
+        width: 100%;
+        z-index: 2;
+        overflow-y: scroll;
+    }
+
+    .radio .station{
+        width: 50%;
+    }
+
+    .radio .station-name{
+        font-size: 4vw;
+    }
+
+    .radio .list_container{
+        height: 80%;
+    }
+
+    .radio #menuBtn {
+        display: block;
+        color: #485060;
+    }
+
+    .radio .station-list-header{
+        display: block;
+        color: #485060;
+        font-size: 4vw;
+        display: block;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+
+    .radio .title{
+        padding-top: 100px;
+        font-size: 5vw;
+    }
+
+    .radio .loading-text{
+        padding-top: 100px;
+        font-size: 5vw;
+    }
+
+    .radio .select-station h3{
+        padding-top: 100px;
+        font-size: 5vw;
+    }
+
+    .radio .select-station button{
+        width: 20%;
+        font-size: 3vw;
+    }
+
+    .radio .disconnect-button{
+        width: 20%;
+        font-size: 3vw;
+    }
+
+    .livestream-title{
+        padding-top: 100px;
+        font-size: 5vw; 
+    }
+
+    audio{
+        width: 50%;
+    }
+
 }

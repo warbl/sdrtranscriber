@@ -11,7 +11,7 @@
     width: 100%;
 }
 
-.sidePanel{
+.music .sidePanel{
     flex: 1;
     flex-grow: 0;   
     flex-basis: 25em;
@@ -24,18 +24,18 @@
     height: 100vh;
 }
 
-.side-nav-bar{
+.music .side-nav-bar{
     height: 100vh;
     overflow-y: scroll;
 }
 
-.filter-form-songs {
+ .music .filter-form-songs {
     width: 100%;
     padding-bottom: 10px;
     text-align: center;
 }
 
-.filter-form-song-input{
+.music .filter-form-song-input{
     height: 15px;
     width: 70%;
     background-color: #F0CF91;
@@ -43,12 +43,12 @@
     border-radius: 50px;
 }
 
-.filter-form-stations {
+.music .filter-form-stations {
     width: 100%;
     padding-top: 10px;
 }
 
-.filter-form-station-input{
+.music .filter-form-station-input{
     width: 85%;
     background-color: #F0CF91;
     border: 1px solid #C7AC7A;
@@ -56,7 +56,7 @@
     margin: 0px 5px;
 }
 
-.filter-form_dropdown{
+.music .filter-form_dropdown{
     color: gray;
     width: 85%;
     background-color: #F0CF91;
@@ -65,13 +65,13 @@
     margin: 20px 5px;
 }
 
-.list_container{
+.music .list_container{
     margin-top: 15px;
     overflow-y: auto;
     height: 78%;
 }
 
-.container{
+.music .container{
     flex: 4;
     flex-grow: 0;   
     flex-basis: 100em;
@@ -82,12 +82,12 @@
     font-family: 'Archivo Black', sans-serif;
 }
 
-.empty_song_container{
+.music .empty_song_container{
     padding-top: 100px;
     font-size: 30px;
 }
 
-.song_container{
+.music .song_container{
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -97,11 +97,11 @@
     height: 95%;
 }
 
-.stationHeading{
+.music .stationHeading{
     font-family: 'Archivo Black', sans-serif;
 }
 
-.song{
+.music .song{
     position: relative;
     display: flex;
     flex-direction: column;
@@ -112,7 +112,7 @@
     width: 60%;
 }
 
-.song-info {
+.music .song-info {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -121,49 +121,49 @@
     text-align: left;
 }
 
-.song-info h1{
+.music .song-info h1{
     font-size: min(2vw, 30px);
 }
 
-.song-content{
+.music .song-content{
     padding-right: 10px;
     font-size: min(1.5vw, 18px);
 }
 
-.album-image{
+.music .album-image{
     width: 60%;
     height: min(200px, 33.33vh);
 }
-.album-image img {
+.music .album-image img {
     width: 60%;
     height: min(200px, 33.33vh);
     float: right;
 }
 
-h1{
+.music h1{
     font-family: 'Archivo Black', sans-serif;
 }
 
-iframe{
+.music iframe{
     width: 100%;
 }
 
-.banner{
+.music .banner{
     margin: 0;
     padding: 10px 0 5px 10px;
     position: relative;
 }
 
-.close-button{
+.music .close-button{
     float: right;
     padding-right: 40px;
 }
 
-.close-button:hover{
+.music .close-button:hover{
     cursor: pointer;
 }
 
-.heading{
+.music .heading{
     padding-top:120px;
     font-size: 24px;
     text-align: center;
@@ -171,104 +171,104 @@ iframe{
     font-family: 'Archivo Black', sans-serif;
 }
 
-.station{
+.music .station{
     padding-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.station:hover{
+.music .station:hover{
     cursor: pointer;
     color:#542124;
 }
 
-.station_name{
+.music .station_name{
     display: inline-block;
     padding-right: 8px;
     font-weight: bold;
     font-size: 25px;
 }
 
-.station_freq{
+.music .station_freq{
     text-align: center;
     font-size: 20px;
 }
 
-.sidebar-nav-hide {
+.music .sidebar-nav-hide {
     left: -1000px;
 }
 
 @media only screen and (max-width: 750px) {
-    .sidePanel {
+    .music .sidePanel {
         width: 100%;
         height: 100%;
         position: fixed;
         z-index: 2;
     }
 
-    .side-nav-bar{
+    .music .side-nav-bar{
         height: 100%;
         width: 100%;
         z-index: 2;
         overflow-y: scroll;
     }
 
-    #menuBtn {
+    .music #menuBtn {
         display: block;
     }
 
-    .filter-form-station-input{
+    .music .filter-form-station-input{
         width: 50%;
         font-size: 4vw;
     }
     
-    .filter-form_dropdown{
+    .music .filter-form_dropdown{
         width: 50%;
         font-size: 4vw;
     }
 
-    .station_name{
+    .music .station_name{
         font-size: 4vw;
     }
 
-    .station_freq{
+    .music .station_freq{
         font-size: 4vw;
     }
 
-    .banner{
+    .music .banner{
         font-size: 3.5vw;
     }
 
-    .stationHeading{
+    .music .stationHeading{
         font-size: 4vw;
     }
 
-    .song{
+    .music .song{
         position: relative;
         height: 25vh;
         width: 90%;
     }
 
-    .song-info{
+    .music .song-info{
         height: max(300px, 35vh);
     }
 
-    .album-image img{
+    .music .album-image img{
         height: 12vh;
         width: 60%;
     }
 
-    .list_container{
+    .music .list_container{
         height:80%;
     }
     
-    iframe{
+   .music iframe{
         margin-top: -25px;
     }
 }
 
-#menuBtn {
+.music #menuBtn {
     display: none;
     margin: 0;
     z-index: 3;
