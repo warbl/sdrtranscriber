@@ -1,13 +1,224 @@
 .radio{
     color: #485060;
-    font-family: 'Arvo', sans-serif;
+    display: flex;
+    flex-direction: column;
     text-align: center;
     font-weight: bold;
-    padding-top: 150px;
+    padding-top: 100px;
+    position: fixed;
+    height: 88vh;
     background-color: white;
-    height: 100vh;
+    width: 100%;
+    align-items: center;
 }
 
-.title{
-    padding-bottom: 50px;
+.radio .sidePanel{
+    display: flex;
+    flex: 1;
+    flex-grow: 0;   
+    flex-basis: 25em;
+    text-align:center;
+    color:#485060;
+    font-family: 'Archivo Black', sans-serif;
+    width: 100%;
+    height: 60vh;
+}
+
+.radio .side-nav-bar{
+    height: 60vh;
+}
+
+.radio .list_container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 10px;
+    height: 95%;
+    overflow-y: scroll;
+}
+
+.radio .find-song-container{
+    flex: 1;
+    flex-grow: 0;   
+    flex-basis: 100em;
+    text-align:center;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+    font-family: 'Archivo Black', sans-serif;
+}
+
+.radio .station{
+    width: 20%;
+    height: 180px;
+    padding: 8px;
+    border: black thin solid;
+    background-color: #F0CF91;
+    margin: 1rem;
+    box-shadow: 5px 5px 5px 5px #485060;
+}
+
+.radio .station:hover{
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.radio .station-name{
+    font-weight: bold;
+    font-size: 25px;
+    display: block;
+    padding-top: 5px;
+    padding-left: 10px;
+}
+
+.radio .station-logo{
+    width: 50%;
+    height: 50%;
+    padding: 8px;
+}
+
+.radio #menuBtn {
+    display: none;
+    margin: 0;
+    z-index: 3;
+    position: fixed;
+    right: 14px;
+    top: 140px;
+    color: #485060;
+    font-size: 40px;
+    cursor: pointer;
+    transition: color 1s;
+    font-size: 6vw;
+}
+
+.radio .title{
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    padding-top: 100px;
+}
+
+.radio .loading-text{
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+.loading-indicator{
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.select-station h3{
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    padding-top: 30px;
+}
+
+.select-station button{
+    width: 10%;
+    padding: 10px;
+    margin-left: 5px;
+    background-color: #C7AC7A;
+}
+
+.select-station button:hover{
+    cursor: pointer;
+}
+
+.disconnect-button{
+    width: 10%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #C7AC7A;
+}
+
+.disconnect-button:hover{
+    cursor: pointer;
+}
+
+.radio .station-list-header{
+    display: none;
+}
+
+
+@media only screen and (max-width: 750px) {
+    .radio .sidePanel {
+        width: 100%;
+        height: 90%;
+        position: fixed;
+        z-index: 2;
+        background-color: #C7AC7A;
+    }
+
+    .radio .side-nav-bar{
+        height: 100%;
+        width: 100%;
+        z-index: 2;
+        overflow-y: scroll;
+    }
+
+    .radio .station{
+        width: 50%;
+    }
+
+    .radio .station-name{
+        font-size: 4vw;
+    }
+
+    .radio .list_container{
+        height: 80%;
+    }
+
+    .radio #menuBtn {
+        display: block;
+        color: #485060;
+    }
+
+    .radio .station-list-header{
+        display: block;
+        color: #485060;
+        font-size: 4vw;
+        display: block;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+
+    .radio .title{
+        padding-top: 100px;
+        font-size: 5vw;
+    }
+
+    .radio .loading-text{
+        padding-top: 100px;
+        font-size: 5vw;
+    }
+
+    .radio .select-station h3{
+        padding-top: 100px;
+        font-size: 5vw;
+    }
+
+    .radio .select-station button{
+        width: 20%;
+        font-size: 3vw;
+    }
+
+    .radio .disconnect-button{
+        width: 20%;
+        font-size: 3vw;
+    }
+
+    .livestream-title{
+        padding-top: 100px;
+        font-size: 5vw; 
+    }
+
+    audio{
+        width: 50%;
+    }
+
 }

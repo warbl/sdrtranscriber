@@ -7,13 +7,13 @@
     height: 575px;
 }
 
-.top-songs-container .filter-form-songs {
+.container .filter-form-songs {
     width: 100%;
     padding-bottom: 10px;
     text-align: center;
 }
 
-.top-songs-container .filter-form-song-input{
+.container .filter-form-song-input{
     height: 15px;
     width: 70%;
     background-color: #F0CF91;
@@ -78,5 +78,13 @@
 
 .container .song-content{
     width: 50%;
-    font-size: min(1.5vw, 30px);
+    font-size: min(2vw, 30px);
+}
+
+@media only screen and (max-width: 750px) {
+
+    .top-songs-container .song-content{
+        margin-bottom: -120px;
+    }
+
 }
