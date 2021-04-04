@@ -25,29 +25,34 @@ export default function NewsModal({ handleClick, newsContent }) {
     }
 
     const toggleContent = (index) => {
-        const section = document.getElementById('popup-news-container-'+ index)
-        console.log(section);
+        const section = document.getElementById('popup-news-content-' + index);
+        const button = document.getElementById('popup-news-button-' + index);
         if(section.style.display === "block"){
             section.style.display = "none";
+            button.innerText = "Read News";
         } else {
             section.style.display = "block";
+            button.innerText = "Close";
         }
     }
 
 
     return (
         <div className="popup">
-            <h1 className="heading">Past News</h1>
+            <h1 className="heading">All News</h1>
             <div className="content">
                 <button className="close" onClick={handleClick}>Close</button>
                 {newsGroups && newsGroups.map((element, index) => {
                     return (
                     <div className="popup-news-container">
-                        <h3 className="popup-time-header" onClick={() => toggleContent(index)}>{formatDate(element[0].time_of_broadcast)}</h3>
-                        <div id={"popup-news-container-"+index} style={{display: "none"}}>
+                        <div className="popup-header">
+                        <h3 className="popup-time">{formatDate(element[0].time_of_broadcast)}</h3>
+                        <button className="popup-button" onClick={() => toggleContent(index)} id={"popup-news-button-"+index}>Read News</button>
+                        </div>
+                        <div className="popup-news-content" id={"popup-news-content-"+index} style={{display: "none"}}>
                         {element.map((val) => {
                             return (
-                                <span className="popup-news-container-content" key={val.time_of_broadcast}>
+                                <span key={val.time_of_broadcast}>
                                     {val.transcribed_speech}&nbsp;
                                 </span>
                             )

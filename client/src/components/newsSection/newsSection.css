@@ -16,7 +16,7 @@
 
 .news .heading{
     padding-top: 130px;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
 }
 
 .news .title{
@@ -42,6 +42,12 @@
 
 .news-section{
     font-size: 27px;
+}
+
+.news .past-news-button{
+    padding: 10px;
+    background-color: #C7AC7A;
+    margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 750px) {
@@ -79,8 +85,8 @@
 
 .news .popup .content{
     overflow-y: scroll;
-    width: 70%;
-    height: 70%;
+    width: 90%;
+    height: 65%;
 }
 
 .news .popup .close{
@@ -89,7 +95,7 @@
     top: 130px;
     padding: 10px;
     color: #485060;
-    background-color: #F0CF91;
+    background-color: #C7AC7A;;
 }
 
 .close:hover{
@@ -105,6 +111,33 @@
     font-size: 12px;
 }
 
-.news .heading{
-    padding-bottom: 10px;
+.popup-header{
+    border: black thin solid;
+    background-color: #485060;
+    color: white;
+}
+
+.popup-time{
+    text-align: start;
+    display: inline-block;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.popup-button{
+    padding: 10px;
+    background-color: #C7AC7A;;
+    float: right;
+    margin-top: 10px;
+    margin-right: 15px;
+}
+
+.popup-news-content{
+    border: black thin solid;
+    padding: 15px;
+    height: 300px;
+    overflow-y: scroll;
+    background-color: #F0CF91;
+    color: black;
 }

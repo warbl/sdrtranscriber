@@ -40,10 +40,10 @@ export default function NewsSection() {
              <NewsModal handleClick={handleClick} newsContent={newsContent} />
              </div>
             <div className="heading">
-                <button className="past-news-button" onClick={handleClick}>Read Past News Here</button>
                 <span className="title">Here is the Transcribed News Report from KYW NEWS</span>
                 <span className="time-stamp">(last updated: {lastUpdated})</span>
             </div>
+            <button className="past-news-button" onClick={handleClick}>Read Past News Here</button>
             <div className="playback">
                 <audio controls>
                     <source src="" type="audio/mpeg" />
