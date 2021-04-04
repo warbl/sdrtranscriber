@@ -92,7 +92,7 @@ export default function ContentArea({ station }) {
                                             </div>
                                         </div>
                                         {val.yt_link !== 'N/A' && <div className="playback">
-                                            <iframe src={[val.yt_link.slice(0, 24), '/embed', val.yt_link.slice(24)].join('')} height="75" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                            <iframe src={[val.yt_link.slice(0, 24), '/embed', val.yt_link.slice(24)].join('')} height="75" frameBorder="0" allowtransparency="true" allow="encrypted-media" title={val.song_name}></iframe>
                                         </div>
                                         }
                                     </div>

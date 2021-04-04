@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSpinner, faBars} from "@fortawesome/free-solid-svg-icons";
-import { Form } from 'react-bootstrap';
 import Axios from 'axios';
 import './radio.css'
 import alertify from 'alertifyjs';
@@ -138,7 +137,7 @@ export default function Radio() {
                         {stationList && stationList.map((val) => {
                             return (
                                 <div className="station" key={val.station_id} onClick={() => clickStation(val)}>
-                                    <img className="station-logo" src={val.music_img}/>
+                                    <img className="station-logo" alt={val.station_name} src={val.music_img}/>
                                     <span className="station-name">{val.station_name}-{val.station_freq}</span>
                                 </div>
                             )

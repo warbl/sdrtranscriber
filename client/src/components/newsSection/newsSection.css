@@ -66,3 +66,45 @@
 
 }
 
+
+.news .popup{
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    align-items: center;
+}
+
+.news .popup .content{
+    overflow-y: scroll;
+    width: 70%;
+    height: 70%;
+}
+
+.news .popup .close{
+    position: absolute;
+    right: 10px;
+    top: 130px;
+    padding: 10px;
+    color: #485060;
+    background-color: #F0CF91;
+}
+
+.close:hover{
+    cursor: pointer;
+}
+
+.popup-news-container{
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.popup-news-container-content{
+    font-size: 12px;
+}
+
+.news .heading{
+    padding-bottom: 10px;
+}
