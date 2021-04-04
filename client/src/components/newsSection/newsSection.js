@@ -8,6 +8,7 @@ import NewsModal from './newsModal';
 
 export default function NewsSection() {
     const [newsContent, setNewsContent] = useState();
+    const [recentNewsContent, setRecentNewsContent] = useState();
     const [lastUpdated, setLastUpdated] = useState();
     const [showNewsModal, setShowNewsModal] = useState(false);
 
@@ -20,6 +21,7 @@ export default function NewsSection() {
     const fetchNewsContent = () => {
         Axios.get("http://localhost:3001/api/getNewsContent").then((response) => {
             setNewsContent(response.data);
+            setRecentNewsContent(response.data.slice(0, 5));
             const data = response.data;
             const last_time = formatDate(data[data.length - 1].time_of_broadcast);
             setLastUpdated(last_time);
@@ -49,7 +51,7 @@ export default function NewsSection() {
                 </audio>
             </div>
             <div className="news_container">
-                {newsContent && newsContent.map((val) => {
+                {recentNewsContent && recentNewsContent.map((val) => {
                     return (
                         <span className="news-section" key={val.time_of_broadcast}>
                             {val.transcribed_speech}&nbsp;
