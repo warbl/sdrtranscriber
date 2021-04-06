@@ -8,6 +8,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json())
 app.use(cors());
 
+const PORT = '8002';
+const HOST = '173.49.251.28';
+const net = require('net');
+const client = new net.Socket();
+client.connect(PORT, HOST, function(){
+    console.log("Connected to " + HOST + " on port " + PORT);
+});
+
 
 const db = mysql.createPool({
     host: "rds-sdr-transcriber-mysql.c9vzpejjgwtu.us-east-1.rds.amazonaws.com",
@@ -76,9 +84,19 @@ app.get("/api/getNewsContent", (req, res) => {
     })
 });
 
-app.listen(3001, () => {
-    console.log("SERVER IS RUNNING ON PORT 3001!");
+app.post("/api/connectToStation", (req, res) => {
+    console.log(req.body.station);
+    client.write(req.body.station);
+/*
+    client.on('data', function(data) {
+        console.log(data.toString());
+        client.end();
+      });
+*/
+    res.send(req.body.station);
 })
 
 
-
+app.listen(3001, () => {
+    console.log("SERVER IS RUNNING ON PORT 3001!");
+})

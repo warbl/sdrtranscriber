@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSpinner, faBars} from "@fortawesome/free-solid-svg-icons";
-import { Form } from 'react-bootstrap';
+import { faSpinner, faBars } from "@fortawesome/free-solid-svg-icons";
 import Axios from 'axios';
-import './radio.css'
-import alertify from 'alertifyjs';
-import 'alertifyjs/build/css/alertify.css';
+import './radio.css';
 
 
 export default function Radio() {
@@ -52,11 +49,10 @@ export default function Radio() {
 
     const clickStation = (val) => {
         if (livestream) {
-            alertify.alert('Error', 'You cannot change stations until you disconnect from current station!');
-        } else {
-            setStation(val);
-            toggleSidebar();
+            stopAudio();
         }
+        setStation(val);
+        toggleSidebar();
     }
 
     const toggleSidebar = () => {
@@ -66,7 +62,7 @@ export default function Radio() {
             mobileBtn.style.color = "#C7AC7A";
             sidebarRef.current.style.display = "none";
             setHideSidebar(true);
-        } else { 
+        } else {
             mobileBtn.style.color = "#485060";
             sidebarRef.current.style.display = "block";
             setHideSidebar(false);
@@ -74,12 +70,15 @@ export default function Radio() {
     };
 
 
-    const tuneToStation =  () => {
-        //send station name to api
-        //poll other api until you receive a livestream link back
-        // setLivestreamLink(response.data);
+    const tuneToStation = () => {
         setLivestream(true);
-        setTimeout(() => { readyToPlay() }, 4000);
+        const req_station = { station: "F " + station.station_freq };
+        Axios.post("http://localhost:3001/api/connectToStation", req_station).then((response) => {
+            console.log(response);
+            setTimeout(() => { readyToPlay() }, 2000);
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 
     const removeStation = () => {
@@ -116,7 +115,7 @@ export default function Radio() {
                     <div className="play-song-container">
                         <div className="loading-container" id="loading-container">
                             <p className="loading-text">Connecting to Station...</p>
-                                <FontAwesomeIcon icon={faSpinner} id="loading-indicator" className="loading-inidicator fa-pulse fa-4x" />
+                            <FontAwesomeIcon icon={faSpinner} id="loading-indicator" className="loading-inidicator fa-pulse fa-4x" />
                         </div>
                         <div className="livestream container" id="livestream-container" style={{ display: 'none' }}>
                             <h1 className="livestream-title">Listening to {station.station_name} - {station.station_freq}</h1>
@@ -133,12 +132,12 @@ export default function Radio() {
             <FontAwesomeIcon onClick={toggleSidebar} id="menuBtn" icon={faBars} />
             <div ref={sidebarRef} className="sidePanel">
                 <div ref={sidebarNavRef} className="side-nav-bar">
-                <h3 className="station-list-header">Stations</h3>
+                    <h3 className="station-list-header">Stations</h3>
                     <div className="list_container" id="station-container">
                         {stationList && stationList.map((val) => {
                             return (
                                 <div className="station" key={val.station_id} onClick={() => clickStation(val)}>
-                                    <img className="station-logo" src={val.music_img}/>
+                                    <img className="station-logo" src={val.music_img} />
                                     <span className="station-name">{val.station_name}-{val.station_freq}</span>
                                 </div>
                             )
