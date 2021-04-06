@@ -36,7 +36,6 @@ export default function NewsSection() {
 
     return (
         <div className="news">
-            <button className="past-news-button" onClick={handleClick} style={{display: showNewsModal ? 'none' : 'block'}}>All News</button>
             <div style={{display: showNewsModal ? 'block' : 'none'}}>
              <NewsModal handleClick={handleClick} newsContent={newsContent} />
              </div>
@@ -44,6 +43,7 @@ export default function NewsSection() {
                 <span className="title">Here is the Transcribed News Report from KYW NEWS</span>
                 <span className="time-stamp">(last updated: {lastUpdated})</span>
             </div>
+            <button className="past-news-button" onClick={handleClick} style={{display: showNewsModal ? 'none' : 'block'}}>All News</button>
             <div className="playback">
                 <audio controls>
                     <source src="" type="audio/mpeg" />
