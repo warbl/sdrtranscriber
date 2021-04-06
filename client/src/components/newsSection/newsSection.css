@@ -73,6 +73,28 @@
         margin-bottom: 0;
     }
 
+    .popup-news-content{
+        font-size: 4vw;
+        height: 50px;
+    }
+
+    .popup-header h3{
+        font-size: 4vw;
+    }
+
+    .popup-header button{
+        font-size: 2vw;
+    }
+
+    .news .popup .close{
+        font-size: 2vw;
+    }
+
+    .popup .heading{
+        font-size: 25px;
+    }
+
+
 }
 
 
@@ -117,6 +139,7 @@
     border: black thin solid;
     background-color: #485060;
     color: white;
+    height: 80px;
 }
 
 .popup-time{
