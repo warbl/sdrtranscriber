@@ -48,6 +48,9 @@
     padding: 10px;
     background-color: #C7AC7A;
     margin-bottom: 10px;
+    position: absolute;
+    right: 10px;
+    top: 130px;
 }
 
 @media only screen and (max-width: 750px) {
@@ -94,8 +97,7 @@
     right: 10px;
     top: 130px;
     padding: 10px;
-    color: #485060;
-    background-color: #C7AC7A;;
+    background-color: #C7AC7A;
 }
 
 .close:hover{

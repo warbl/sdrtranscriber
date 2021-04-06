@@ -19,7 +19,7 @@ export default function NewsSection() {
     }, []);
 
     const fetchNewsContent = () => {
-        Axios.get("https://sdrtranscriber.tk:3002/api/getNewsContent").then((response) => {
+        Axios.get("http:localhost:3001/api/getNewsContent").then((response) => {
             setNewsContent(response.data);
             setRecentNewsContent(response.data.slice(0, 5));
             const data = response.data;
@@ -36,6 +36,7 @@ export default function NewsSection() {
 
     return (
         <div className="news">
+            <button className="past-news-button" onClick={handleClick} style={{display: showNewsModal ? 'none' : 'block'}}>All News</button>
             <div style={{display: showNewsModal ? 'block' : 'none'}}>
              <NewsModal handleClick={handleClick} newsContent={newsContent} />
              </div>
@@ -43,7 +44,6 @@ export default function NewsSection() {
                 <span className="title">Here is the Transcribed News Report from KYW NEWS</span>
                 <span className="time-stamp">(last updated: {lastUpdated})</span>
             </div>
-            <button className="past-news-button" onClick={handleClick}>Read Past News Here</button>
             <div className="playback">
                 <audio controls>
                     <source src="" type="audio/mpeg" />
