@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSpinner, faBars} from "@fortawesome/free-solid-svg-icons";
-import { Form } from 'react-bootstrap';
+import { faSpinner, faBars } from "@fortawesome/free-solid-svg-icons";
 import Axios from 'axios';
 import './radio.css'
-import alertify from 'alertifyjs';
-import 'alertifyjs/build/css/alertify.css';
 
 
 export default function Radio() {
@@ -42,7 +39,7 @@ export default function Radio() {
     };
 
     const fetchStations = async () => {
-        Axios.get("http://localhost:3001/api/getStations").then((response) => {
+        Axios.get("https://sdrtranscriber.tk:3002/api/getStations").then((response) => {
             console.log(response.data);
             setStationList(response.data);
         }).catch((error) => {
@@ -52,11 +49,10 @@ export default function Radio() {
 
     const clickStation = (val) => {
         if (livestream) {
-            alertify.alert('Error', 'You cannot change stations until you disconnect from current station!');
-        } else {
-            setStation(val);
-            toggleSidebar();
+            stopAudio();
         }
+        setStation(val);
+        toggleSidebar();
     }
 
     const toggleSidebar = () => {
@@ -66,7 +62,7 @@ export default function Radio() {
             mobileBtn.style.color = "#C7AC7A";
             sidebarRef.current.style.display = "none";
             setHideSidebar(true);
-        } else { 
+        } else {
             mobileBtn.style.color = "#485060";
             sidebarRef.current.style.display = "block";
             setHideSidebar(false);
@@ -74,12 +70,12 @@ export default function Radio() {
     };
 
 
-    const tuneToStation =  () => {
+    const tuneToStation = () => {
         //send station name to api
         //poll other api until you receive a livestream link back
         // setLivestreamLink(response.data);
         setLivestream(true);
-        setTimeout(() => { readyToPlay() }, 4000);
+        setTimeout(() => { readyToPlay() }, 3000);
     }
 
     const removeStation = () => {
@@ -116,12 +112,12 @@ export default function Radio() {
                     <div className="play-song-container">
                         <div className="loading-container" id="loading-container">
                             <p className="loading-text">Connecting to Station...</p>
-                                <FontAwesomeIcon icon={faSpinner} id="loading-indicator" className="loading-inidicator fa-pulse fa-4x" />
+                            <FontAwesomeIcon icon={faSpinner} id="loading-indicator" className="loading-inidicator fa-pulse fa-4x" />
                         </div>
                         <div className="livestream container" id="livestream-container" style={{ display: 'none' }}>
                             <h1 className="livestream-title">Listening to {station.station_name} - {station.station_freq}</h1>
                             <div className="playback">
-                                <audio controls autoPlay="autoplay" id="audio" onCanPlay={(e) => readyToPlay(e)}>
+                                <audio controls autoPlay="autoplay" id="audio">
                                     <source src="http://173.49.251.28:8090/live" type="audio/mpeg" />
                                 Your browser does not support the audio element.
                             </audio>
@@ -133,12 +129,12 @@ export default function Radio() {
             <FontAwesomeIcon onClick={toggleSidebar} id="menuBtn" icon={faBars} />
             <div ref={sidebarRef} className="sidePanel">
                 <div ref={sidebarNavRef} className="side-nav-bar">
-                <h3 className="station-list-header">Stations</h3>
+                    <h3 className="station-list-header">Stations</h3>
                     <div className="list_container" id="station-container">
                         {stationList && stationList.map((val) => {
                             return (
                                 <div className="station" key={val.station_id} onClick={() => clickStation(val)}>
-                                    <img className="station-logo" src={val.music_img}/>
+                                    <img className="station-logo" alt={val.station_name} src={val.music_img} />
                                     <span className="station-name">{val.station_name}-{val.station_freq}</span>
                                 </div>
                             )

@@ -16,7 +16,7 @@
 
 .news .heading{
     padding-top: 130px;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
 }
 
 .news .title{
@@ -44,7 +44,16 @@
     font-size: 27px;
 }
 
-@media only screen and (max-width: 750px) {
+.news .past-news-button{
+    padding: 8px;
+    background-color: #C7AC7A;
+    margin-bottom: 10px;
+    position: absolute;
+    right: 10px;
+    top: 130px;
+}
+
+@media screen and (max-width: 780px) {
    .news-container{
     font-size: 4vw;
     background-color: white;
@@ -64,5 +73,105 @@
         margin-bottom: 0;
     }
 
+    .popup-news-content{
+        font-size: 4vw;
+        height: 50px;
+    }
+
+    .popup-header h3{
+        font-size: 4vw;
+    }
+
+    .popup-header button{
+        font-size: 2vw;
+    }
+
+    .news .popup .close{
+        font-size: 2vw;
+    }
+
+    .popup .heading{
+        font-size: 25px;
+    }
+
+    .news .past-news-button{
+        position: static;
+        font-size: 2.5vw;
+        padding: 5px;
+    }
+
+    .news .news-section{
+        font-size: 3vw;
+    }
+
 }
 
+
+.news .popup{
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    align-items: center;
+}
+
+.news .popup .content{
+    overflow-y: scroll;
+    width: 90%;
+    height: 65%;
+}
+
+.news .popup .close{
+    position: absolute;
+    right: 10px;
+    top: 130px;
+    padding: 10px;
+    background-color: #C7AC7A;
+}
+
+.close:hover{
+    cursor: pointer;
+}
+
+.popup-news-container{
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.popup-news-container-content{
+    font-size: 12px;
+}
+
+.popup-header{
+    border: black thin solid;
+    background-color: #485060;
+    color: white;
+    height: 80px;
+}
+
+.popup-time{
+    text-align: start;
+    display: inline-block;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.popup-button{
+    padding: 10px;
+    background-color: #C7AC7A;;
+    float: right;
+    margin-top: 10px;
+    margin-right: 15px;
+}
+
+.popup-news-content{
+    border: black thin solid;
+    padding: 15px;
+    height: 300px;
+    overflow-y: scroll;
+    background-color: #F0CF91;
+    color: black;
+}
