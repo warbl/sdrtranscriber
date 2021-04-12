@@ -24,9 +24,9 @@ export default function InstallPWA() {
     }
     promptInstall.prompt();
   };
-  if (!supportsPWA) {
-    return null;
-  }
+//  if (!supportsPWA) {
+//   return null;
+// }
   return (
     <button
       className="pwa-link-button"

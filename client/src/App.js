@@ -23,4 +23,7 @@ function App() {
   );
 }
 
+if('serviceWorker' in navigator){
+	navigator.serviceWorker.register('./public/worker.js');
+};
 export default App;
