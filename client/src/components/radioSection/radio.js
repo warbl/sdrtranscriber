@@ -73,8 +73,8 @@ export default function Radio() {
 
     const tuneToStation = () => {
         setLivestream(true);
-        const station = station.station_freq;
-        const stationFreq = station.replace('.', '') + '00000';
+        const tempStation = station.station_freq.toString();
+        const stationFreq = tempStation.replace('.', '') + '00000';
         const req_station = { station: "F " + stationFreq };
         Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
             console.log(response);
@@ -124,7 +124,7 @@ export default function Radio() {
                             <h1 className="livestream-title">Listening to {station.station_name} - {station.station_freq}</h1>
                             <div className="playback">
                                 <audio controls autoPlay="autoplay" id="audio">
-                                    <source src="http://173.49.251.28:8090/live" type="audio/mpeg" />
+                                    <source src="https://sdrstream.tk:8003/remote3" type="audio/mpeg" />
                                 Your browser does not support the audio element.
                             </audio>
                             </div>
