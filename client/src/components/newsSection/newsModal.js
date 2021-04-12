@@ -15,8 +15,8 @@ export default function NewsModal({ handleClick, newsContent }) {
     const getNewsSections = () => {
         if (newsContent && newsContent.length >= 0) {
             var groups = [];
-            for (var index = 0; index < newsContent.length; index += 5) {
-                groups.push(newsContent.slice(index, index + 5));
+            for (var index = 0; index < newsContent.length; index += 10) {
+                groups.push(newsContent.slice(index, index + 10));
             }
             console.log(groups);
             setNewsGroups(groups);
