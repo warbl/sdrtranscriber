@@ -10,7 +10,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json())
 app.use(cors());
 
-<<<<<<< HEAD
 const PORT = '8001';
 const HOST = '173.49.251.28';
 const net = require('net');
@@ -18,12 +17,11 @@ const client = new net.Socket();
 client.connect(PORT, HOST, function(){
     console.log("Connected to " + HOST + " on port " + PORT);
 });
-=======
+
 const options = {
   key: fs.readFileSync('privkey1.pem'),
   cert: fs.readFileSync('cert1.pem')
 };
->>>>>>> ae14cae517c143b6c286007296ae0e78342b5dcf
 
 const db = mysql.createPool({
     host: "rds-sdr-transcriber-mysql.c9vzpejjgwtu.us-east-1.rds.amazonaws.com",
@@ -92,7 +90,6 @@ app.get("/api/getNewsContent", (req, res) => {
     })
 });
 
-<<<<<<< HEAD
 app.post("/api/connectToStation", (req, res) => {
     console.log(req.body.station);
     client.write(req.body.station);
@@ -103,21 +100,6 @@ app.post("/api/connectToStation", (req, res) => {
       });
 });
 
-/*
-client.write('f /x0d/x0a');
-client.on('data', function(data) {
-    console.log(data.toString());
-    client.end();
-  });
-  //res.send(req.body.station);
-//sending frequency 'F 102100000'
-//getting frequency 'f /x0d/x0a'
-*/
-
-app.listen(3001, () => {
-    console.log("SERVER IS RUNNING ON PORT 3001!");
-});
-=======
 // SSL API endpoint is listening on 3002, normal API endpoint is listening on 3001
 // server needs to identify whether client is using HTTP or HTTPS and correct the API endpoint 
 // API endpoint must use domain name sdrtranscriber.tk or SSL will break
@@ -126,9 +108,7 @@ app.listen(3001, '0.0.0.0', () => {
     console.log("SERVER IS RUNNING ON PORT 3001!");
 })
 
-
 var api_ssl_server = https.createServer(options, app);
 
 
 api_ssl_server.listen(3002, '0.0.0.0')
->>>>>>> ae14cae517c143b6c286007296ae0e78342b5dcf
