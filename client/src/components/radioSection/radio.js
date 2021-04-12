@@ -124,7 +124,7 @@ export default function Radio() {
                             <h1 className="livestream-title">Listening to {station.station_name} - {station.station_freq}</h1>
                             <div className="playback">
                                 <audio controls autoPlay="autoplay" id="audio">
-                                    <source src="https://sdrstream.tk:8003/remote3" type="audio/mpeg" />
+                                    <source src="https://sdrstream.tk:8090/remote3" type="audio/mpeg" />
                                 Your browser does not support the audio element.
                             </audio>
                             </div>
