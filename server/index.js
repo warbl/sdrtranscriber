@@ -10,11 +10,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json())
 app.use(cors());
 
-const PORT = '8003';
-const HOST = '173.49.251.28';
-const net = require('net');
-const client = new net.Socket();
-
 const options = {
   key: fs.readFileSync('privkey1.pem'),
   cert: fs.readFileSync('cert1.pem')
@@ -88,16 +83,28 @@ app.get("/api/getNewsContent", (req, res) => {
 });
 
 app.post("/api/connectToStation", (req, res) => {
+    const net = require('net');
+    const client = new net.Socket();
+    const PORT = '8003';
+    const HOST = '173.49.251.28';
+
+
     client.connect(PORT, HOST, function(){
         console.log("Connected to " + HOST + " on port " + PORT);
     });
+
     console.log(req.body.station);
     client.write(req.body.station);
+    
     client.on('data', function(data) {
         console.log(data.toString());
         res.send(data.toString());
-        client.end();
+        client.destroy();
       });
+    
+      client.on('close', function(){
+          console.log("connection closed");
+      })
 });
 
 // SSL API endpoint is listening on 3002, normal API endpoint is listening on 3001
