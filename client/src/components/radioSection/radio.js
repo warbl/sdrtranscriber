@@ -76,7 +76,7 @@ export default function Radio() {
         const tempStation = station.station_freq.toString();
         const stationFreq = tempStation.replace('.', '') + '00000';
         const req_station = { station: "F " + stationFreq };
-        Axios.post("http://localhost:3001/api/connectToStation", req_station).then((response) => {
+        Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
             console.log(response);
             readyToPlay();
         }).catch((error) => {
