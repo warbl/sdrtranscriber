@@ -40,7 +40,6 @@ export default function Home() {
                 <div className="content">
                     <h1 className="homeHeading">NO RADIO,<br/> NO PROBLEM.</h1>
                     <h3 className="paragraph">Enjoy and explore all the content from the radio stations of Philadelphia right here!</h3>
-                    {/* need to add conditional to hide when necessary */}
                     <div className="pwa-button"><InstallPWA /></div>
                 </div>
                 <img className="icon" src={radio} alt="home page icon" />

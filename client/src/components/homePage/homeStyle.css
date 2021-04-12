@@ -99,3 +99,9 @@ img{
     }
 }
 
+@media all and (display-mode: standalone) {
+    .pwa-button{ 
+        display: none; 
+    }
+}
+
