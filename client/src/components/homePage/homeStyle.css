@@ -70,17 +70,17 @@ img{
         flex-direction: column;
         padding: 5% 0 0 0;
         margin: 0;
-        height: 75vh;
+        height: 70vh;
     }
 
     .group{
-        overflow-y: scroll;
+        position: fixed;
         height: 87.5vh;
     }
 
     .banner{
         font-size: 3vw;
-        padding: 15px 0 0 0;
+        padding: 8px 0 0 0;
         text-align: center;
         height: 4%;
     }
@@ -97,16 +97,19 @@ img{
 
     .homeHeading{
         font-size: 8vw;
-        padding-bottom: 10px;
-    }
-
-    .pwa-button{
-        margin-top: 15%;
+        padding-bottom: 8px;
     }
 
     .icon{
-        height: 200px;
-        width: 200px;
+        margin-top: 20%;
+        height: 140px;
+        width: 140px;
+    }
+}
+
+@media all and (display-mode: standalone) {
+    .pwa-button{ 
+        display: none; 
     }
 }
 

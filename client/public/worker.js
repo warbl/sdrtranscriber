@@ -1,12 +1,12 @@
 var CACHE_NAME = 'sdr-transcriber';
 var urlsToCache = [
 	'/',
-	'/completed'
-	'./public/favicon.ico'
-	'./public/index.html'
-	'./public/maskable_icon.png'
-	'./src/images/radio.png'
-	'./src/index.css'
+	'/completed',
+	'./favicon.ico',
+	'./index.html',
+	'./maskable_icon.png',
+	'../src/images/radio.png',
+	'../src/index.css',
 	
 ];
 

@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSpinner, faBars } from "@fortawesome/free-solid-svg-icons";
 import Axios from 'axios';
-import './radio.css'
+import './radio.css';
+
 
 
 export default function Radio() {
@@ -71,11 +72,16 @@ export default function Radio() {
 
 
     const tuneToStation = () => {
-        //send station name to api
-        //poll other api until you receive a livestream link back
-        // setLivestreamLink(response.data);
         setLivestream(true);
-        setTimeout(() => { readyToPlay() }, 3000);
+        const station = station.station_freq;
+        const stationFreq = station.replace('.', '') + '00000';
+        const req_station = { station: "F " + stationFreq };
+        Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
+            console.log(response);
+            setTimeout(() => { readyToPlay() }, 2000);
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 
     const removeStation = () => {
