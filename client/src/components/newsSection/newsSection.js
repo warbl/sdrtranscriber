@@ -16,7 +16,7 @@ export default function NewsSection() {
     }, []);
 
     const fetchNewsContent = () => {
-        Axios.get("http://localhost:3001/api/getNewsContent").then((response) => {
+        Axios.get("https://sdrtranscriber.tk:3002/api/getNewsContent").then((response) => {
             setNewsContent(response.data);
             const data = response.data;
             const last_time = formatDate(data[data.length - 1].time_of_broadcast);

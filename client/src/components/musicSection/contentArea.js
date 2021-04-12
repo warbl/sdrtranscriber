@@ -21,7 +21,7 @@ export default function ContentArea({ station }) {
 
     const fetchSongsByStation = () => {
         const stationFreq = station.station_freq;
-        Axios.get("http://localhost:3001/api/getSongsByStation/" + stationFreq).then((response) => {
+        Axios.get("https://sdrtranscriber.tk:3002/api/getSongsByStation/" + stationFreq).then((response) => {
             console.log("getting songs from station: " + station.station_freq);
             const data = response.data;
             if (data.length > 0) {
