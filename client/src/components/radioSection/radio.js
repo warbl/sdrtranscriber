@@ -78,7 +78,7 @@ export default function Radio() {
         const req_station = { station: "F " + stationFreq };
         Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
             console.log(response);
-            setTimeout(() => { readyToPlay() }, 2000);
+            readyToPlay();
         }).catch((error) => {
             console.log(error);
         });
