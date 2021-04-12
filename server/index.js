@@ -14,9 +14,6 @@ const PORT = '8003';
 const HOST = '173.49.251.28';
 const net = require('net');
 const client = new net.Socket();
-client.connect(PORT, HOST, function(){
-    console.log("Connected to " + HOST + " on port " + PORT);
-});
 
 const options = {
   key: fs.readFileSync('privkey1.pem'),
@@ -91,6 +88,9 @@ app.get("/api/getNewsContent", (req, res) => {
 });
 
 app.post("/api/connectToStation", (req, res) => {
+    client.connect(PORT, HOST, function(){
+        console.log("Connected to " + HOST + " on port " + PORT);
+    });
     console.log(req.body.station);
     client.write(req.body.station);
     client.on('data', function(data) {
