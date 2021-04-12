@@ -1,9 +1,7 @@
-@viewport {
-	width: 100%;
-}
+
 
 .group{
-    height: 87.5vh;
+    height: 89vh;
     padding-top: 100px;
     background-color: #515D71;
 }
@@ -53,7 +51,7 @@ img{
     color: #485060;
     padding-bottom: 5px;
     background-color: #F0CF91;
-    padding-left: 5px;
+    padding-left: 15px;
     padding-top: 5px;
 }
 
@@ -70,32 +68,45 @@ img{
 @media only screen and (max-width: 750px) {
     .home{
         flex-direction: column;
-        padding: 0; 
+        padding: 5% 0 0 0;
         margin: 0;
-        height: 100vh;
+        height: 75vh;
     }
 
     .group{
-        height: 100%;
         overflow-y: scroll;
+        height: 87.5vh;
     }
 
     .banner{
         font-size: 3vw;
+        padding: 15px 0 0 0;
+        text-align: center;
+        height: 4%;
+    }
+
+    .content{
+        width: 80%;
+        height: 50%;
+
     }
 
     .paragraph{
-        font-size: 4vw;
+        font-size: 5vw;
     }
 
     .homeHeading{
-        font-size: 40px;
-        font-size: 7vw;
+        font-size: 8vw;
         padding-bottom: 10px;
     }
 
+    .pwa-button{
+        margin-top: 15%;
+    }
+
     .icon{
-        font-size: 8vw;
+        height: 200px;
+        width: 200px;
     }
 }
 

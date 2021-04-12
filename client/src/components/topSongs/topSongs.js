@@ -47,7 +47,7 @@ export default function TopSongs() {
             <div>
                 <Form className="filter-form-songs">
                     <Form.Group className="filter-form-song-box">
-                        <Form.Control className='filter-form-song-input' type="text" placeholder=" Search songs..." onChange={(e) => { setInput(e.target.value); search(e) }} />
+                        <Form.Control className='filter-form-song-input' type="text" value={input} placeholder=" Search songs..." onChange={(e) => { setInput(e.target.value); search(e) }} />
                     </Form.Group>
                 </Form>
             </div>
@@ -66,7 +66,7 @@ export default function TopSongs() {
                                 </div>
                             </div>
                             <div className="playback">
-                                <iframe src={[val.yt_link.slice(0, 24), '/embed', val.yt_link.slice(24)].join('')} width="300" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                <iframe title={val.song_name} src={[val.yt_link.slice(0, 24), '/embed', val.yt_link.slice(24)].join('')} width="300" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                             </div>
                         </div>
                     )

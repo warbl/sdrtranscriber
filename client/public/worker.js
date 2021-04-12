@@ -2,6 +2,12 @@ var CACHE_NAME = 'sdr-transcriber';
 var urlsToCache = [
 	'/',
 	'/completed'
+	'./public/favicon.ico'
+	'./public/index.html'
+	'./public/maskable_icon.png'
+	'./src/images/radio.png'
+	'./src/index.css'
+	
 ];
 
 self.addEventListener('install', event =>{
@@ -11,6 +17,10 @@ self.addEventListener('install', event =>{
 			console.log('Opened cache');
 			return cache.addAll(urlsToCache);
 		})
+		.then(()=>{
+			return self.skipWaiting();
+		})
+		.catch(err => console.log(err))
 	);
 });
 
@@ -31,7 +41,7 @@ self.addEventListener('fetch', event => {
 
 // Update a service worker
 self.addEventListener('activate', event => {
-  var cacheWhitelist = ['pwa-task-manager'];
+  var cacheWhitelist = ['sdr-transcriber'];
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
