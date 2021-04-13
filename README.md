@@ -21,6 +21,9 @@ The design concept has 3 SDRs that are plugged in tto a personal computer, which
 ### Testing documents
 We have 3 acceptance testing documents, for testing and verification purposes, which are linked below
 
+- [Mobile App Acceptance Testing (Chrome)](./SDR%20Transcriber%20Mobile%20Website%20Acceptance%20Test%20Scripts%20-%20Chrome%20-%20Sheet1.pdf)
+- [Website Acceptance Testing (Chrome)](./SDR%20Transcriber%20Website%20Acceptance%20Test%20Scripts%20-%20Chrome%20-%20Sheet1.pdf)
+- [Website Acceptance Testing (Safari)](./SDR%20Transcriber%20Website%20Acceptance%20Test%20Scripts%20-%20Safari%20-%20Sheet1.pdf)
 
 Please Contact Trevor Lewis at tuh12644@temple.edu for QA Technical Support
 
