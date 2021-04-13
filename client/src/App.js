@@ -22,8 +22,4 @@ function App() {
     </Router>
   );
 }
-
-if('serviceWorker' in navigator){
-	navigator.serviceWorker.register('./public/worker.js');
-};
 export default App;
