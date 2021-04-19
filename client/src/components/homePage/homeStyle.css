@@ -1,7 +1,8 @@
 
 
 .group{
-    height: 89vh;
+    height: 90vh;
+    position: fixed;
     padding-top: 100px;
     background-color: #515D71;
 }
@@ -28,14 +29,14 @@
 }
 
 .content{
-    width: 50%;
+    width: 60%;
     float: left;
     padding: 0 5%;
 
 }
 
 img{
-    width: 45%;
+    width: 40%;
     vertical-align: middle;
 }
 
@@ -51,8 +52,9 @@ img{
     color: #485060;
     padding-bottom: 5px;
     background-color: #F0CF91;
+    height: 30px;
     padding-left: 15px;
-    padding-top: 5px;
+    padding-top: 10px;
 }
 
 .pwa-button{
@@ -65,7 +67,24 @@ img{
     color: #515D71;
 }
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 1200px) {
+    .home{
+        padding-top: 10%;
+    }
+
+    .banner{
+        font-size: 1.8vw;
+    }
+    .homeHeading{
+        font-size: 5vw;
+    }
+
+    .paragraph{
+        font-size: 3vw;
+    }
+}
+
+@media only screen and (max-width: 600px) {
     .home{
         flex-direction: column;
         padding: 5% 0 0 0;
@@ -82,22 +101,23 @@ img{
         font-size: 3vw;
         padding: 15px 0 0 0;
         text-align: center;
-        height: 4%;
+        height: 6.4%;
     }
 
     .content{
         width: 80%;
-        height: 50%;
+        height: 60%;
 
+    }
+
+    .homeHeading{
+        padding-bottom: 6px;
+        font-size: 6vw;
     }
 
     .paragraph{
         font-size: 5vw;
-    }
-
-    .homeHeading{
-        font-size: 8vw;
-        padding-bottom: 10px;
+        padding-top: 0;
     }
 
     .pwa-button{
@@ -105,8 +125,8 @@ img{
     }
 
     .icon{
-        height: 200px;
-        width: 200px;
+        height: 150px;
+        width: 150px;
     }
 }
 

@@ -113,30 +113,35 @@
 }
 
 .music .song-info {
-    width: 100%;
+    width: 110%;
     display: flex;
     flex-direction: row;
     word-wrap: break-word;
     font-family: 'Garamond Premier Pro', serif;
     text-align: left;
-}
-
-.music .song-info h1{
-    font-size: min(2vw, 30px);
+    margin-bottom: 10px;
 }
 
 .music .song-content{
-    padding-right: 10px;
-    font-size: min(1.5vw, 18px);
+    padding-right: 5px;
+    width: 70%;
+}
+
+.music .song-info h1{
+    font-size: 1.5vw;
+}
+
+.music .song-info h3{
+    font-size: 1.5vw;
 }
 
 .music .album-image{
-    width: 60%;
+    width: 40%;
     height: min(200px, 33.33vh);
 }
 .music .album-image img {
-    width: 60%;
-    height: min(200px, 33.33vh);
+    width: 200px;
+    height: 200px;
     float: right;
 }
 
@@ -146,6 +151,7 @@
 
 .music iframe{
     width: 100%;
+    height: 80px;
 }
 
 .music .banner{
@@ -199,7 +205,36 @@
     left: -1000px;
 }
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 1200px) {
+    .music .song{
+        width: 80%;
+    }
+
+    .music .song-info{
+        padding-bottom: 0;
+    }
+
+    .music .song-info h1{
+        font-size: 2vw;
+    }
+
+    .music .song-info h3{
+        font-size: 1.8vw;
+    }
+
+    .music .album-image img {
+        width: 170px;
+        height: 170px;
+    }
+
+    .music .song-info {
+        height: 65%;
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+
     .music .sidePanel {
         width: 100%;
         height: 100%;
@@ -240,13 +275,42 @@
         font-size: 3.5vw;
     }
 
+    .music .song{
+        width: 80%;
+        height: 250px;
+    }
+
+    .music .song-info{
+        height: 90%;
+        width: 100%;
+    }
+
+    .music .song-content{
+        padding-right: 15px;
+    }
+
+    .music .song-info h1{
+        font-size: 3vw;
+        width: 100%;
+    }
+
+    .music .song-info h3{
+        font-size: 2.6vw;
+        width: 120%;
+    }
+
     .music .stationHeading{
-        font-size: 4vw;
+        font-size: 5.5vw;
+    }
+
+    .music .album-image{
+        width: 42%;
+        padding-left: 10px;
     }
 
     .music .album-image img{
-        height: 12vh;
-        width: 60%;
+        height: 120px;
+        width: 120px;
     }
 
     .music .list_container{
@@ -266,7 +330,6 @@
     right: 14px;
     top: 140px;
     color:#C7AC7A;
-    font-size: 40px;
     cursor: pointer;
     transition: color 1s;
     font-size: 6vw;

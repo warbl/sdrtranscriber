@@ -46,24 +46,24 @@
 }
 
 @media only screen and (max-width: 750px) {
-   .news-container{
-    font-size: 4vw;
-    background-color: white;
-   }
-
-   .news .title{
-    font-size: 4vw;
+    .news .title{
+       font-size: 4vw;
+       padding: 0 5px;
     }
 
     .news .playback{
-        width: 50%;
+        width: 100%;
         display: block;
     }
 
     .time-stamp{
-        font-size: 2vw;
+        font-size: 2.5vw;
         margin-bottom: 0;
     }
 
+    .news-container{
+        font-size: 3vw;
+        background-color: white;
+    }
 }
 
