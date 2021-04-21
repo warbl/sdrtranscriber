@@ -18,7 +18,6 @@
     flex-grow: 0;   
     flex-basis: 25em;
     text-align:center;
-    color:#485060;
     font-family: 'Archivo Black', sans-serif;
     width: 100%;
     height: 60vh;
@@ -53,22 +52,25 @@
     width: 20%;
     height: 180px;
     padding: 8px;
-    background-color: #F0CF91;
+    background-color: white;
     margin: 1rem;
-    box-shadow: 5px 5px 5px 5px #485060;
+    box-shadow: 5px 5px 5px 5px #2c313a;
 }
 
 .radio .station:hover{
     cursor: pointer;
+    background-color: #515D71;
     box-shadow: none;
+    color: white;
 }
 
 .radio .station-name{
     font-weight: bold;
     font-size: 25px;
     display: block;
-    padding-top: 5px;
+    padding-top: 15px;
     padding-left: 10px;
+    color: #C25C5C;
 }
 
 .radio .station-logo{
@@ -84,7 +86,6 @@
     position: fixed;
     right: 14px;
     top: 140px;
-    color: #F0CF91;
     cursor: pointer;
     transition: color 1s;
     font-size: 6vw;
@@ -120,7 +121,7 @@
     width: 10%;
     padding: 10px;
     margin-left: 5px;
-    background-color: #C7AC7A;
+    background-color: #F0CF91;
 }
 
 .select-station button:hover{
@@ -131,7 +132,7 @@
     width: 10%;
     padding: 10px;
     margin-top: 10px;
-    background-color: #C7AC7A;
+    background-color: #C25C5C;
 }
 
 .disconnect-button:hover{
@@ -148,7 +149,7 @@
         height: 90%;
         position: fixed;
         z-index: 2;
-        background-color: #485060;
+        background-color: white;
     }
 
     .radio .side-nav-bar{
@@ -160,7 +161,6 @@
 
     .radio .station{
         width: 50%;
-        box-shadow: 5px 5px 5px 5px #2c313a;
     }
 
     .radio .station-name{
@@ -177,7 +177,6 @@
 
     .radio .station-list-header{
         display: block;
-        color: #F0CF91;
         font-size: 5vw;
         text-align: center;
         padding-bottom: 5px;
