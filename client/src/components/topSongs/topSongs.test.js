@@ -21,7 +21,6 @@ test('renders top songs page content', async () => {
     const artist0 =  screen.getByTestId("song_artist_0");
     const station0 =  screen.getByTestId("station_freq_0");
     const yt_link0 =  screen.getByTestId("yt_link_0");
-
     expect(id0).toBeInTheDocument();
     expect(name0).toBeInTheDocument();
     expect(artist0).toBeInTheDocument();

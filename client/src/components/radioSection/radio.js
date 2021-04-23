@@ -137,11 +137,11 @@ export default function Radio() {
                 <div ref={sidebarNavRef} className="side-nav-bar">
                     <h3 className="station-list-header">Stations</h3>
                     <div className="list_container" id="station-container">
-                        {stationList && stationList.map((val) => {
+                        {stationList && stationList.map((val, index) => {
                             return (
-                                <div className="station" key={val.station_id} onClick={() => clickStation(val)}>
-                                    <img className="station-logo" alt={val.station_name} src={val.music_img} />
-                                    <span className="station-name">{val.station_name}-{val.station_freq}</span>
+                                <div className="station" key={val.station_id} onClick={() => clickStation(val)} data-testid={'station_' + index}>
+                                    <img className="station-logo" alt={val.station_name} src={val.music_img} data-testid={'station_img_' + index}/>
+                                    <span className="station-name" data-testid={'station_info_' + index}>{val.station_name}-{val.station_freq}</span>
                                 </div>
                             )
                         })}
