@@ -22,7 +22,6 @@ export default function ContentArea({ station }) {
     const fetchSongsByStation = () => {
         const stationFreq = station.station_freq;
         Axios.get("https://sdrtranscriber.tk:3002/api/getSongsByStation/" + stationFreq).then((response) => {
-            console.log("getting songs from station: " + station.station_freq);
             const data = response.data;
             if (data.length > 0) {
                 data.forEach(element => {
@@ -36,7 +35,6 @@ export default function ContentArea({ station }) {
                 setFilterResults(data);
                 return;
             } else if (songSize > 0 && songSize < data.length) {
-                console.log("new song added");
                 setInput('');
                 setShowBanner(true);
                 songSize = data.length;
@@ -61,7 +59,7 @@ export default function ContentArea({ station }) {
                     <span className="banner-content">New song just added. Check it out below!</span>
                     <span className="close-button" onClick={() => { setShowBanner(false) }}>&#x2715;</span>
                 </div>}
-                <h1 className="stationHeading"> {station.station_name} - {station.station_freq} SET LIST </h1>
+                <h1 className="stationHeading" data-testid="heading"> {station.station_name} - {station.station_freq} SET LIST </h1>
                 {songs.length > 0 &&
                     <div>
                         <Form className="filter-form-songs">
@@ -80,18 +78,18 @@ export default function ContentArea({ station }) {
                         <div className="song_container">
                             {filterResults && filterResults.map((val, index) => {
                                 return (
-                                    <div className="song" key={val.song_id}>
+                                    <div className="song" key={val.song_id} data-testid={'song_id_' + index}>
                                         <div className="song-info">
                                             <div className="song-content">
-                                                <h1>{index + 1}. {val.song_name}</h1>
-                                                <h3>Artist: {val.song_artist}</h3>
-                                                <h3>Played on: {val.time_played}</h3>
+                                                <h1 data-testid={'song_name_' + index}>{index + 1}. {val.song_name}</h1>
+                                                <h3 data-testid={'song_artist_' + index}>Artist: {val.song_artist}</h3>
+                                                <h3 data-testid={'time_played_' + index}>Played on: {val.time_played}</h3>
                                             </div>
                                             <div className="album-image">
-                                                <img src={val.album_cover} alt="album_image" />
+                                                <img src={val.album_cover} alt="album_image" data-testid={'album_cover_' + index}/>
                                             </div>
                                         </div>
-                                        {val.yt_link !== 'N/A' && <div className="playback">
+                                        {val.yt_link !== 'N/A' && <div className="playback" data-testid={'yt_link_' + index}>
                                             <iframe src={[val.yt_link.slice(0, 24), '/embed', val.yt_link.slice(24)].join('')} height="75" frameBorder="0" allowtransparency="true" allow="encrypted-media" title={val.song_name}></iframe>
                                         </div>
                                         }
