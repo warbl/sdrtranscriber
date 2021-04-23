@@ -19,7 +19,7 @@ export default function NewsSection() {
     }, []);
 
     const fetchNewsContent = () => {
-        Axios.get("https://sdrtranscriber.tk:3002/api/getNewsContent").then((response) => {
+        Axios.get("http://localhost:3001/api/getNewsContent").then((response) => {
             setNewsContent(response.data);
             setRecentNewsContent(response.data.slice(0, 5));
             const data = response.data;
@@ -40,8 +40,8 @@ export default function NewsSection() {
              <NewsModal handleClick={handleClick} newsContent={newsContent} />
              </div>
             <div className="heading">
-                <span className="title">Here is the Transcribed News Report from KYW NEWS</span>
-                <span className="time-stamp">(last updated: {lastUpdated})</span>
+                <span className="title" data-testid="news-title">Here is the Transcribed News Report from KYW NEWS</span>
+                <span className="time-stamp" data-testid="news-timestamp">(last updated: {lastUpdated})</span>
             </div>
             <button className="past-news-button" onClick={handleClick} style={{display: showNewsModal ? 'none' : 'block'}}>All News</button>
             <div className="playback">
@@ -50,7 +50,7 @@ export default function NewsSection() {
                     Your browser does not support the audio element.
                 </audio>
             </div>
-            <div className="news_container">
+            <div className="news_container" data-testid="news-content">
                 {recentNewsContent && recentNewsContent.map((val) => {
                     return (
                         <span className="news-section" key={val.time_of_broadcast}>

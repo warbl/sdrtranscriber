@@ -26,7 +26,6 @@ export default function TopSongs() {
                     element.time_played = parsed[parsed.length - 1];
                 });
             }
-            console.log(data);
             setInput('');
             setTopSongs(data);
             setFilterResults(data);

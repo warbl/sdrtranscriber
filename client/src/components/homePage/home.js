@@ -24,7 +24,6 @@ export default function Home() {
                     element.time_played = parsed[parsed.length - 1];
                 });
             }
-            console.log(data);
             setLastSong(data);
         }).catch((error) => {
             console.log(error);

@@ -5,7 +5,6 @@ import { formatDate } from '../helpers/formatDate';
 
 export default function NewsModal({ handleClick, newsContent }) {
     const [newsGroups, setNewsGroups] = useState();
-    const [showContent, setShowContent] = useState(false);
 
     useEffect(() => {
         getNewsSections();
@@ -18,12 +17,11 @@ export default function NewsModal({ handleClick, newsContent }) {
             for (var index = 0; index < newsContent.length; index += 5) {
                 groups.push(newsContent.slice(index, index + 5));
             }
-            console.log(groups);
             setNewsGroups(groups);
         }
 
     }
-
+    
     const toggleContent = (index) => {
         const section = document.getElementById('popup-news-content-' + index);
         const button = document.getElementById('popup-news-button-' + index);
@@ -36,7 +34,6 @@ export default function NewsModal({ handleClick, newsContent }) {
         }
     }
 
-
     return (
         <div className="popup">
             <h1 className="heading">All News</h1>
@@ -44,7 +41,7 @@ export default function NewsModal({ handleClick, newsContent }) {
                 <button className="close" onClick={handleClick}>Close</button>
                 {newsGroups && newsGroups.map((element, index) => {
                     return (
-                    <div className="popup-news-container">
+                    <div className="popup-news-container" key={"popup-news-content-"+index}>
                         <div className="popup-header">
                         <h3 className="popup-time">{formatDate(element[0].time_of_broadcast)}</h3>
                         <button className="popup-button" onClick={() => toggleContent(index)} id={"popup-news-button-"+index}>Read News</button>
