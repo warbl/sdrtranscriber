@@ -21,7 +21,7 @@ export default function NewsModal({ handleClick, newsContent }) {
         }
 
     }
-    
+
     const toggleContent = (index) => {
         const section = document.getElementById('popup-news-content-' + index);
         const button = document.getElementById('popup-news-button-' + index);
@@ -46,7 +46,7 @@ export default function NewsModal({ handleClick, newsContent }) {
                         <h3 className="popup-time">{formatDate(element[0].time_of_broadcast)}</h3>
                         <button className="popup-button" onClick={() => toggleContent(index)} id={"popup-news-button-"+index}>Read News</button>
                         </div>
-                        <div className="popup-news-content" id={"popup-news-content-"+index} style={{display: "none"}}>
+                        <div className="popup-news-content" id={"popup-news-content-"+index} style={{display: "none"}} data-testid={"popup-news-content-"+index}>
                         {element.map((val) => {
                             return (
                                 <span key={val.time_of_broadcast}>
