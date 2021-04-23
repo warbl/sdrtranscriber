@@ -15,7 +15,7 @@ export default function Home() {
     }, []);
 
     const fetchLatestSong = () => {
-        Axios.get("https://sdrtranscriber.tk:3002/api/getLatestSong").then((response) => {
+        Axios.get("http://localhost:3001/api/getLatestSong").then((response) => {
             const data = response.data;
             if (data.length > 0) {
                 data.forEach(element => {
@@ -33,7 +33,7 @@ export default function Home() {
 
     return (
         <div className="group">
-            {lastSong && <div className="banner">
+            {lastSong && <div className="banner" data-testid="banner">
                 {lastSong[0].song_name} by {lastSong[0].song_artist} started playing on station {lastSong[0].station_freq} at {lastSong[0].time_played}
             </div>}
             <div className="home">
