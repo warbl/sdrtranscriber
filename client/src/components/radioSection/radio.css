@@ -144,6 +144,10 @@
     display: none;
 }
 
+.radio .listening-to-radio{
+    margin-bottom: 20px;
+}
+
 
 @media only screen and (max-width: 750px) {
     .radio .sidePanel {

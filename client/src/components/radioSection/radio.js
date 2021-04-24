@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import PCMPlayer from "../helpers/pcmPlayer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSpinner, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner, faBars, faBroadcastTower } from "@fortawesome/free-solid-svg-icons";
 import Axios from 'axios';
 import './radio.css';
 
@@ -99,6 +99,7 @@ export default function Radio() {
         const req_station = { station: "F " + stationFreq };
         Axios.post("http://localhost:3001/api/connectToStation", req_station).then((response) => {
             console.log(response);
+            readyToPlay();
         }).catch((error) => {
             console.log(error);
         });
@@ -109,8 +110,6 @@ export default function Radio() {
     }
 
     const stopAudio = () => {
-        const audio = document.getElementById("audio");
-        audio.pause();
         setStation(null);
         setLivestream(false);
         document.getElementById("livestream-container").style.display = "none";
@@ -140,13 +139,8 @@ export default function Radio() {
                             <FontAwesomeIcon icon={faSpinner} id="loading-indicator" className="loading-inidicator fa-pulse fa-4x" />
                         </div>
                         <div className="livestream container" id="livestream-container" style={{ display: 'none' }}>
-                            <h1 className="livestream-title">Listening to {station.station_name} - {station.station_freq}</h1>
-                            <div className="playback">
-                                <audio controls autoPlay id="audio" onCanPlay={readyToPlay}>
-                                    <source src="https://sdrstream.tk:8091/remote3" type="audio/mpeg" />
-                                Your browser does not support the audio element.
-                            </audio>
-                            </div>
+                            <h1 className="livestream-title">Now Listening to {station.station_name} - {station.station_freq}</h1>
+                            <FontAwesomeIcon icon={faBroadcastTower} id="listening-to-radio" className="listening-to-radio fa-pulse fa-4x" /><br/>
                             <button className="disconnect-button" onClick={() => stopAudio()}>Disconnect</button>
                         </div>
                     </div>}
