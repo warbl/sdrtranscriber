@@ -3,6 +3,9 @@ import axios from 'axios';
 import Radio from './radio';
 
 jest.mock('axios');
+jest.mock('@fortawesome/react-native-fontawesome', () => ({
+    FontAwesomeIcon: ''
+}))
 
 test('renders radio page content', async () => {
     axios.get.mockResolvedValue({

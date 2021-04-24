@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import PCMPlayer from "../helpers/pcmPlayer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSpinner, faBars } from "@fortawesome/free-solid-svg-icons";
 import Axios from 'axios';
@@ -16,6 +17,26 @@ export default function Radio() {
 
     useEffect(() => {
         fetchStations();
+
+        const button = document.getElementById("connect-button");
+        if (button) {
+            button.addEventListener('click', function () {
+                var socketURL = 'ws://173.49.251.28/sound';
+                var player = new PCMPlayer({
+                    encoding: '16bitInt',
+                    channels: 2,
+                    sampleRate: 48000,
+                    flushingTime: 100
+                });
+                var ws = new WebSocket(socketURL);
+                player.volume = 1;
+                ws.onmessage = function (event) {
+                    var data = new Uint16Array(JSON.parse(event.data));
+
+                    player.feed(data);
+                }
+            });
+        }
         if (window.innerWidth <= 750) {
             let mobileBtn = document.getElementById('menuBtn');
             mobileBtn.style.display = "block";
@@ -40,7 +61,7 @@ export default function Radio() {
     };
 
     const fetchStations = async () => {
-        Axios.get("https://sdrtranscriber.tk:3002/api/getStations").then((response) => {
+        Axios.get("http://localhost:3001/api/getStations").then((response) => {
             console.log(response.data);
             setStationList(response.data);
         }).catch((error) => {
@@ -76,9 +97,8 @@ export default function Radio() {
         const tempStation = station.station_freq.toString();
         const stationFreq = tempStation.replace('.', '') + '00000';
         const req_station = { station: "F " + stationFreq };
-        Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
+        Axios.post("http://localhost:3001/api/connectToStation", req_station).then((response) => {
             console.log(response);
-            readyToPlay();
         }).catch((error) => {
             console.log(error);
         });
@@ -91,7 +111,6 @@ export default function Radio() {
     const stopAudio = () => {
         const audio = document.getElementById("audio");
         audio.pause();
-        audio.currentTime = 0;
         setStation(null);
         setLivestream(false);
         document.getElementById("livestream-container").style.display = "none";
@@ -112,7 +131,7 @@ export default function Radio() {
                     <div className="select-station">
                         <h3>Listen to station: {station.station_name} - {station.station_freq}?</h3>
                         <button onClick={() => removeStation()}>Cancel</button>
-                        <button onClick={() => tuneToStation()}>Connect</button>
+                        <button id="connect-button" onClick={() => tuneToStation()}>Connect</button>
                     </div>}
                 {station && livestream &&
                     <div className="play-song-container">
@@ -123,7 +142,7 @@ export default function Radio() {
                         <div className="livestream container" id="livestream-container" style={{ display: 'none' }}>
                             <h1 className="livestream-title">Listening to {station.station_name} - {station.station_freq}</h1>
                             <div className="playback">
-                                <audio controls autoPlay id="audio">
+                                <audio controls autoPlay id="audio" onCanPlay={readyToPlay}>
                                     <source src="https://sdrstream.tk:8091/remote3" type="audio/mpeg" />
                                 Your browser does not support the audio element.
                             </audio>
@@ -140,7 +159,7 @@ export default function Radio() {
                         {stationList && stationList.map((val, index) => {
                             return (
                                 <div className="station" key={val.station_id} onClick={() => clickStation(val)} data-testid={'station_' + index}>
-                                    <img className="station-logo" alt={val.station_name} src={val.music_img} data-testid={'station_img_' + index}/>
+                                    <img className="station-logo" alt={val.station_name} src={val.music_img} data-testid={'station_img_' + index} />
                                     <span className="station-name" data-testid={'station_info_' + index}>{val.station_name}-{val.station_freq}</span>
                                 </div>
                             )
