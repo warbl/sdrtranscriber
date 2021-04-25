@@ -17,7 +17,6 @@ export default function Radio() {
 
     useEffect(() => {
         fetchStations();
-
         const button = document.getElementById("connect-button");
         if (button) {
             button.addEventListener('click', function () {
@@ -62,7 +61,6 @@ export default function Radio() {
 
     const fetchStations = async () => {
         Axios.get("http://localhost:3001/api/getStations").then((response) => {
-            console.log(response.data);
             setStationList(response.data);
         }).catch((error) => {
             console.log(error);
