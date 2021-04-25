@@ -19,7 +19,7 @@ export default function NewsSection() {
     }, []);
 
     const fetchNewsContent = () => {
-        Axios.get("http://localhost:3001/api/getNewsContent").then((response) => {
+        Axios.get("https://sdrtranscriber.tk:3002/api/getNewsContent").then((response) => {
             setNewsContent(response.data);
             setRecentNewsContent(response.data.slice(0, 5));
             const data = response.data;

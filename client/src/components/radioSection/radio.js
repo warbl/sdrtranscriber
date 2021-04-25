@@ -45,7 +45,7 @@ export default function Radio() {
     };
 
     const fetchStations = async () => {
-        Axios.get("http://localhost:3001/api/getStations").then((response) => {
+        Axios.get("https://sdrtranscriber.tk:3002/api/getStations").then((response) => {
             console.log(response.data);
             setStationList(response.data);
         }).catch((error) => {
@@ -84,7 +84,7 @@ export default function Radio() {
         const tempStation = station.station_freq.toString();
         const stationFreq = tempStation.replace('.', '') + '00000';
         const req_station = { station: "F " + stationFreq };
-        Axios.post("http://localhost:3001/api/connectToStation", req_station).then((response) => {
+        Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
             console.log(response);
             playAudio();
         }).catch((error) => {
@@ -142,7 +142,7 @@ export default function Radio() {
             const tempStation = stationList[i].station_freq.toString();
             const stationFreq = tempStation.replace('.', '') + '00000';
             const req_station = { station: "F " + stationFreq };
-            Axios.post("http://localhost:3001/api/connectToStation", req_station).then((response) => {
+            Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
                 console.log(response);
             }).catch((error) => {
                 console.log(error);
