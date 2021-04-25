@@ -36,4 +36,7 @@ test('renders news content', async () => {
     expect(newsContent).toBeInTheDocument();
     expect(newsContent).toHaveTextContent("This is me testing the news section of the website.");
 
+    //checking news livestream url
+    const newsLiveStream = screen.getByTestId("news-livestream"); 
+    expect(newsLiveStream).toBeInTheDocument();
 });

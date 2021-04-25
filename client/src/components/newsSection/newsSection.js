@@ -46,7 +46,7 @@ export default function NewsSection() {
             <button className="past-news-button" onClick={handleClick} style={{display: showNewsModal ? 'none' : 'block'}}>All News</button>
             <div className="playback">
                 <audio controls>
-                    <source src="https://sdrstream.tk:8091/remote2" type="audio/mpeg" />
+                    <source src="https://sdrstream.tk:8091/remote2" type="audio/mpeg" data-testid="news-livestream"/>
                     Your browser does not support the audio element.
                 </audio>
             </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import PCMPlayer from "pcm-player";
+import PCMPlayer from "../helpers/pcmPlayer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSpinner, faBars, faBroadcastTower } from "@fortawesome/free-solid-svg-icons";
 import Axios from 'axios';
@@ -14,28 +14,13 @@ export default function Radio() {
     const sidebarRef = useRef(null);
     const sidebarNavRef = useRef(null);
     const [hideSidebar, setHideSidebar] = useState(false);
+    const [scanning, setScanning] = useState(false);
+    const [stationReady, setStationReady] = useState(false);
+    const [stopScanning, setStopScanning] = useState(false);
+    let scanningInterval = null;
 
     useEffect(() => {
         fetchStations();
-        const button = document.getElementById("connect-button");
-        if (button) {
-            button.addEventListener('click', function () {
-                var socketURL = 'ws://173.49.251.28/sound';
-                var player = new PCMPlayer({
-                    encoding: '16bitInt',
-                    channels: 2,
-                    sampleRate: 48000,
-                    flushingTime: 100
-                });
-                var ws = new WebSocket(socketURL);
-                player.volume = 1;
-                ws.onmessage = function (event) {
-                    var data = new Uint16Array(JSON.parse(event.data));
-
-                    player.feed(data);
-                }
-            });
-        }
         if (window.innerWidth <= 750) {
             let mobileBtn = document.getElementById('menuBtn');
             mobileBtn.style.display = "block";
@@ -68,14 +53,6 @@ export default function Radio() {
         });
     };
 
-    const clickStation = (val) => {
-        if (livestream) {
-            stopAudio();
-        }
-        setStation(val);
-        toggleSidebar();
-    }
-
     const toggleSidebar = () => {
         let mobileBtn = document.getElementById('menuBtn');
         if (window.innerWidth > 750) return;
@@ -90,6 +67,17 @@ export default function Radio() {
         }
     };
 
+    const clickStation = (val) => {
+        if (livestream || scanning) {
+            stopAudio();
+        }
+        setStation(val);
+        toggleSidebar();
+    }
+
+    const removeStation = () => {
+        setStation(null);
+    }
 
     const tuneToStation = () => {
         setLivestream(true);
@@ -98,50 +86,111 @@ export default function Radio() {
         const req_station = { station: "F " + stationFreq };
         Axios.post("http://localhost:3001/api/connectToStation", req_station).then((response) => {
             console.log(response);
-            readyToPlay();
+            playAudio();
         }).catch((error) => {
             console.log(error);
         });
     }
 
-    const removeStation = () => {
-        setStation(null);
+    const playAudio = () => {
+        var socketURL = 'ws://173.49.251.28/sound';
+        var player = new PCMPlayer({
+            encoding: '16bitInt',
+            channels: 2,
+            sampleRate: 48000,
+            flushingTime: 100
+        });
+        var ws = new WebSocket(socketURL);
+        player.volume = 1;
+        ws.onmessage = function (event) {
+            var data = new Uint16Array(JSON.parse(event.data));
+
+            player.feed(data);
+        }
     }
 
     const stopAudio = () => {
-        setStation(null);
         setLivestream(false);
-        document.getElementById("livestream-container").style.display = "none";
-        document.getElementById("loading-container").style.display = "block";
+        //stop sound
+        if (scanning) {
+            setLivestream(false);
+            setScanning(false);
+        } else {
+            setStation(null);
+            setStationReady(false);
+        }
     }
 
-    const readyToPlay = (e) => {
-        document.getElementById("livestream-container").style.display = "block";
-        document.getElementById("loading-container").style.display = "none";
+    const startScanning = () => {
+        setLivestream(true);
+        setScanning(true);
+        playAudio();
+        changeStation(0);
+        let i = 1;
+        scanningInterval = setInterval(() => {
+            changeStation(i); 
+            if(i === stationList.length -1){
+                i = 0;
+            } else {
+                i = i + 1;
+            }
+        }, 7000);
+    }
 
+    const changeStation = (i) => {
+        if (!stopScanning) {
+            const tempStation = stationList[i].station_freq.toString();
+            const stationFreq = tempStation.replace('.', '') + '00000';
+            const req_station = { station: "F " + stationFreq };
+            Axios.post("http://localhost:3001/api/connectToStation", req_station).then((response) => {
+                console.log(response);
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
+    }
+
+    const stayOnStation = () => {
+        clearInterval(scanningInterval);
+        setStopScanning(true);
+        document.getElementById("stay-button").style.display = "none";
+        document.getElementById("scanning-header").innerHTML = "Playing Station";
+        document.getElementById("scanning-radio").classList.remove("fa-pulse");
     }
 
     return (
         <div className="radio">
             <div className="find-song-container">
-                {!station && <h1 className="title">Choose a Station</h1>}
+                {!(station || scanning) &&
+                    <div className="mobile-header">
+                        <h1 className="title">Choose a Station</h1>
+                        <h1 className="or">Or</h1>
+                        <button className="scan-button" id="scan-button" onClick={() => startScanning()}>Scan Stations</button>
+                    </div>
+                }
                 {station && !livestream &&
                     <div className="select-station">
                         <h3>Listen to station: {station.station_name} - {station.station_freq}?</h3>
                         <button onClick={() => removeStation()}>Cancel</button>
                         <button id="connect-button" onClick={() => tuneToStation()}>Connect</button>
                     </div>}
-                {station && livestream &&
-                    <div className="play-song-container">
-                        <div className="loading-container" id="loading-container">
-                            <p className="loading-text">Connecting to Station...</p>
-                            <FontAwesomeIcon icon={faSpinner} id="loading-indicator" className="loading-inidicator fa-pulse fa-4x" />
-                        </div>
-                        <div className="livestream container" id="livestream-container" style={{ display: 'none' }}>
-                            <h1 className="livestream-title">Now Listening to {station.station_name} - {station.station_freq}</h1>
-                            <FontAwesomeIcon icon={faBroadcastTower} id="listening-to-radio" className="listening-to-radio fa-pulse fa-4x" /><br/>
-                            <button className="disconnect-button" onClick={() => stopAudio()}>Disconnect</button>
-                        </div>
+                {station && livestream && !stationReady &&
+                    <div className="loading-container" id="loading-container">
+                        <p className="loading-text">Connecting to Station...</p>
+                        <FontAwesomeIcon icon={faSpinner} id="loading-indicator" className="loading-inidicator fa-pulse fa-4x" />
+                    </div>}
+                {station && livestream && stationReady &&
+                    <div className="livestream-container" id="livestream-container">
+                        <h1 className="livestream-title">Now Listening to {station.station_name} - {station.station_freq}</h1>
+                        <FontAwesomeIcon icon={faBroadcastTower} id="listening-to-radio" className="listening-to-radio fa-4x" /><br />
+                        <button className="disconnect-button" onClick={() => stopAudio()}>Disconnect</button>
+                    </div>}
+                {scanning && livestream &&
+                    <div className="scanning-container" id="scanning-container">
+                        <p className="loading-text" id="scanning-header">Scanning Stations...</p>
+                        <FontAwesomeIcon icon={faBroadcastTower} id="scanning-radio" className="listening-to-radio fa-pulse fa-4x" /><br />
+                        <button className="stay-button" id="stay-button" onClick={() => stayOnStation()}>Stay</button>
+                        <button className="disconnect-button" onClick={() => stopAudio()}>Disconnect</button>
                     </div>}
             </div>
             <FontAwesomeIcon onClick={toggleSidebar} id="menuBtn" icon={faBars} />
