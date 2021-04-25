@@ -15,7 +15,7 @@ export default function Home() {
     }, []);
 
     const fetchLatestSong = () => {
-        Axios.get("http://localhost:3001/api/getLatestSong").then((response) => {
+        Axios.get("https://sdrtranscriber.tk:3002/api/getLatestSong").then((response) => {
             const data = response.data;
             if (data.length > 0) {
                 data.forEach(element => {
