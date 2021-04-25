@@ -31,6 +31,7 @@ xtest('renders radio page content', async () => {
     const img0 =  screen.getByTestId("station_img_0");
     expect(station0).toBeInTheDocument();
     expect(info0).toBeInTheDocument();
+    expect(info0).toHaveTextContent("station name 1-station 1");
     expect(img0).toBeInTheDocument();
 
     //checking if second station renders
@@ -39,6 +40,7 @@ xtest('renders radio page content', async () => {
     const img1 =  screen.getByTestId("station_img_1");
     expect(station1).toBeInTheDocument();
     expect(info1).toBeInTheDocument();
+    expect(info1).toHaveTextContent("station name 2-station 2");
     expect(img1).toBeInTheDocument();
 
     //checking if third station renders
@@ -47,6 +49,7 @@ xtest('renders radio page content', async () => {
     const img2 =  screen.getByTestId("station_img_2");
     expect(station2).toBeInTheDocument();
     expect(info2).toBeInTheDocument();
+    expect(info2).toHaveTextContent("station name 3-station 3");
     expect(img2).toBeInTheDocument();
 
 });

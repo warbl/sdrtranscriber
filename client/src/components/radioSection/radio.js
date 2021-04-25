@@ -61,6 +61,7 @@ export default function Radio() {
 
     const fetchStations = async () => {
         Axios.get("http://localhost:3001/api/getStations").then((response) => {
+            console.log(response.data);
             setStationList(response.data);
         }).catch((error) => {
             console.log(error);
