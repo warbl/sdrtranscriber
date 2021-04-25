@@ -17,7 +17,7 @@ export default function TopSongs() {
     }, []);
 
     const fetchTopSongs = () => {
-        Axios.get("https://sdrtranscriber.tk:3002/api/getSongsByPopularity").then((response) => {
+        Axios.get("http://localhost:3001/api/getSongsByPopularity").then((response) => {
             const data = response.data;
             if (data.length > 0) {
                 data.forEach(element => {
@@ -26,7 +26,6 @@ export default function TopSongs() {
                     element.time_played = parsed[parsed.length - 1];
                 });
             }
-            console.log(data);
             setInput('');
             setTopSongs(data);
             setFilterResults(data);
@@ -54,18 +53,18 @@ export default function TopSongs() {
             <div className="top-songs-container">
                 {filterResults && filterResults.map((val, index) => {
                     return (
-                        <div className="song" key={val.song_id}>
+                        <div className="song" key={val.song_id} data-testid={'song_id_' + index}>
                             <div className="song-info">
                                 <div className="song-content">
-                                    <h1>{index + 1}. {val.song_name}</h1>
-                                    <h3>Artist: {val.song_artist}</h3>
-                                    <h3>Played on: {val.station_freq}</h3>
+                                    <h1 data-testid={'song_name_' + index}>{index + 1}. {val.song_name}</h1>
+                                    <h3 data-testid={'song_artist_' + index}>Artist: {val.song_artist}</h3>
+                                    <h3 data-testid={'station_freq_' + index}>Played on: {val.station_freq}</h3>
                                 </div>
-                                <div className="album-image">
+                                <div className="album-image" data-testid={'album_cover_' + index}>
                                     <img src={val.album_cover} alt="album_image" />
                                 </div>
                             </div>
-                            <div className="playback">
+                            <div className="playback" data-testid={'yt_link_' + index}>
                                 <iframe title={val.song_name} src={[val.yt_link.slice(0, 24), '/embed', val.yt_link.slice(24)].join('')} width="300" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                             </div>
                         </div>

@@ -111,7 +111,7 @@ app.post("/api/connectToStation", (req, res) => {
 // server needs to identify whether client is using HTTP or HTTPS and correct the API endpoint 
 // API endpoint must use domain name sdrtranscriber.tk or SSL will break
 // example "https://sdrtranscriber.tk:3002/api/getLatestSong" vs "http://sdrtranscriber.tk:3001/api/getLatestSong"
-app.listen(3001, '0.0.0.0', () => {
+app.listen(3001, () => {
     console.log("SERVER IS RUNNING ON PORT 3001!");
 })
 

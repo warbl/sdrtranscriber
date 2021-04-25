@@ -45,7 +45,7 @@ export default function SidePanel() {
     };
 
     const fetchRadioStations = async () => {
-        Axios.get("https://sdrtranscriber.tk:3002/api/getStations").then((response) => {
+        Axios.get("http://localhost:3001/api/getStations").then((response) => {
             console.log(response.data);
             setStationList(response.data);
             setFilterResults(response.data);
@@ -56,8 +56,7 @@ export default function SidePanel() {
     };
 
     const fetchStationGenres = async () => {
-        Axios.get("https://sdrtranscriber.tk:3002/api/getStationGenres").then((response) => {
-            console.log(response.data);
+        Axios.get("http://localhost:3001/api/getStationGenres").then((response) => {
             if (response.data.length > 0) {
                 let allGenres = [];
                 response.data.forEach(element => {
