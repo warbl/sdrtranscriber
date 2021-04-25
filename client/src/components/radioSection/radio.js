@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import PCMPlayer from "../helpers/pcmPlayer";
+import PCMPlayer from "pcm-player";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSpinner, faBars, faBroadcastTower } from "@fortawesome/free-solid-svg-icons";
 import Axios from 'axios';
