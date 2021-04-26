@@ -3,7 +3,7 @@ import Music from './components/musicSection/musicSection'
 import NavBar from './components/navBar/navbar'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import News from './components/newsSection/newsSection';
-import Radio from './components/radioSection/radio';
+import Radio from './components/radioSection/radioplayer';
 import TopSongs from './components/topSongs/topSongs';
 
 function App() {
