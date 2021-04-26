@@ -19,7 +19,7 @@ export default function Radio() {
     const [hideSidebar, setHideSidebar] = useState(false);
     const [scanning, setScanning] = useState(false);
     const [stationReady, setStationReady] = useState(false);
-    const [startScanning, setStartScanning] = useState(false);
+    const [scanCycle, setScanCycle] = useState(false);
 
     const scanClosure = () => {
 
@@ -151,7 +151,7 @@ export default function Radio() {
     const startScanning = () => {
         setLivestream(true);
         setScanning(true);
-        setStartScanning(false);
+        setScanCycle(true);
         console.log("changing to station " + stationList[0].station_freq);
         changeStation(0);
         playAudio();
@@ -159,7 +159,7 @@ export default function Radio() {
     }
 
     const changeStation = (i) => {
-        if (!startScanning) {
+        if (scanCycle) {
             const tempStation = stationList[i].station_freq.toString();
             const stationFreq = tempStation.replace('.', '') + '00000';
             const req_station = { station: "F " + stationFreq };
@@ -174,7 +174,7 @@ export default function Radio() {
 
     const stayOnStation = () => {
         scanningCycle.stop();
-        setStartScanning(false);
+        setScanCycle(false);
         document.getElementById("stay-button").style.display = "none";
         document.getElementById("scanning-header").innerHTML = "Now Listening to " + stationList[i].station_name + " - " + stationList[i].station_freq;
         document.getElementById("scanning-radio").classList.remove("fa-pulse");
