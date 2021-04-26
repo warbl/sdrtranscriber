@@ -26,6 +26,7 @@ export default function Radio() {
             start() {
                 i = 1;
                 scanningInterval = setInterval(() => {
+                    console.log("changing to station " + stationList[i].station_freq);
                     changeStation(i);
                     if (i === stationList.length - 1) {
                         i = 0;
@@ -149,6 +150,7 @@ export default function Radio() {
     const startScanning = () => {
         setLivestream(true);
         setScanning(true);
+        console.log("changing to station " + stationList[0].station_freq);
         changeStation(0);
         playAudio();
         scanningCycle.start();
