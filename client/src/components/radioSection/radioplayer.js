@@ -8,6 +8,7 @@ import './radio.css';
 let scanningInterval = null;
 var player = null;
 var ws = null;
+var i = 0;
 
 export default function Radio() {
     const [stationList, setStationList] = useState();
@@ -116,7 +117,6 @@ export default function Radio() {
         setLivestream(false);
 		ws.close();
 		player.destroy();
-        //stop sound
         if (scanning) {
             setLivestream(false);
             setScanning(false);
@@ -130,8 +130,8 @@ export default function Radio() {
         setLivestream(true);
         setScanning(true);
         playAudio();
-        changeStation(0);
-        let i = 1;
+        changeStation(i);
+        i = 1;
         scanningInterval = setInterval(() => {
             changeStation(i); 
             if(i === stationList.length -1){
@@ -149,6 +149,7 @@ export default function Radio() {
             const req_station = { station: "F " + stationFreq };
             Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
                 console.log(response);
+                document.getElementById("scanning-header").innerHTML = "Scanning Station " + stationList[i].station_name + "-" + stationList[i].station_freq;
             }).catch((error) => {
                 console.log(error);
             });
@@ -159,7 +160,7 @@ export default function Radio() {
         clearInterval(scanningInterval);
         setStopScanning(true);
         document.getElementById("stay-button").style.display = "none";
-        document.getElementById("scanning-header").innerHTML = "Playing Station";
+        document.getElementById("scanning-header").innerHTML = "Playing Station " + stationList[i].station_name + "-" + stationList[i].station_freq;;
         document.getElementById("scanning-radio").classList.remove("fa-pulse");
     }
 
