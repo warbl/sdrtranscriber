@@ -157,15 +157,17 @@ export default function Radio() {
     }
 
     const changeStation = (i) => {
-        const tempStation = stationList[i].station_freq.toString();
-        const stationFreq = tempStation.replace('.', '') + '00000';
-        const req_station = { station: "F " + stationFreq };
-        Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
-            console.log(response);
-            document.getElementById("scanning-header").innerHTML = "Scanning Station " + stationList[i].station_name + " - " + stationList[i].station_freq;
-        }).catch((error) => {
-            console.log(error);
-        });
+        if (!stopScanning) {
+            const tempStation = stationList[i].station_freq.toString();
+            const stationFreq = tempStation.replace('.', '') + '00000';
+            const req_station = { station: "F " + stationFreq };
+            Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
+                console.log(response);
+                document.getElementById("scanning-header").innerHTML = "Scanning Station " + stationList[i].station_name + " - " + stationList[i].station_freq;
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
     }
 
     const stayOnStation = () => {
