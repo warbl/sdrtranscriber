@@ -95,7 +95,7 @@ export default function Radio() {
     }
 
     const playAudio = () => {
-        var socketURL = 'ws://173.49.251.28/sound';
+        var socketURL = 'wss://sdrstream.tk:5000/sound';
         player = new PCMPlayer({
             encoding: '16bitInt',
             channels: 2,
