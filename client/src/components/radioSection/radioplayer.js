@@ -5,7 +5,7 @@ import { faSpinner, faBars, faBroadcastTower } from "@fortawesome/free-solid-svg
 import Axios from 'axios';
 import './radio.css';
 
-let scanningInterval = null;
+var scanningInterval = null;
 var player = null;
 var ws = null;
 var i = 0;
