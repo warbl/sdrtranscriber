@@ -179,7 +179,6 @@ export default function Radio() {
 
     return (
         <div className="radio">
-            <button onClick={() => stayOnStation()}>stop</button>
             <div className="find-song-container">
                 {!(station || scanning) &&
                     <div className="mobile-header">
