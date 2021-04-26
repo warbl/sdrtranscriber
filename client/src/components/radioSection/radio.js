@@ -89,6 +89,7 @@ export default function Radio() {
         Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
             console.log(response);
             playAudio();
+            setStationReady(true);
         }).catch((error) => {
             console.log(error);
         });
@@ -98,9 +99,9 @@ export default function Radio() {
         var socketURL = 'wss://sdrstream.tk:5000/sound';
         player = new PCMPlayer({
             encoding: '16bitInt',
-            channels: 2,
+            channels: 1,
             sampleRate: 48000,
-            flushingTime: 100
+            flushingTime: 200
         });
         ws = new WebSocket(socketURL);
         player.volume = 1;
