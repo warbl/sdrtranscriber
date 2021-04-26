@@ -22,7 +22,7 @@ export default function NewsSection() {
         Axios.get("https://sdrtranscriber.tk:3002/api/getNewsContent").then((response) => {
             setNewsContent(response.data);
             const data = response.data;
-            setRecentNewsContent(response.data.slice(data.length  - 6, data.length - 1));
+            setRecentNewsContent(data.slice(Math.max(data.length - 5, 0)));
             const last_time = formatDate(data[data.length - 1].time_of_broadcast);
             setLastUpdated(last_time);
         }).catch((error) => {
