@@ -5,10 +5,9 @@ import { faSpinner, faBars, faBroadcastTower } from "@fortawesome/free-solid-svg
 import Axios from 'axios';
 import './radio.css';
 
-var scanningInterval = null;
 var player = null;
 var ws = null;
-var i = 0;
+var scanningInterval = null;
 
 export default function Radio() {
     const [stationList, setStationList] = useState();
@@ -19,30 +18,8 @@ export default function Radio() {
     const [hideSidebar, setHideSidebar] = useState(false);
     const [scanning, setScanning] = useState(false);
     const [stationReady, setStationReady] = useState(false);
-    const [scanCycle, setScanCycle] = useState(false);
+    const [stopScanning, setStopScanning] = useState(false);
 
-    const scanClosure = () => {
-
-        return {
-            start() {
-                i = 1;
-                scanningInterval = setInterval(() => {
-                    console.log("changing to station " + stationList[i].station_freq);
-                    changeStation(i);
-                    if (i === stationList.length - 1) {
-                        i = 0;
-                    } else {
-                        i = i + 1;
-                    }
-                }, 7000);
-            },
-            stop() {
-                clearInterval(scanningInterval);
-            }
-        }
-    };
-
-    var scanningCycle = scanClosure();
 
     useEffect(() => {
         fetchStations();
@@ -112,19 +89,18 @@ export default function Radio() {
         Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
             console.log(response);
             playAudio();
-            setStationReady(true);
         }).catch((error) => {
             console.log(error);
         });
     }
 
     const playAudio = () => {
-        var socketURL = 'wss://sdrstream.tk:5000/sound';
+        var socketURL = 'ws://173.49.251.28/sound';
         player = new PCMPlayer({
             encoding: '16bitInt',
-            channels: 1,
+            channels: 2,
             sampleRate: 48000,
-            flushingTime: 200
+            flushingTime: 100
         });
         ws = new WebSocket(socketURL);
         player.volume = 1;
@@ -137,8 +113,8 @@ export default function Radio() {
 
     const stopAudio = () => {
         setLivestream(false);
-        ws.close();
         player.destroy();
+        ws.close();
         if (scanning) {
             setLivestream(false);
             setScanning(false);
@@ -151,21 +127,27 @@ export default function Radio() {
     const startScanning = () => {
         setLivestream(true);
         setScanning(true);
-        setScanCycle(true);
-        console.log("changing to station " + stationList[0].station_freq);
-        changeStation(0);
+        setStopScanning(false);
         playAudio();
-        scanningCycle.start();
+        changeStation(0);
+        let i = 1;
+        scanningInterval = setInterval(() => {
+            changeStation(i); 
+            if(i === stationList.length -1){
+                i = 0;
+            } else {
+                i = i + 1;
+            }
+        }, 7000);
     }
 
     const changeStation = (i) => {
-        if (scanCycle) {
+        if (!stopScanning) {
             const tempStation = stationList[i].station_freq.toString();
             const stationFreq = tempStation.replace('.', '') + '00000';
             const req_station = { station: "F " + stationFreq };
             Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
                 console.log(response);
-                document.getElementById("scanning-header").innerHTML = "Scanning Station " + stationList[i].station_name + " - " + stationList[i].station_freq;
             }).catch((error) => {
                 console.log(error);
             });
@@ -173,10 +155,10 @@ export default function Radio() {
     }
 
     const stayOnStation = () => {
-        scanningCycle.stop();
-        setScanCycle(false);
+        clearInterval(scanningInterval);
+        setStopScanning(true);
         document.getElementById("stay-button").style.display = "none";
-        document.getElementById("scanning-header").innerHTML = "Now Listening to " + stationList[i].station_name + " - " + stationList[i].station_freq;
+        document.getElementById("scanning-header").innerHTML = "Playing Station";
         document.getElementById("scanning-radio").classList.remove("fa-pulse");
     }
 
