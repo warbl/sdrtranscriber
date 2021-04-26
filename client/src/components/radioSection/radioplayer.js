@@ -5,7 +5,9 @@ import { faSpinner, faBars, faBroadcastTower } from "@fortawesome/free-solid-svg
 import Axios from 'axios';
 import './radio.css';
 
-
+let scanningInterval = null;
+var player = null;
+var ws = null;
 
 export default function Radio() {
     const [stationList, setStationList] = useState();
@@ -17,7 +19,7 @@ export default function Radio() {
     const [scanning, setScanning] = useState(false);
     const [stationReady, setStationReady] = useState(false);
     const [stopScanning, setStopScanning] = useState(false);
-    let scanningInterval = null;
+
 
     useEffect(() => {
         fetchStations();
@@ -87,20 +89,21 @@ export default function Radio() {
         Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
             console.log(response);
             playAudio();
+            setStationReady(true);
         }).catch((error) => {
             console.log(error);
         });
     }
 
     const playAudio = () => {
-        var socketURL = 'ws://173.49.251.28/sound';
-        var player = new PCMPlayer({
+        var socketURL = 'wss://sdrstream.tk:5000/sound';
+        player = new PCMPlayer({
             encoding: '16bitInt',
-            channels: 2,
+            channels: 1,
             sampleRate: 48000,
-            flushingTime: 100
+            flushingTime: 75
         });
-        var ws = new WebSocket(socketURL);
+        ws = new WebSocket(socketURL);
         player.volume = 1;
         ws.onmessage = function (event) {
             var data = new Uint16Array(JSON.parse(event.data));
@@ -111,6 +114,8 @@ export default function Radio() {
 
     const stopAudio = () => {
         setLivestream(false);
+		ws.close();
+		player.destroy();
         //stop sound
         if (scanning) {
             setLivestream(false);
