@@ -123,7 +123,7 @@ export default function Radio() {
             encoding: '16bitInt',
             channels: 1,
             sampleRate: 48000,
-            flushingTime: 150
+            flushingTime: 200
         });
         ws = new WebSocket(socketURL);
         player.volume = 1;
@@ -157,21 +157,19 @@ export default function Radio() {
     }
 
     const changeStation = (i) => {
-        if (!stopScanning) {
-            const tempStation = stationList[i].station_freq.toString();
-            const stationFreq = tempStation.replace('.', '') + '00000';
-            const req_station = { station: "F " + stationFreq };
-            Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
-                console.log(response);
-                document.getElementById("scanning-header").innerHTML = "Scanning Station " + stationList[i].station_name + " - " + stationList[i].station_freq;
-            }).catch((error) => {
-                console.log(error);
-            });
-        }
+        const tempStation = stationList[i].station_freq.toString();
+        const stationFreq = tempStation.replace('.', '') + '00000';
+        const req_station = { station: "F " + stationFreq };
+        Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
+            console.log(response);
+            document.getElementById("scanning-header").innerHTML = "Scanning Station " + stationList[i].station_name + " - " + stationList[i].station_freq;
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 
     const stayOnStation = () => {
-        scanningCycle.stop(); 
+        scanningCycle.stop();
         setStopScanning(true);
         document.getElementById("stay-button").style.display = "none";
         document.getElementById("scanning-header").innerHTML = "Now Listening to " + stationList[i].station_name + " - " + stationList[i].station_freq;
