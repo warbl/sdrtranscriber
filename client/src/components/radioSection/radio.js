@@ -5,6 +5,7 @@ import { faSpinner, faBars, faBroadcastTower } from "@fortawesome/free-solid-svg
 import Axios from 'axios';
 import './radio.css';
 
+var scanningInterval = null;
 var player = null;
 var ws = null;
 var i = 0;
@@ -18,10 +19,10 @@ export default function Radio() {
     const [hideSidebar, setHideSidebar] = useState(false);
     const [scanning, setScanning] = useState(false);
     const [stationReady, setStationReady] = useState(false);
-    const [stopScanning, setStopScanning] = useState(false);
+    const [startScanning, setStartScanning] = useState(false);
 
     const scanClosure = () => {
-        var scanningInterval = null;
+
         return {
             start() {
                 i = 1;
@@ -150,6 +151,7 @@ export default function Radio() {
     const startScanning = () => {
         setLivestream(true);
         setScanning(true);
+        setStartScanning(false);
         console.log("changing to station " + stationList[0].station_freq);
         changeStation(0);
         playAudio();
@@ -157,7 +159,7 @@ export default function Radio() {
     }
 
     const changeStation = (i) => {
-        if (!stopScanning) {
+        if (!startScanning) {
             const tempStation = stationList[i].station_freq.toString();
             const stationFreq = tempStation.replace('.', '') + '00000';
             const req_station = { station: "F " + stationFreq };
@@ -172,7 +174,7 @@ export default function Radio() {
 
     const stayOnStation = () => {
         scanningCycle.stop();
-        setStopScanning(true);
+        setStartScanning(false);
         document.getElementById("stay-button").style.display = "none";
         document.getElementById("scanning-header").innerHTML = "Now Listening to " + stationList[i].station_name + " - " + stationList[i].station_freq;
         document.getElementById("scanning-radio").classList.remove("fa-pulse");
