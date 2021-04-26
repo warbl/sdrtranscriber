@@ -5,7 +5,6 @@ import { faSpinner, faBars, faBroadcastTower } from "@fortawesome/free-solid-svg
 import Axios from 'axios';
 import './radio.css';
 
-var scanningInterval = null;
 var player = null;
 var ws = null;
 var i = 0;
@@ -22,12 +21,9 @@ export default function Radio() {
     const [stopScanning, setStopScanning] = useState(false);
 
     const scanClosure = () => {
+        var scanningInterval = null;
         return {
             start() {
-                setLivestream(true);
-                setScanning(true);
-                playAudio();
-                changeStation(0);
                 i = 1;
                 scanningInterval = setInterval(() => {
                     changeStation(i);
@@ -44,8 +40,7 @@ export default function Radio() {
         }
     };
 
-    var scanningObj = scanClosure();
-
+    var scanningCycle = scanClosure();
 
     useEffect(() => {
         fetchStations();
@@ -127,7 +122,7 @@ export default function Radio() {
             encoding: '16bitInt',
             channels: 1,
             sampleRate: 48000,
-            flushingTime: 75
+            flushingTime: 150
         });
         ws = new WebSocket(socketURL);
         player.volume = 1;
@@ -152,7 +147,11 @@ export default function Radio() {
     }
 
     const startScanning = () => {
-        scanningObj.start();
+        setLivestream(true);
+        setScanning(true);
+        changeStation(0);
+        playAudio();
+        scanningCycle.start();
     }
 
     const changeStation = (i) => {
@@ -170,7 +169,7 @@ export default function Radio() {
     }
 
     const stayOnStation = () => {
-        scanningObj.stop(); 
+        scanningCycle.stop(); 
         setStopScanning(true);
         document.getElementById("stay-button").style.display = "none";
         document.getElementById("scanning-header").innerHTML = "Now Listening to " + stationList[i].station_name + " - " + stationList[i].station_freq;
