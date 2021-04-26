@@ -21,6 +21,31 @@ export default function Radio() {
     const [stationReady, setStationReady] = useState(false);
     const [stopScanning, setStopScanning] = useState(false);
 
+    const scanClosure = () => {
+        return {
+            start() {
+                setLivestream(true);
+                setScanning(true);
+                playAudio();
+                changeStation(0);
+                i = 1;
+                scanningInterval = setInterval(() => {
+                    changeStation(i);
+                    if (i === stationList.length - 1) {
+                        i = 0;
+                    } else {
+                        i = i + 1;
+                    }
+                }, 7000);
+            },
+            stop() {
+                clearInterval(scanningInterval);
+            }
+        }
+    };
+
+    var scanningObj = scanClosure();
+
 
     useEffect(() => {
         fetchStations();
@@ -115,8 +140,8 @@ export default function Radio() {
 
     const stopAudio = () => {
         setLivestream(false);
-		ws.close();
-		player.destroy();
+        ws.close();
+        player.destroy();
         if (scanning) {
             setLivestream(false);
             setScanning(false);
@@ -127,19 +152,7 @@ export default function Radio() {
     }
 
     const startScanning = () => {
-        setLivestream(true);
-        setScanning(true);
-        playAudio();
-        changeStation(i);
-        i = 1;
-        scanningInterval = setInterval(() => {
-            changeStation(i); 
-            if(i === stationList.length -1){
-                i = 0;
-            } else {
-                i = i + 1;
-            }
-        }, 7000);
+        scanningObj.start();
     }
 
     const changeStation = (i) => {
@@ -157,7 +170,7 @@ export default function Radio() {
     }
 
     const stayOnStation = () => {
-        clearInterval(scanningInterval);
+        scanningObj.stop(); 
         setStopScanning(true);
         document.getElementById("stay-button").style.display = "none";
         document.getElementById("scanning-header").innerHTML = "Playing Station " + stationList[i].station_name + "-" + stationList[i].station_freq;;
@@ -166,6 +179,7 @@ export default function Radio() {
 
     return (
         <div className="radio">
+            <button onClick={() => stayOnStation()}>stop</button>
             <div className="find-song-container">
                 {!(station || scanning) &&
                     <div className="mobile-header">

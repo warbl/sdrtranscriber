@@ -49,7 +49,7 @@ PCMPlayer.prototype.createContext = function() {
 };
 
 PCMPlayer.prototype.isTypedArray = function(data) {
-    return (data.byteLength && data.buffer && data.buffer.constructor == ArrayBuffer);
+    return (data.byteLength && data.buffer && data.buffer.constructor === ArrayBuffer);
 };
 
 PCMPlayer.prototype.feed = function(data) {
