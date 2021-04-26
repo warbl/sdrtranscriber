@@ -161,7 +161,6 @@ export default function Radio() {
         clearInterval(scanningInterval);
         setStopScanning(true);
         document.getElementById("stay-button").style.display = "none";
-        document.getElementById("scanning-header").innerHTML = "Playing Station " + stationList[i].station_freq;
         document.getElementById("scanning-radio").classList.remove("fa-pulse");
     }
 
