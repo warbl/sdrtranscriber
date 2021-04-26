@@ -5,9 +5,10 @@ import { faSpinner, faBars, faBroadcastTower } from "@fortawesome/free-solid-svg
 import Axios from 'axios';
 import './radio.css';
 
-let scanningInterval = null;
+var scanningInterval = null;
 var player = null;
 var ws = null;
+var i = 0;
 
 export default function Radio() {
     const [stationList, setStationList] = useState();
@@ -19,6 +20,31 @@ export default function Radio() {
     const [scanning, setScanning] = useState(false);
     const [stationReady, setStationReady] = useState(false);
     const [stopScanning, setStopScanning] = useState(false);
+
+    const scanClosure = () => {
+        return {
+            start() {
+                setLivestream(true);
+                setScanning(true);
+                playAudio();
+                changeStation(0);
+                i = 1;
+                scanningInterval = setInterval(() => {
+                    changeStation(i);
+                    if (i === stationList.length - 1) {
+                        i = 0;
+                    } else {
+                        i = i + 1;
+                    }
+                }, 7000);
+            },
+            stop() {
+                clearInterval(scanningInterval);
+            }
+        }
+    };
+
+    var scanningObj = scanClosure();
 
 
     useEffect(() => {
@@ -114,9 +140,8 @@ export default function Radio() {
 
     const stopAudio = () => {
         setLivestream(false);
-		ws.close();
-		player.destroy();
-        //stop sound
+        ws.close();
+        player.destroy();
         if (scanning) {
             setLivestream(false);
             setScanning(false);
@@ -127,19 +152,7 @@ export default function Radio() {
     }
 
     const startScanning = () => {
-        setLivestream(true);
-        setScanning(true);
-        playAudio();
-        changeStation(0);
-        let i = 1;
-        scanningInterval = setInterval(() => {
-            changeStation(i); 
-            if(i === stationList.length -1){
-                i = 0;
-            } else {
-                i = i + 1;
-            }
-        }, 7000);
+        scanningObj.start();
     }
 
     const changeStation = (i) => {
@@ -149,6 +162,7 @@ export default function Radio() {
             const req_station = { station: "F " + stationFreq };
             Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
                 console.log(response);
+                document.getElementById("scanning-header").innerHTML = "Scanning Station " + stationList[i].station_name + " - " + stationList[i].station_freq;
             }).catch((error) => {
                 console.log(error);
             });
@@ -156,10 +170,10 @@ export default function Radio() {
     }
 
     const stayOnStation = () => {
-        clearInterval(scanningInterval);
+        scanningObj.stop(); 
         setStopScanning(true);
         document.getElementById("stay-button").style.display = "none";
-        document.getElementById("scanning-header").innerHTML = "Playing Station";
+        document.getElementById("scanning-header").innerHTML = "Now Listening to " + stationList[i].station_name + " - " + stationList[i].station_freq;
         document.getElementById("scanning-radio").classList.remove("fa-pulse");
     }
 
