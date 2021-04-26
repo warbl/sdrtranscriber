@@ -5,6 +5,7 @@ import { faSpinner, faBars, faBroadcastTower } from "@fortawesome/free-solid-svg
 import Axios from 'axios';
 import './radio.css';
 
+var i = 0;
 var player = null;
 var ws = null;
 var scanningInterval = null;
@@ -89,6 +90,7 @@ export default function Radio() {
         Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
             console.log(response);
             playAudio();
+            setStationReady(true);
         }).catch((error) => {
             console.log(error);
         });
@@ -98,9 +100,9 @@ export default function Radio() {
         var socketURL = 'wss://sdrstream.tk:5000/sound';
         player = new PCMPlayer({
             encoding: '16bitInt',
-            channels: 2,
+            channels: 1,
             sampleRate: 48000,
-            flushingTime: 100
+            flushingTime: 200
         });
         ws = new WebSocket(socketURL);
         player.volume = 1;
@@ -130,7 +132,7 @@ export default function Radio() {
         setStopScanning(false);
         playAudio();
         changeStation(0);
-        let i = 1;
+        i = 1;
         scanningInterval = setInterval(() => {
             changeStation(i); 
             if(i === stationList.length -1){
@@ -148,6 +150,7 @@ export default function Radio() {
             const req_station = { station: "F " + stationFreq };
             Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
                 console.log(response);
+                document.getElementById("scanning-header").innerHTML = "Scanning Station " + stationList[i].station_freq;
             }).catch((error) => {
                 console.log(error);
             });
@@ -158,7 +161,7 @@ export default function Radio() {
         clearInterval(scanningInterval);
         setStopScanning(true);
         document.getElementById("stay-button").style.display = "none";
-        document.getElementById("scanning-header").innerHTML = "Playing Station";
+        document.getElementById("scanning-header").innerHTML = "Playing Station " + stationList[i].station_freq;
         document.getElementById("scanning-radio").classList.remove("fa-pulse");
     }
 
