@@ -162,7 +162,7 @@ export default function Radio() {
             const req_station = { station: "F " + stationFreq };
             Axios.post("https://sdrtranscriber.tk:3002/api/connectToStation", req_station).then((response) => {
                 console.log(response);
-                document.getElementById("scanning-header").innerHTML = "Scanning Station " + stationList[i].station_name + "-" + stationList[i].station_freq;
+                document.getElementById("scanning-header").innerHTML = "Scanning Station " + stationList[i].station_name + " - " + stationList[i].station_freq;
             }).catch((error) => {
                 console.log(error);
             });
@@ -173,7 +173,7 @@ export default function Radio() {
         scanningObj.stop(); 
         setStopScanning(true);
         document.getElementById("stay-button").style.display = "none";
-        document.getElementById("scanning-header").innerHTML = "Playing Station " + stationList[i].station_name + "-" + stationList[i].station_freq;;
+        document.getElementById("scanning-header").innerHTML = "Now Listening to " + stationList[i].station_name + " - " + stationList[i].station_freq;
         document.getElementById("scanning-radio").classList.remove("fa-pulse");
     }
 
