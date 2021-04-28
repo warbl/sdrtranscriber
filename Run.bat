@@ -1,0 +1,3 @@
+start cmd /k "cd C:\Users\Administrator\Desktop\project-sdr-transcriber\client & serve -s build -l 80"
+start cmd /k "cd C:\Users\Administrator\Desktop\project-sdr-transcriber\client & serve --ssl-cert C:\Users\Administrator\Desktop\certificatebois\cert1.pem --ssl-key C:\Users\Administrator\Desktop\certificatebois\privkey1.pem -l 443 -s build"
+start cmd /k "cd C:\Users\Administrator\Desktop\project-sdr-transcriber\server & npm start"
