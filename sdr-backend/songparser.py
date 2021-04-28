@@ -65,18 +65,15 @@ def insert_into_db(song_name, song_artist, spotify_link, album_link, station_fre
 
 
 def worker_transcriber(cv):
-    num_transcribed = 0
     while True:
         with cv:
             cv.wait()
         print('Transcribing.')
         text = transcriber.transcribe_text(sdrcontrol.get_recording_name(1)[0])
-        print(text)
         transcriber.insert_transcription_into_db(text)
-        num_transcribed += 1
         os.remove(sdrcontrol.get_recording_name(1)[0])
-        if (num_transcribed > 4):
-            transcriber.delete_oldest_transcription()
+        #if (num_transcribed > 4):
+        #    transcriber.delete_oldest_transcription()
 
 
 def worker_recording_transcriber(cv):
@@ -99,10 +96,11 @@ def worker_music():
             sdrcontrol.change_frequency(CURFREQ, 0)
             print('Detecting song on ' + str(CURFREQ) + '...')
             sdrcontrol.clear_recordings(0)
-            time.sleep(0.1)
+            time.sleep(0.5)
             sdrcontrol.record(True, 0)
-            time.sleep(10)
+            time.sleep(9)
             sdrcontrol.record(False, 0)
+            time.sleep(2)
             recognize(sdrcontrol.get_recording_name(0)[0], CURFREQ)
 
 
