@@ -69,6 +69,7 @@ def transcribe_text(filename):
         response = requests.get(endpoint, headers=headers)
         process = response.json()['status']
         if process == 'completed':
+            print(response.json()['text'])
             return (response.json()['text'])
 
 

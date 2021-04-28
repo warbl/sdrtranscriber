@@ -27,7 +27,7 @@ def clear_recordings(index):
 
 
 def get_recording_name(index):
-	return sorted(glob.glob('/home/laserball31/recordings/'+ str(index) + '/*.wav'), key=os.path.getmtime)
+	return sorted(glob.glob('/home/laserball31/recordings/' + str(index) + '/*.wav'), key=os.path.getmtime)
 
 
 """
