@@ -57,9 +57,13 @@ Each SDR device will constantly perform their functions as they continue to rece
 To view and use the application a user can go to this public address: https://sdrtranscriber.tk/. To install the mobile version on an Android device, a user can go to this address in their browser. Then on the home page there should be button to install the mobile app. To install on an iPhone device, a user can also go to this address in the browser and then add the application to their home screen as a bookmark.
 
 ### Build Application Instructions
-To build and run the entire application on your local machine you would first need all of the things listed in the requirements section above. You would need to connect the SDR devices to your local machine, and you would then need to run the code in the sdr-backend folder on your local machine to run and control the SDR devices.
+To build and run the entire application on your own local machine you would first need to have three SDR devices that can connect to your local machine. You would also need to have the GQRX software on your local machine to control the SDR devices.
 
-To run the rest of the application, on another machine you would need to run the server application and the client application. To do that you can use these script files which will build and start both applications.
+You could then download the source code, and you would need to run the code in the sdr-backend folder on the local machine with the SDR devices connected to it to control the SDR devices to gather the backend data for the application.
+
+To run the rest of the application, on another machine you would need to first make sure you have NodeJS and npm installed. Next you would need to download the source code. You would then need to cd into the server folder and run 'npm install' to install all the necessary packages. You would also need to cd into the client folder and run 'npm install' to download the necessary packages for that application as well. After doing these two things you would be ready to build and run the application. 
+
+To do that you can use these two script files which will build and run both applications. After completing these steps you would have the whole application running on your local machine.
 
 (This application can only work if the remote machine with the SDR devices as well as the database is up and running!)
 
