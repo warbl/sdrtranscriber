@@ -65,6 +65,10 @@ To run the rest of the application, on another machine you would need to first m
 
 To do that you can use these two script files which will build and run both applications. After completing these steps you would have the whole application running on your local machine.
 
+* Run this script to build both applications (the client and server) - [build application](./Build.bat)
+* Then run this script to start the entire application - [run application](./Run.bat)
+
+
 (This application can only work if the remote machine with the SDR devices as well as the database is up and running!)
 
 
