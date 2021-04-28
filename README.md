@@ -53,6 +53,12 @@ Each SDR device will constantly perform their functions as they continue to rece
 * Within the 'listen to radio' section of the application only one user can listen to the radio at a time. Did not find a way to let multiple users connect to the SDR
 * Within the 'listen to radio' section the scanning only seems to work on the first time. If you stop scanning and try to scan again it will not scan through stations. Were unable to come up with a solution in time.
 
+### Build Instructions
+To view and use the application a user can go to this public address: https://sdrtranscriber.tk/. To install the mobile version on an Android device, a user can go to this address in their browser. Then on the home page there should be button to install the mobile app. To install on an iPhone device, a user can also go to this address in the browser and then add the application to their home screen as a bookmark.
+
+To build the entire application on your local machine...
+
+
 ### Contributors
 * Daniel McShane
 * Alex Liu
